@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.system.menu.mapper.SysMenuMapper">
+
+<!-- 根据 内部职位id查询该职位授予的所有菜单信息   -->
+    <select id="selectListByJobInnerId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT
+        menu.id AS "id",
+        menu.parent_id AS "parentId",
+        menu.parent_ids AS "parentIds",
+        menu.sort AS "sort",
+        menu.`name` AS "name"
+        FROM
+        sys_menu menu
+        LEFT JOIN sys_job_menu_inner sjmi ON sjmi.menu_id = menu.id
+        and sjmi.del_flag = '0'
+        LEFT JOIN sys_job_inner sji on sji.id = sjmi.job_inner_id
+        AND sji.del_flag = 0
+        WHERE
+        menu.del_flag = '0'
+        <if test="dto.jobId != null">
+            and sji.id = #{dto.jobId}
+        </if>
+        <if test="dto.serviceCode != null and dto.serviceCode != ''">
+            AND menu.service_code = #{dto.serviceCode}
+        </if>
+    </select>
+
+    <!-- 根据 外部职位id查询该职位授予的所有菜单信息-->
+    <select id="selectListByJobOuterId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT
+        menu.id AS "id",
+        menu.parent_id AS "parentId",
+        menu.parent_ids AS "parentIds",
+        menu.sort AS "sort",
+        menu.`name` AS "name"
+        FROM
+        sys_menu menu
+        LEFT JOIN sys_job_menu_outer sjmo ON sjmo.menu_id = menu.id
+        and sjmo.del_flag = '0'
+        LEFT JOIN sys_job_outer sjo on sjo.id = sjmo.job_outer_id
+        AND sjo.del_flag = 0
+        WHERE
+        menu.del_flag = '0'
+        <if test="dto.jobId != null">
+            and sjo.id = #{dto.jobId}
+        </if>
+        <if test="dto.serviceCode != null and dto.serviceCode != ''">
+            AND menu.service_code = #{dto.serviceCode}
+        </if>
+    </select>
+
+
+    <select id="selectPermsInner" resultType="java.lang.String">
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_job_menu_inner sjmi ON sjmi.menu_id = menu.id
+        AND sjmi.del_flag = '0'
+        LEFT JOIN sys_user_job_inner suji ON suji.job_inner_id = sjmi.job_inner_id
+        AND suji.del_flag = '0'
+        LEFT JOIN sys_job_inner sji ON sji.id = suji.job_inner_id
+        LEFT JOIN sys_user_inner sui ON sui.id = suji.user_inner_id
+        AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and sji.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+                LEFT JOIN sys_user_menu_inner sumi ON sumi.menu_id = menu.id
+                AND sumi.del_flag = '0'
+                LEFT JOIN sys_user_inner sui ON sui.id = sumi.user_inner_id
+                AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+        AND srmi.del_flag = '0'
+        LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = srmi.role_inner_id
+        AND suri.del_flag = '0'
+        LEFT JOIN sys_role_inner sri on sri.id = suri.role_inner_id
+        and sri.del_flag = '0'
+        LEFT JOIN sys_user_inner sui on sui.id = suri.user_inner_id
+        WHERE
+            menu.del_flag = '0'
+            and sui.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND suri.user_inner_id = #{userId}
+            </if>
+    </select>
+
+    <select id="selectPermsOuter" resultType="java.lang.String">
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_job_menu_outer sjmo ON sjmo.menu_id = menu.id
+        AND sjmo.del_flag = '0'
+        LEFT JOIN sys_user_job_outer sujo ON sujo.job_outer_id = sjmo.job_outer_id
+        AND sujo.del_flag = '0'
+        LEFT JOIN sys_job_outer sjo on sjo.id = sujo.job_outer_id
+        LEFT JOIN sys_user_outer suo ON suo.id = sujo.user_outer_id
+        AND suo.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and sjo.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND suo.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+                LEFT JOIN sys_user_menu_outer sumo ON sumo.menu_id = menu.id
+                AND sumo.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.id = sumo.user_outer_id
+                AND suo.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND suo.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_role_menu_outer srmo ON srmo.menu_id = menu.id
+        AND srmo.del_flag = '0'
+        LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = srmo.role_outer_id
+        AND suro.del_flag = '0'
+        LEFT JOIN sys_role_outer sro on sro.id = suro.role_outer_id
+        and sro.del_flag = '0'
+        LEFT JOIN sys_user_outer suo on suo.id = suro.user_outer_id
+        WHERE
+            menu.del_flag = '0'
+            and sro.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND suro.user_outer_id = #{userId}
+            </if>
+    </select>
+
+
+    <!--    通过内部角色id查询内部菜单权限信息-->
+    <select id="getRoleMenuInnerAuth" resultType="cn.kun.auth.system.menu.entity.vo.MenuRedisVo">
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.`name` AS "name",
+            menu.`type` AS "type",
+            menu.`sort` AS "sort",
+            menu.`href` AS "href",
+            menu.`icon` AS "icon",
+            menu.is_show AS "isShow",
+            menu.service_code AS "serviceCode",
+            menu.permission AS "permission"
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+        AND srmi.del_flag = '0'
+        LEFT JOIN sys_role_inner sri on sri.id = srmi.role_inner_id
+        WHERE
+            menu.del_flag = '0'
+            and sri.del_flag = '0'
+        <if test="roleInnerId != null">
+            AND sri.id = #{roleInnerId}
+        </if>
+    </select>
+
+    <!--    通过外部角色id查询菜单权限信息-->
+    <select id="getRoleMenuOuterAuth" resultType="cn.kun.auth.system.menu.entity.vo.MenuRedisVo">
+        SELECT
+        menu.id id,
+        menu.parent_id AS "parentId",
+        menu.parent_ids AS "parentIds",
+        menu.`name` AS "name",
+        menu.`type` AS "type",
+        menu.`sort` AS "sort",
+        menu.`href` AS "href",
+        menu.`icon` AS "icon",
+        menu.is_show AS "isShow",
+        menu.service_code AS "serviceCode",
+        menu.permission AS "permission"
+        FROM
+        sys_menu menu
+        LEFT JOIN sys_role_menu_outer srmo ON srmo.menu_id = menu.id
+        AND srmo.del_flag = '0'
+        LEFT JOIN sys_role_outer sro on sro.id = srmo.role_outer_id
+        WHERE
+        menu.del_flag = '0'
+        and sro.del_flag = '0'
+        AND
+        <if test="roleOuterId != null">
+            sro.id = #{roleOuterId}
+        </if>
+    </select>
+
+    <select id="selectInnerPage" resultType="cn.kun.auth.system.menu.entity.vo.MenuPageVO">
+        SELECT DISTINCT
+            menu.`id`,
+            menu.`id` "value",
+            menu.`name`,
+            menu.type,
+            menu.href,
+            menu.sort,
+            menu.parent_id AS "parentId",
+            menu.parent_id AS "parentValue",
+            menu.parent_ids AS "parentIds",
+            menu.parent_ids AS "parentValues",
+            menu.service_code AS "serviceCode",
+            menu.is_show isShow,
+            menu.permission,
+            menu.update_name updateName,
+            menu.update_date updateDate
+        FROM
+        `sys_menu` menu,(
+        SELECT
+            sm.`id`,
+            sm.parent_id AS "parentId",
+            sm.parent_ids AS "parentIds"
+        FROM
+            `sys_menu` sm
+            LEFT JOIN sys_user_menu_inner sumi ON sumi.menu_id = sm.id
+            AND sumi.del_flag = 0
+            LEFT JOIN sys_user_inner sui ON sui.id = sumi.user_inner_id
+        <where>
+            sm.del_flag = 0
+            and sui.del_flag = 0
+            <if test="dto.userId != null">
+                AND sumi.user_inner_id = #{dto.userId}
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                AND sm.type = #{dto.type}
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                AND sm.NAME LIKE concat( '%', #{dto.name}, '%' )
+            </if>
+            <if test="dto.serviceCode != null and dto.serviceCode != ''">
+                AND sm.service_code = #{dto.serviceCode}
+            </if>
+        </where>
+        UNION
+        SELECT
+            sm.`id`,
+            sm.parent_id AS "parentId",
+            sm.parent_ids AS "parentIds"
+        FROM
+            `sys_menu` sm
+            LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = sm.id
+            AND srmi.del_flag = 0
+            LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = srmi.role_inner_id
+            AND suri.del_flag = 0
+            LEFT JOIN sys_role_inner sri ON sri.id = suri.role_inner_id
+            LEFT JOIN sys_user_inner sui ON sui.id = suri.user_inner_id
+        <where>
+            sm.del_flag = 0
+            and sri.del_flag = 0
+            and sui.del_flag = 0
+            <if test="dto.userId != null">
+                AND suri.user_inner_id = #{dto.userId}
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                AND sm.type = #{dto.type}
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                AND sm.NAME LIKE concat( '%', #{dto.name}, '%' )
+            </if>
+            <if test="dto.serviceCode != null and dto.serviceCode != ''">
+                AND sm.service_code = #{dto.serviceCode}
+            </if>
+        </where>
+        ) alls
+        WHERE
+            menu.del_flag = '0'
+            AND (
+            <![CDATA[ LOCATE( menu.id, alls.parentIds ) > 0 ]]>
+            OR menu.id = alls.id
+            )
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by menu.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectOuterPage" resultType="cn.kun.auth.system.menu.entity.vo.MenuPageVO">
+        SELECT DISTINCT
+            menu.`id`,
+            menu.`id` "value",
+            menu.`name`,
+            menu.type,
+            menu.href,
+            menu.sort,
+            menu.parent_id AS "parentId",
+            menu.parent_id AS "parentValue",
+            menu.parent_ids AS "parentIds",
+            menu.parent_ids AS "parentValues",
+            menu.service_code AS "serviceCode",
+            menu.is_show isShow,
+            menu.permission,
+            menu.update_name updateName,
+            menu.update_date updateDate
+        FROM
+            `sys_menu` menu,(
+            SELECT
+                sm.`id`,
+                sm.parent_id AS "parentId",
+                sm.parent_ids AS "parentIds"
+            FROM
+                `sys_menu` sm
+                LEFT JOIN sys_user_menu_outer sumo ON sumo.menu_id = sm.id
+                AND sumo.del_flag = 0
+                LEFT JOIN sys_user_outer suo ON suo.id = sumo.user_outer_id
+            <where>
+                sm.del_flag = 0
+                and suo.del_flag = 0
+                <if test="dto.userId != null">
+                    AND sumo.user_outer_id  = #{dto.userId}
+                </if>
+                <if test="dto.type != null and dto.type != ''">
+                    AND sm.type = #{dto.type}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sm.NAME LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.serviceCode != null and dto.serviceCode != ''">
+                    AND sm.service_code = #{dto.serviceCode}
+                </if>
+            </where>
+            UNION
+            SELECT
+                sm.`id`,
+                sm.parent_id AS "parentId",
+                sm.parent_ids AS "parentIds"
+            FROM
+                `sys_menu` sm
+                LEFT JOIN sys_role_menu_outer srmo ON srmo.menu_id = sm.id
+                AND srmo.del_flag = 0
+                LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = srmo.role_outer_id
+                AND suro.del_flag = 0
+                LEFT JOIN sys_role_outer sro ON sro.id = suro.role_outer_id
+                LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+            <where>
+                sm.del_flag = 0
+                and sro.del_flag = 0
+                and suo.del_flag = 0
+                <if test="dto.userId != null">
+                    AND suro.user_outer_id = #{dto.userId}
+                </if>
+                <if test="dto.type != null and dto.type != ''">
+                    AND sm.type = #{dto.type}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sm.NAME LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.serviceCode != null and dto.serviceCode != ''">
+                    AND sm.service_code = #{dto.serviceCode}
+                </if>
+            </where>
+            ) alls
+        WHERE
+            menu.del_flag = '0'
+            AND ( <![CDATA[ LOCATE( menu.id, alls.parentIds ) > 0 ]]>   OR menu.id = alls.id)
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by menu.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+
+<!--    添加-查询上级菜单 -->
+    <select id="menuList" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT DISTINCT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.service_code AS "serviceCode",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu,(
+            SELECT
+                menu.id AS "id",
+                menu.parent_id AS "parentId",
+                menu.parent_ids AS "parentIds"
+            FROM
+                sys_menu menu
+                LEFT JOIN sys_job_menu_inner sjmi ON sjmi.menu_id = menu.id
+                AND sjmi.del_flag = '0'
+                LEFT JOIN sys_user_job_inner suji ON suji.job_inner_id = sjmi.job_inner_id
+                AND suji.del_flag = '0'
+                LEFT JOIN sys_job_inner sji ON sji.id = suji.job_inner_id
+                LEFT JOIN sys_user_inner sui ON sui.id = suji.user_inner_id
+                AND sui.del_flag = '0'
+            WHERE
+                menu.del_flag = '0'
+                AND sji.del_flag = '0'
+                <if test="userId != null">
+                    AND sui.id = #{userId}
+                </if>
+                <if test="serviceCode != null and serviceCode != ''">
+                    AND menu.service_code = #{serviceCode}
+                </if>
+            UNION
+            SELECT
+                menu.id AS "id",
+                menu.parent_id AS "parentId",
+                menu.parent_ids AS "parentIds"
+            FROM
+            sys_menu menu
+                LEFT JOIN sys_user_menu_inner sumi ON sumi.menu_id = menu.id
+                AND sumi.del_flag = '0'
+                LEFT JOIN sys_user_inner sui ON sui.id = sumi.user_inner_id
+                AND sui.del_flag = '0'
+            WHERE
+            menu.del_flag = '0'
+                <if test="userId != null">
+                    AND sui.id = #{userId}
+                </if>
+                <if test="serviceCode != null and serviceCode != ''">
+                    AND menu.service_code = #{serviceCode}
+                </if>
+            UNION
+            SELECT
+                menu.id AS "id",
+                menu.parent_id AS "parentId",
+                menu.parent_ids AS "parentIds"
+            FROM
+                sys_menu menu
+                LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+                AND srmi.del_flag = '0'
+                LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = srmi.role_inner_id
+                AND suri.del_flag = '0'
+                LEFT JOIN sys_role_inner sri ON sri.id = suri.role_inner_id
+                LEFT JOIN sys_user_inner sui ON sui.id = suri.user_inner_id
+            WHERE
+                menu.del_flag = '0'
+                AND sri.del_flag = '0'
+                AND sui.del_flag = '0'
+                <if test="userId != null">
+                    AND sui.id = #{userId}
+                </if>
+                <if test="serviceCode != null and serviceCode != ''">
+                    AND menu.service_code = #{serviceCode}
+                </if>
+            ) alls
+        WHERE
+            menu.del_flag = '0'
+            AND (
+            <![CDATA[ LOCATE( menu.id, alls.parentIds ) > 0 ]]>
+            OR menu.id = alls.id
+            )
+    </select>
+
+    <!--    根据用户id获取系统名称 -->
+    <select id="serviceCode" resultType="java.lang.String">
+        SELECT
+            menu.service_code AS "serviceCode"
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_job_menu_inner sjmi ON sjmi.menu_id = menu.id
+        AND sjmi.del_flag = '0'
+        LEFT JOIN sys_user_job_inner suji ON suji.job_inner_id = sjmi.job_inner_id
+        AND suji.del_flag = '0'
+        LEFT JOIN sys_job_inner sji on sji.id = suji.job_inner_id
+        LEFT JOIN sys_user_inner sui ON sui.id = suji.user_inner_id
+        AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and sji.del_flag = '0'
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.service_code AS "serviceCode"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_user_menu_inner sumi ON sumi.menu_id = menu.id
+            AND sumi.del_flag = '0'
+            LEFT JOIN sys_user_inner sui ON sui.id = sumi.user_inner_id
+            AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.service_code AS "serviceCode"
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+        AND srmi.del_flag = '0'
+        LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = srmi.role_inner_id
+        AND suri.del_flag = '0'
+        LEFT JOIN sys_role_inner sri ON sri.id = suri.role_inner_id
+        LEFT JOIN sys_user_inner sui ON sui.id = suri.user_inner_id
+        WHERE
+            menu.del_flag = '0'
+                AND sri.del_flag = 0
+                AND sui.del_flag = 0
+            <if test="userId != null">
+                AND suri.user_inner_id = #{userId}
+            </if>
+    </select>
+
+<!--根据用户id查询外部用户菜单信息-->
+    <select id="menuListByUserOuterId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT DISTINCT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.service_code AS "serviceCode",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu,(
+            SELECT
+                menu.id AS "id",
+                menu.parent_id AS "parentId",
+                menu.parent_ids AS "parentIds"
+            FROM
+                sys_menu menu
+                LEFT JOIN sys_job_menu_outer sjmo ON sjmo.menu_id = menu.id
+                AND sjmo.del_flag = '0'
+                LEFT JOIN sys_user_job_outer sujo ON sujo.job_outer_id = sjmo.job_outer_id
+                AND sujo.del_flag = '0'
+                LEFT JOIN sys_job_outer sjo ON sjo.id = sujo.job_outer_id
+                LEFT JOIN sys_user_outer suo ON suo.id = sujo.user_outer_id
+                AND suo.del_flag = '0'
+            WHERE
+                menu.del_flag = '0'
+                AND sjo.del_flag = '0'
+                <if test="userId != null">
+                    AND suo.id = #{userId}
+                </if>
+                <if test="serviceCode != null and serviceCode != ''">
+                    AND menu.service_code = #{serviceCode}
+                </if>
+            UNION
+            SELECT
+                menu.id AS "id",
+                menu.parent_id AS "parentId",
+                menu.parent_ids AS "parentIds"
+            FROM
+                sys_menu menu
+                LEFT JOIN sys_user_menu_outer sumo ON sumo.menu_id = menu.id
+                AND sumo.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.id = sumo.user_outer_id
+                AND suo.del_flag = '0'
+            WHERE
+                menu.del_flag = '0'
+                <if test="userId != null">
+                    AND suo.id = #{userId}
+                </if>
+                <if test="serviceCode != null and serviceCode != ''">
+                    AND menu.service_code = #{serviceCode}
+                </if>
+            UNION
+            SELECT
+                menu.id AS "id",
+                menu.parent_id AS "parentId",
+                menu.parent_ids AS "parentIds"
+            FROM
+                sys_menu menu
+                LEFT JOIN sys_role_menu_outer srmo ON srmo.menu_id = menu.id
+                AND srmo.del_flag = '0'
+                LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = srmo.role_outer_id
+                AND suro.del_flag = '0'
+                LEFT JOIN sys_role_outer sro ON sro.id = suro.role_outer_id
+                LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+            WHERE
+                menu.del_flag = '0'
+                AND sro.del_flag = '0'
+                AND suo.del_flag = '0'
+                <if test="userId != null">
+                    AND suo.id = #{userId}
+                </if>
+                <if test="serviceCode != null and serviceCode != ''">
+                    AND menu.service_code = #{serviceCode}
+                </if>
+            ) alls
+        WHERE
+            menu.del_flag = '0'
+            AND (
+            <![CDATA[ LOCATE( menu.id, alls.parentIds ) > 0 ]]>
+            OR menu.id = alls.id
+            )
+    </select>
+
+    <!--    查询内部角色-菜单权限-->
+    <select id="selectListByRoleInnerId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT
+        menu.id AS "id",
+        menu.parent_id AS "parentId",
+        menu.parent_ids AS "parentIds",
+        menu.sort AS "sort",
+        menu.`name` AS "name"
+        FROM
+        sys_menu menu
+        LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+        AND srmi.del_flag = '0'
+        LEFT JOIN sys_role_inner sri on sri.id = srmi.role_inner_id
+        WHERE
+        menu.del_flag = '0'
+            and sri.del_flag = '0'
+        <if test="dto.roleId != null">
+            AND sri.id = #{dto.roleId}
+        </if>
+        <if test="dto.serviceCode != null and dto.serviceCode != ''">
+            AND menu.service_code = #{dto.serviceCode}
+        </if>
+    </select>
+
+    <!--    查询外部角色-项目菜单权限-->
+    <select id="selectListByRoleOuterId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT
+        menu.id AS "id",
+        menu.parent_id AS "parentId",
+        menu.parent_ids AS "parentIds",
+        menu.sort AS "sort",
+        menu.`name` AS "name"
+        FROM
+        sys_menu menu
+        LEFT JOIN sys_role_menu_outer srmo ON srmo.menu_id = menu.id
+        AND srmo.del_flag = '0'
+        LEFT JOIN sys_role_outer sro on sro.id = srmo.role_outer_id
+        WHERE
+        menu.del_flag = '0'
+            and sro.del_flag = '0'
+        <if test="roleId != null">
+            AND sro.id = #{roleId}
+        </if>
+        <if test="serviceCode != null and serviceCode != ''">
+            AND menu.service_code = #{serviceCode}
+        </if>
+    </select>
+<!-- 根据内部用户获取当前用户所拥有的菜单信息（不包含上级信息） -->
+    <select id="innerMenuListInfo" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.service_code AS "serviceCode",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_job_menu_inner sjmi ON sjmi.menu_id = menu.id
+            AND sjmi.del_flag = '0'
+            LEFT JOIN sys_user_job_inner suji ON suji.job_inner_id = sjmi.job_inner_id
+            AND suji.del_flag = '0'
+            LEFT JOIN sys_job_inner sji on sji.id = suji.job_inner_id
+            LEFT JOIN sys_user_inner sui ON sui.id = suji.user_inner_id
+            AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and sji.del_flag = '0'
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.service_code AS "serviceCode",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_user_menu_inner sumi ON sumi.menu_id = menu.id
+            AND sumi.del_flag = '0'
+            LEFT JOIN sys_user_inner sui ON sui.id = sumi.user_inner_id
+            AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.service_code AS "serviceCode",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+            AND srmi.del_flag = '0'
+            LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = srmi.role_inner_id
+            AND suri.del_flag = '0'
+            LEFT JOIN sys_role_inner sri ON sri.id = suri.role_inner_id
+            LEFT JOIN sys_user_inner sui ON sui.id = suri.user_inner_id
+        WHERE
+            menu.del_flag = '0'
+            AND sri.del_flag = '0'
+            AND sui.del_flag = '0'
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+    </select>
+<!-- 根据外部用户获取当前用户所拥有的菜单信息（不包含上级信息）-->
+    <select id="outerMenuListInfo" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_job_menu_outer sjmo ON sjmo.menu_id = menu.id
+            AND sjmo.del_flag = '0'
+            LEFT JOIN sys_user_job_outer sujo ON sujo.job_outer_id = sjmo.job_outer_id
+            AND sujo.del_flag = '0'
+            LEFT JOIN sys_job_outer sjo on sjo.id = sujo.job_outer_id
+            LEFT JOIN sys_user_outer suo ON suo.id = sujo.user_outer_id
+            AND suo.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and sjo.del_flag = '0'
+            <if test="userId != null">
+                AND suo.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_user_menu_outer sumo ON sumo.menu_id = menu.id
+            AND sumo.del_flag = '0'
+            LEFT JOIN sys_user_outer suo ON suo.id = sumo.user_outer_id
+            AND suo.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            <if test="userId != null">
+                AND suo.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.id AS "id",
+            menu.parent_id AS "parentId",
+            menu.parent_ids AS "parentIds",
+            menu.sort AS "sort",
+            menu.`name` AS "name"
+        FROM
+            sys_menu menu
+            LEFT JOIN sys_role_menu_outer srmo ON srmo.menu_id = menu.id
+            AND srmo.del_flag = '0'
+            LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = srmo.role_outer_id
+            AND suro.del_flag = '0'
+            LEFT JOIN sys_role_outer sro on sro.id = suro.role_outer_id
+            LEFT JOIN sys_user_outer suo on suo.id = suro.user_outer_id
+        WHERE
+            menu.del_flag = '0'
+            and sro.del_flag = '0'
+            and suo.del_flag = '0'
+            <if test="userId != null">
+                AND suro.user_outer_id = #{userId}
+            </if>
+    </select>
+</mapper>

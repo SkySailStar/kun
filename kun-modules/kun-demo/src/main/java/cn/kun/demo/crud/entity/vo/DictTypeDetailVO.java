@@ -1,0 +1,32 @@
+package cn.kun.demo.crud.entity.vo;
+
+import cn.kun.base.core.global.entity.vo.BaseDetailVO;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serial;
+
+/**
+ * 字典类型-详情-返回值
+ *
+ * @author 廖航
+ * @date 2023-03-23 11:32
+ */
+@Schema(description = "字典类型-详情-返回值")
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class DictTypeDetailVO extends BaseDetailVO {
+    
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @Schema(description = "编码")
+    private String code;
+
+    @Schema(description = "名称")
+    private String name;
+
+    @Schema(description = "英文名称")
+    private String enName;
+}

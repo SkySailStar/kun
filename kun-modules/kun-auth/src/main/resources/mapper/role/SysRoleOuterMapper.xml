@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.system.role.mapper.SysRoleOuterMapper">
+
+    <!--    角色详情-->
+    <select id="detail" resultType="cn.kun.auth.system.role.entity.vo.RoleDetailVO">
+        SELECT
+            sro.`id` AS "id",
+            sro.`name`,
+            sro.type,
+            sro.permission,
+            sro.company_inner_id AS "companyId",
+            sro.remarks AS "remarks",
+            sro.create_date AS "createDate",
+            sro.create_name AS "createName",
+            sro.update_date AS "updateDate",
+            sro.update_name AS "updateName",
+            sco.`name` AS "companyName"
+        FROM
+        sys_role_outer sro
+        LEFT JOIN sys_company_outer sco ON sci.id = sri.company_outer_id
+        AND sco.del_flag = '0'
+        <where>
+            sro.del_flag = 0
+            <if test="id != null">
+                AND sro.id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <!--    角色分页列表-->
+    <select id="selectPage" resultType="cn.kun.auth.system.role.entity.vo.RolePageVO">
+        SELECT DISTINCT
+            sro.`id` AS "id",
+            sro.`name`,
+            sro.type,
+            sro.permission,
+            sro.company_outer_id AS "companyId",
+            sro.create_date AS "createDate",
+            sro.create_name AS "createName",
+            sro.update_date AS "updateDate",
+            sro.update_name AS "updateName",
+            sro.remarks AS "remarks",
+            sco.`name` AS "companyName"
+        FROM
+            sys_role_outer sro
+            LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+            AND suro.del_flag = 0
+            LEFT JOIN sys_user_outer suo on suo.id = suro.user_outer_id
+            and suo.del_flag = 0
+            LEFT JOIN sys_company_outer sco ON sco.id = sro.company_outer_id
+            AND sco.del_flag = '0'
+        <where>
+            sro.del_flag = 0
+            <if test="dto.userId != null">
+                AND suo.id  = #{dto.userId}
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                AND sro.NAME LIKE concat( '%', #{dto.name}, '%' )
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                AND sro.type = #{dto.type}
+            </if>
+        </where>
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by sro.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+    
+    <!--    通过内部用户id查询角色信息-->
+    <select id="getRoleInfoByUserId" resultType="cn.kun.base.api.entity.auth.vo.RoleInfoByUserIdVO">
+        SELECT
+            sro.id roleId,
+            sro.`name` roleName,
+            sro.type roleType,
+            sro.`status` STATUS,
+            sro.permission permission
+        FROM
+            sys_role_outer sro
+        LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+        AND suro.del_flag = 0
+        LEFT JOIN sys_user_outer suo on suo.id = suro.user_outer_id
+        WHERE
+            sro.del_flag = 0
+        AND suo.del_flag = 0
+        <if test="userId != null">
+        AND  suo.id = #{userId}
+        </if>
+    </select>
+
+    <!--    通过内部用户id查询角色信息-->
+    <select id="getRoleOuterByRoleOuterId" resultType="cn.kun.base.api.entity.auth.vo.RoleInfoByUserIdVO">
+        SELECT
+            sro.id roleId,
+            sro.`name` roleName,
+            sro.type roleType,
+            sro.permission permission
+        FROM
+            sys_role_outer sro
+        LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+        AND suro.del_flag = '0'
+        LEFT JOIN sys_user_outer suo on suo.id = suro.user_outer_id
+        WHERE
+            sro.del_flag = 0
+        AND suo.del_flag = 0
+        <if test="userOuterId != null">
+            AND suo.id = #{userOuterId}
+        </if>
+    </select>
+
+    <!--    根据 角色id、公司id信息 获取当前角色有多少内部用户-->
+    <select id="selectOuterPersonnelInfoRoleId" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+        SELECT DISTINCT
+            suo.id AS "value",
+            suo.`name` AS "userName",
+            sco.`id` AS "companyId",
+            sco.`name` AS "companyName",
+            sdo.`id` AS "deptId",
+            sdo.`name` AS "deptName",
+            sjo.`id` AS "jobId",
+            sjo.`name` AS "jobName"
+        FROM
+            sys_user_outer suo
+            LEFT JOIN sys_user_job_outer sujo ON sujo.user_outer_id = suo.id
+            AND sujo.del_flag = '0'
+            LEFT JOIN sys_job_outer sjo ON sjo.id = sujo.job_outer_id
+            LEFT JOIN sys_dept_outer sdo ON sdo.id = sjo.dept_outer_id
+            AND sdo.del_flag = '0'
+            LEFT JOIN sys_company_outer sco ON sco.id = suo.company_outer_id
+            AND sco.del_flag = '0'
+            LEFT JOIN sys_user_role_outer suro ON suro.user_outer_id = suo.id
+            AND suro.del_flag = '0'
+            LEFT JOIN sys_role_outer sro ON sro.id = suro.role_outer_id
+        WHERE
+            suo.del_flag = '0'
+            AND sjo.del_flag = '0'
+        AND sro.del_flag = '0'
+        <if test="roleId != null">
+            AND sro.id = #{roleId}
+        </if>
+        <if test="companyIds != null and companyIds.size > 0">
+            AND sco.id IN
+            <foreach item="item" index="index" collection="companyIds"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+    <!--   角色-人员配置-分页-->
+    <select id="personnelRoleInfoPage" resultType="cn.kun.auth.system.user.entity.vo.UserPersonnelPageVO">
+        SELECT DISTINCT
+            suo.id AS "userId",
+            suo.`name` AS "userName",
+            suo.`sex` AS "sex",
+            suo.`login_name` AS "loginName",
+            sudo.`phone` AS "phone",
+            sco.`id` AS "companyId",
+            sco.`name` AS "companyName",
+            sjo.`id` AS "jobId",
+            sjo.`name` AS "jobName"
+        FROM
+            sys_user_outer suo
+            LEFT JOIN sys_user_detail_outer sudo on sudo.user_outer_id = suo.id
+            AND sudo.del_flag = '0'
+            LEFT JOIN sys_user_job_outer sujo ON sujo.user_outer_id = suo.id
+            AND sujo.del_flag = '0'
+            LEFT JOIN sys_job_outer sjo ON sjo.id = sujo.job_outer_id AND sjo.del_flag = '0'
+            LEFT JOIN sys_dept_outer sdo ON sdo.id = sjo.dept_outer_id
+            AND sdo.del_flag = '0'
+            LEFT JOIN sys_company_outer sco ON sco.id = suo.company_outer_id
+            AND sco.del_flag = '0'
+            LEFT JOIN sys_user_role_outer suro ON suro.user_outer_id = suo.id
+            AND suro.del_flag = '0'
+            LEFT JOIN sys_role_outer sro ON sro.id = suro.role_outer_id
+            AND sro.del_flag = '0'
+        WHERE
+            suo.del_flag = '0'
+            AND suo.login_name &lt;&gt; 'sysadmin'
+            AND suo.login_name &lt;&gt; #{loginName}
+            <if test="dto.roleId != null">
+                AND sro.id = #{dto.roleId}
+            </if>
+            <if test="dto.companyIds != null and dto.companyIds.size > 0">
+                AND sco.id IN
+                <foreach item="item" index="index" collection="dto.companyIds"  open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+    </select>
+
+    <!--    查询用户-角色权限-->
+    <select id="selectListByUserId" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT
+            sro.id as "value",
+            sro.`name` AS "label",
+            "role" AS "type",
+            sro.company_outer_id as "parentCode"
+        FROM
+        sys_role_outer sro
+        <if test="userId != null">
+            LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+            AND suro.del_flag = 0
+            LEFT JOIN sys_user_outer suo on suo.id = suro.user_outer_id
+        </if>
+        LEFT JOIN sys_company_outer sco on sco.id = sro.company_outer_id
+        and sco.del_flag = 0
+        WHERE
+            sro.del_flag = 0
+        <if test="userId != null">
+            AND suo.del_flag = 0
+            AND suro.user_outer_id = #{userId}
+        </if>
+    </select>
+    <!--    查询用户-根据公司获取角色信息-->
+    <select id="selectRoleInfoByCompanyIds" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT
+            sro.`id` AS "value",
+            sro.`name` AS "label",
+            "role" AS "type",
+            sco.id AS "parentValue"
+        FROM
+            sys_role_outer sro
+            LEFT JOIN sys_company_outer sco ON sco.id = sro.company_outer_id
+            AND sco.del_flag = '0'
+        WHERE
+            sro.del_flag = '0'
+            <if test="companyIds != null">
+                AND sro.company_outer_id in
+                <foreach item="item" index="index" collection="companyIds"  open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+    </select>
+</mapper>

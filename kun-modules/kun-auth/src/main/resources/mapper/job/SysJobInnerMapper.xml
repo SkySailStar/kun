@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.system.job.mapper.SysJobInnerMapper">
+<!--    通过内部用户id查询职位、部门、公司信息-->
+    <select id="getJobInnerInfoByUserInnerId" resultType="cn.kun.auth.system.job.entity.vo.JobInfoByUserIdVO">
+        SELECT
+            sji.`id` jobId,
+            sji.`name` jobName,
+            sdi.`id` deptId,
+            sdi.`name` deptName,
+            sci.`id` companyId,
+            sci.`name` companyName
+        FROM
+            sys_job_inner sji
+            LEFT JOIN sys_user_job_inner suji ON suji.job_inner_id = sji.id
+            AND suji.del_flag = 0
+            LEFT JOIN sys_dept_inner sdi ON sji.dept_inner_id = sdi.id
+            AND sdi.del_flag = 0
+            LEFT JOIN sys_company_inner sci ON sdi.company_inner_id = sci.id
+            AND sci.del_flag = 0
+        WHERE
+        <if test="userInnerId != null">
+            suji.user_inner_id = #{userInnerId}
+        </if>
+        AND sji.del_flag = 0
+    </select>
+
+<!-- 职位详情-->
+    <select id="detail" resultType="cn.kun.auth.system.job.entity.vo.JobDetailVO">
+        SELECT
+            job.id AS "id",
+            job.`name` AS "name",
+            sdi.id AS "deptId",
+            sdi.`name` AS "dept",
+            sci.`id` AS "companyId",
+            job.create_date AS "createDate",
+            job.create_name AS "createName",
+            job.update_date AS "updateDate",
+            job.update_name AS "updateName",
+            job.remarks AS "remarks",
+            sci.`name` AS "company"
+        FROM
+            sys_job_inner job
+                LEFT JOIN sys_company_inner sci ON sci.id = job.company_inner_id
+                AND sci.del_flag = '0'
+                LEFT JOIN sys_dept_inner sdi ON sdi.id = job.dept_inner_id
+                AND sdi.del_flag = '0'
+        WHERE
+            job.del_flag = '0'
+            <if test="id != null">
+                AND job.id = #{id}
+            </if>
+    </select>
+
+<!--    分页列表-->
+    <select id="selectPage" resultType="cn.kun.auth.system.job.entity.vo.JobPageVO">
+        SELECT DISTINCT
+            vo.id AS "id",
+            vo.companyId AS "companyId",
+            vo.company AS "company",
+            vo.deptId AS "deptId",
+            vo.dept AS "dept",
+            vo.job AS "job",
+            vo.updateDate AS "updateDate"
+        FROM
+        (
+        SELECT
+            sji.id,
+            sci.id companyId,
+            sci.`name` company,
+            sdi.id deptId,
+            sdi.`name` dept,
+            sji.`name` job,
+            sji.update_date updateDate
+        FROM
+            sys_job_inner sji
+            LEFT JOIN sys_dept_inner sdi ON sdi.id = sji.dept_inner_id
+            AND sdi.del_flag = 0
+            LEFT JOIN sys_company_inner sci ON sci.id = sdi.company_inner_id
+            AND sci.del_flag = 0
+            LEFT JOIN sys_user_inner sui ON sui.company_inner_id = sci.id
+        WHERE
+            sji.del_flag = 0
+            <if test="dto.userId != null">
+                AND sui.id = #{dto.userId}
+            </if>
+            <if test="dto.deptId != null">
+                AND sji.dept_inner_id = #{dto.deptId}
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                AND sji.`name` LIKE concat( '%', #{dto.name}, '%' )
+            </if>
+            <if test="dto.companyId != null">
+                AND sci.id = #{dto.companyId}
+            </if>
+            <if test="dto.companyName != null and dto.companyName != ''">
+                AND sci.`name` LIKE concat( '%', #{dto.companyName}, '%' )
+            </if>
+        UNION
+            SELECT
+                sji.id,
+                sci.id companyId,
+                sci.`name` company,
+                sdi.id deptId,
+                sdi.`name` dept,
+                sji.`name` job,
+                sji.update_date updateDate
+            FROM
+                sys_job_inner sji
+                LEFT JOIN sys_dept_inner sdi ON sdi.id = sji.dept_inner_id
+                AND sdi.del_flag = '0'
+                LEFT JOIN sys_company_inner sci ON sci.id = sdi.company_inner_id
+                AND sci.del_flag = '0'
+                LEFT JOIN sys_role_inner sri ON sri.company_inner_id = sci.id
+                AND sri.del_flag = '0'
+                LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = sri.id
+                AND suri.del_flag = '0'
+                LEFT JOIN sys_user_inner sui ON sui.id = suri.user_inner_id
+                AND sui.del_flag = '0'
+            WHERE
+                sji.del_flag = '0'
+                 <if test="dto.userId != null">
+                    AND sui.id = #{dto.userId}
+                </if>
+
+                <if test="dto.deptId != null">
+                    AND sji.dept_inner_id = #{dto.deptId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sji.`name` LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.companyId != null">
+                    AND sci.id = #{dto.companyId}
+                </if>
+                <if test="dto.companyName != null and dto.companyName != ''">
+                    AND sci.`name` LIKE concat( '%', #{dto.companyName}, '%' )
+                </if>
+            )vo
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by vo.updateDate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--    职位树状图-->
+    <select id="selectJobs" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT
+            job.`id` AS "value",
+            job.`name` AS "label",
+            "job" AS "type",
+            job.`dept_inner_id` AS "parentValue"
+        FROM
+            sys_job_inner job
+        WHERE
+            job.del_flag = '0'
+            <if test="companyIds != null and companyIds.size > 0">
+                AND job.company_inner_id IN
+                <foreach item="item" index="index" collection="companyIds"  open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+    </select>
+
+<!--    获取公司下的所有职位-->
+    <select id="selectJobInfoByCompanyId" resultType="cn.kun.base.api.entity.auth.vo.JobInfoVO">
+        SELECT
+            job.id AS "id",
+            job.`name` AS "name",
+            job.company_inner_id AS "companyId",
+            job.dept_inner_id AS "deptId"
+        FROM
+            sys_job_inner job
+        WHERE
+            job.del_flag = '0'
+            AND job.company_inner_id = #{companyId}
+    </select>
+</mapper>

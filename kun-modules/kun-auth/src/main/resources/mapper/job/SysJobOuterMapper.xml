@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.system.job.mapper.SysJobOuterMapper">
+    <!--    分页列表-->
+    <select id="selectPage" resultType="cn.kun.auth.system.job.entity.vo.JobPageVO">
+        SELECT DISTINCT
+            vo.id AS "id",
+            vo.companyId AS "companyId",
+            vo.company AS "company",
+            vo.deptId AS "deptId",
+            vo.dept AS "dept",
+            vo.job AS "job",
+            vo.updateDate AS "updateDate"
+        FROM
+        (
+            SELECT
+                sjo.id,
+                sco.id companyId,
+                sco.NAME company,
+                sdo.id deptId,
+                sdo.NAME dept,
+                sjo.NAME job,
+                sjo.update_date updateDate
+            FROM
+                sys_job_outer sjo
+                LEFT JOIN sys_dept_outer sdo ON sdo.id = sjo.dept_outer_id
+                AND sdo.del_flag = '0'
+                LEFT JOIN sys_company_outer sco ON sco.id = sdo.company_outer_id
+                AND sco.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.company_outer_id = sco.id
+                AND suo.del_flag = '0'
+            WHERE
+                sjo.del_flag = '0'
+                <if test="dto.userId != null">
+                    AND suo.id = #{dto.userId}
+                </if>
+                <if test="dto.deptId != null">
+                    AND sjo.dept_outer_id = #{dto.deptId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sjo.`name` LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.companyId != null">
+                    AND sco.id = #{dto.companyId}
+                </if>
+        UNION
+            SELECT
+                sjo.id,
+                sco.id companyId,
+                sco.NAME company,
+                sdo.id deptId,
+                sdo.NAME dept,
+                sjo.NAME job,
+                sjo.update_date updateDate
+            FROM
+                sys_job_outer sjo
+                LEFT JOIN sys_dept_outer sdo ON sdo.id = sjo.dept_outer_id
+                AND sdo.del_flag = '0'
+                LEFT JOIN sys_company_outer sco ON sco.id = sdo.company_outer_id
+                AND sco.del_flag = '0'
+                LEFT JOIN sys_role_outer sro ON sro.company_outer_id = sco.id
+                AND sro.del_flag = '0'
+                LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+                AND suro.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+                AND suo.del_flag = '0'
+            WHERE
+                sjo.del_flag = '0'
+                <if test="dto.userId != null">
+                    AND suo.id = #{dto.userId}
+                </if>
+                <if test="dto.deptId != null">
+                    AND sjo.dept_outer_id = #{dto.deptId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sjo.`name` LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.companyId != null">
+                    AND sco.id = #{dto.companyId}
+                </if>
+        )vo
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by vo.updateDate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--    通过用户id查询职位、部门、公司信息-->
+    <select id="getJobOuterInfoByUserOuterId" resultType="cn.kun.auth.system.job.entity.vo.JobInfoByUserIdVO">
+        SELECT
+            sjo.`id` jobId,
+            sjo.`name` jobName,
+            sdo.`id` deptId,
+            sdo.`name` deptName,
+            sco.`id` companyId,
+            sco.`name` companyName
+        FROM
+            sys_job_outer sjo
+                LEFT JOIN sys_user_job_outer sujo ON sujo.job_outer_id = sjo.id
+                AND sujo.del_flag = 0
+                LEFT JOIN sys_dept_outer sdo ON sjo.dept_outer_id = sdo.id
+                AND sdo.del_flag = 0
+                LEFT JOIN sys_company_outer sco ON sdo.company_outer_id = sco.id
+                AND sco.del_flag = 0
+        WHERE
+        <if test="userId != null">
+            sujo.user_outer_id = #{userId}
+        </if>
+          AND sjo.del_flag = 0
+    </select>
+
+    <!--    通过用户id查询职位、部门、公司信息-->
+    <select id="detail" resultType="cn.kun.auth.system.job.entity.vo.JobDetailVO">
+        SELECT
+            job.id AS "id",
+            job.`name` AS "name",
+            sdo.id AS "deptId",
+            sdo.`name` AS "dept",
+            sco.`id` AS "companyId",
+            job.create_date AS "createDate",
+            job.create_name AS "createName",
+            job.update_date AS "updateDate",
+            job.update_name AS "updateName",
+            job.remarks AS "remarks",
+            sco.`name` AS "company"
+        FROM
+            sys_job_outer job
+                LEFT JOIN sys_company_outer sco ON sco.id = job.company_outer_id
+                AND sco.del_flag = '0'
+                LEFT JOIN sys_dept_outer sdo ON sdo.id = job.dept_outer_id
+                AND sdo.del_flag = '0'
+        WHERE
+            job.del_flag = '0'
+            <if test="id != null">
+                AND job.id = #{id}
+            </if>
+    </select>
+    <!--    添加用户-选择职位-->
+    <select id="jobs" resultType="cn.kun.auth.system.job.entity.vo.JobDetailVO">
+        SELECT
+            job.id AS "id",
+            job.`name` AS "name",
+            sdo.id AS "deptId",
+            sdo.`name` AS "dept",
+            sco.`id` AS "companyId",
+            sco.`name` AS "company"
+        FROM
+            sys_job_outer job
+            LEFT JOIN sys_company_outer sco ON sco.id = job.company_outer_id
+            AND sco.del_flag = '0'
+            LEFT JOIN sys_dept_outer sdo ON sdo.id = job.dept_outer_id
+            AND sdo.del_flag = '0'
+        WHERE
+        job.del_flag = '0'
+        <if test="companyIds != null and companyIds.size > 0">
+            AND job.company_outer_id IN
+            <foreach item="item" index="index" collection="companyIds"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+    <!--    职位树状图-->
+    <select id="selectJobs" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT
+            job.`id` AS "value",
+            job.`name` AS "label",
+            "job" AS "type",
+            job.`dept_outer_id` AS "parentValue"
+        FROM
+            sys_job_outer job
+        WHERE
+        job.del_flag = '0'
+            <if test="companyIds != null and companyIds.size > 0">
+                AND job.company_outer_id IN
+                <foreach item="item" index="index" collection="companyIds"  open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+    </select>
+
+    <!--    获取公司下的所有职位-->
+    <select id="selectJobInfoByCompanyId" resultType="cn.kun.base.api.entity.auth.vo.JobInfoVO">
+        SELECT
+            job.id AS "id",
+            job.`name` AS "name",
+            job.company_outer_id AS "companyId",
+            job.dept_outer_id AS "deptId"
+        FROM
+            sys_job_outer job
+        WHERE
+            job.del_flag = '0'
+          AND job.company_outer_id = #{companyId}
+    </select>
+</mapper>

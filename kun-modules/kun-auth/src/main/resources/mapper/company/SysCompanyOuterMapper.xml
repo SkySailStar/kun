@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.system.company.mapper.SysCompanyOuterMapper">
+
+    <!--    公司分页-->
+    <select id="selectPage" resultType="cn.kun.auth.system.company.entity.vo.CompanyPageVO">
+        SELECT
+            *
+        FROM
+            (
+            SELECT
+                sco.id,
+                sco.id AS "value",
+                sco.`name`,
+                sco.`industry` AS "industry",
+                sco.type,
+                sco.parent_id AS "parentId",
+                sco.parent_ids AS "parentIds",
+                sco.parent_id AS "parentValue",
+                sco.parent_ids AS "parentValues",
+                sco.area_id AS "areaId",
+                sco.update_name AS "updateName",
+                sco.update_date AS "updateDate",
+                sco.remarks AS "remarks"
+            FROM
+                sys_company_outer sco
+                LEFT JOIN sys_user_outer suo ON suo.company_outer_id = sco.id
+                AND suo.del_flag = '0'
+            <where>
+                sco.del_flag = 0
+                <if test="dto.userId != null">
+                    AND suo.id = #{dto.userId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sco.NAME LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.type != null and dto.type != ''">
+                    AND sco.type = #{dto.type}
+                </if>
+                <if test="dto.areaId != null">
+                    AND sco.area_id = #{dto.areaId}
+                </if>
+            </where>
+            UNION
+            SELECT
+                sco.id,
+                sco.id AS "value",
+                sco.`name`,
+                sco.`industry` AS "industry",
+                sco.type,
+                sco.parent_id AS "parentId",
+                sco.parent_ids AS "parentIds",
+                sco.parent_id AS "parentValue",
+                sco.parent_ids AS "parentValues",
+                sco.area_id AS "areaId",
+                sco.update_name AS "updateName",
+                sco.update_date AS "updateDate",
+                sco.remarks AS "remarks"
+            FROM
+                sys_company_outer sco
+                LEFT JOIN sys_role_outer sro ON sro.company_outer_id = sco.id
+                AND sro.del_flag = '0'
+                LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+                AND suro.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+                AND suo.del_flag = '0'
+            <where>
+                sco.del_flag = 0
+                <if test="dto.userId != null">
+                    AND suo.id = #{dto.userId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sco.NAME LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.type != null and dto.type != ''">
+                    AND sco.type = #{dto.type}
+                </if>
+                <if test="dto.areaId != null">
+                    AND sco.area_id = #{dto.areaId}
+                </if>
+            </where>
+            ) comp
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by comp.updateDate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--    通过外部公司id获取外部公司信息-->
+    <select id="getCompanyInfoByCompanyId" resultType="cn.kun.base.api.entity.auth.vo.SysCompanyInfoVO">
+        SELECT
+        sco.id companyId,
+        sco.`name` companyName,
+        sco.parent_id parentId,
+        sco.area_id areaId,
+        sco.type type,
+        sco.logo logo
+        FROM
+        sys_company_outer sco
+        LEFT JOIN sys_company_detail_outer scdo ON sco.id = scdo.company_outer_id AND scdo.del_flag = 0
+        WHERE
+        <if test="companyId != null">
+            sco.id = #{companyId}
+        </if>
+        AND sco.del_flag = 0
+    </select>
+
+
+    <!--    查询内部用户所拥有的外部公司信息-->
+    <select id="selectOuterParent" resultType="cn.kun.auth.system.company.entity.vo.CompanyInfoVO">
+        SELECT
+            sco.id as "companyId",
+            sco.parent_id as "0",
+            sco.parent_ids as "0,",
+            sco.`name` as "companyName"
+        FROM
+            sys_company_outer sco
+            LEFT JOIN sys_user_outer suo ON suo.company_outer_id = sco.id
+            AND suo.del_flag = '0'
+        WHERE
+            sco.del_flag = '0'
+            <if test="loginName != null and loginName != ''">
+                AND suo.login_name = #{loginName}
+            </if>
+        UNION
+        SELECT
+            sco.id as "companyId",
+            sco.parent_id as "parentId",
+            sco.parent_ids as "parentIds",
+            sco.`name` as "companyName"
+        FROM
+            sys_company_outer sco
+            LEFT JOIN sys_role_outer sro ON sro.company_outer_id = sco.id
+            AND sro.del_flag = '0'
+            LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+            AND suro.del_flag = '0'
+            LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+            AND suo.del_flag = '0'
+        WHERE
+            sco.del_flag = '0'
+            <if test="loginName != null and loginName != ''">
+                AND suo.login_name = #{loginName}
+            </if>
+    </select>
+
+    <!--    人员配置：获取当前用户所拥有的所有公司信息、部门信息、职位信息的用户  -->
+    <select id="selectCompanyInfoByLoginName" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT DISTINCT
+            comp.`id` AS "value",
+            comp.`name` AS "label",
+            "company" AS "type",
+            comp.`parent_id` AS "parentValue",
+            comp.`parent_ids` AS "parentValues"
+        FROM
+            sys_company_outer comp,
+            (
+                SELECT DISTINCT
+                comp.id,
+                comp.parent_id,
+                comp.parent_ids
+                FROM
+                    sys_company_outer comp
+                    LEFT JOIN sys_dept_outer dept ON comp.id = dept.company_outer_id
+                    LEFT JOIN sys_user_outer suo ON suo.company_outer_id = comp.id
+                    AND suo.del_flag = '0'
+                WHERE
+                    comp.del_flag = '0'
+                    AND dept.del_flag = '0'
+                    <if test="loginName != null and loginName != ''">
+                      AND suo.login_name = #{loginName}
+                    </if>
+                UNION
+                SELECT DISTINCT
+                    comp.id,
+                    comp.parent_id,
+                    comp.parent_ids
+                FROM
+                    sys_company_outer comp
+                    LEFT JOIN sys_dept_outer dept ON comp.id = dept.company_outer_id
+                    LEFT JOIN sys_role_outer sro ON sro.company_outer_id = comp.id
+                    AND sro.del_flag = '0'
+                    LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+                    AND suro.del_flag = '0'
+                    LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+                    AND suo.del_flag = '0'
+                WHERE
+                    comp.del_flag = '0'
+                    AND dept.del_flag = '0'
+                    <if test="loginName != null and loginName != ''">
+                        AND suo.login_name = #{loginName}
+                    </if>
+                ) alls
+        WHERE
+            comp.del_flag = '0'
+            AND (
+            <![CDATA[ LOCATE( comp.id, alls.parent_ids ) > 0 OR comp.id = alls.id ]]>
+            OR comp.id = alls.id
+            )
+    </select>
+
+    <!-- 角色树状图- 根据用户登录名查看有角色的公司信息 -->
+    <select id="selectRoleInfoByLoginName" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT DISTINCT
+            comp.`id` AS "value",
+            comp.`name` AS "label",
+            "company" AS "type",
+            comp.`parent_id` AS "parentValue",
+            comp.`parent_ids` AS "parentValues"
+        FROM
+            sys_company_outer comp,
+            (
+            SELECT DISTINCT
+                comp.id,
+                comp.parent_id,
+                comp.parent_ids
+            FROM
+                sys_company_outer comp
+                LEFT JOIN sys_role_outer role ON role.company_outer_id = comp.id
+                LEFT JOIN sys_user_role_outer uro ON uro.role_outer_id = role.id
+                AND uro.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.id = uro.user_outer_id
+                AND suo.del_flag = '0'
+            WHERE
+                comp.del_flag = '0'
+                AND role.del_flag = '0'
+                <if test="loginName != null and loginName != ''">
+                    AND suo.login_name = #{loginName}
+                </if>
+            ) alls
+        WHERE
+            comp.del_flag = '0'
+            AND (
+            <![CDATA[ LOCATE( comp.id, alls.parent_ids ) > 0 	OR comp.id = alls.id ]]>
+            OR comp.id = alls.id
+            )
+    </select>
+
+    <!-- 根据公司id获取公司信息-->
+    <select id="getCompanyInfoTree" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT DISTINCT
+            comp.`id` AS "value",
+            comp.`name` AS "label",
+            "company" AS "type",
+            comp.`parent_id` AS "0",
+            comp.`parent_ids` AS "0,"
+        FROM
+            sys_company_inner comp
+        WHERE comp.del_flag = '0'
+            <if test="companyId != null">
+                AND comp.id = #{companyId}
+            </if>
+    </select>
+
+</mapper>

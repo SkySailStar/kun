@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.system.dept.mapper.SysDeptOuterMapper">
+    <!--分页查询-->
+    <select id="selectPage" resultType="cn.kun.auth.system.dept.entity.vo.DeptPageVO">
+        SELECT DISTINCT
+            dept.id AS "id",
+            dept.`id` "value",
+            dept.company_outer_id AS "companyId",
+            dept.parent_id AS "parentId",
+            dept.parent_id AS "parentValue",
+            dept.parent_ids AS "parentIds",
+            dept.parent_ids AS "parentValues",
+            dept.`name` AS "name",
+            alls.`company` AS "company",
+            dept.update_name AS "updateName",
+            dept.update_date AS "updateDate"
+        FROM
+            sys_dept_outer dept,(
+            SELECT
+                sdo.id AS "id",
+                sdo.parent_id AS "parentId",
+                sdo.parent_ids AS "parentIds",
+                sco.`name` "company"
+            FROM
+                sys_dept_outer sdo
+                LEFT JOIN sys_company_outer sco ON sco.id = sdo.company_outer_id
+                AND sco.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.company_outer_id = sco.id
+                AND suo.del_flag = '0'
+            WHERE
+                sdo.del_flag = '0'
+                <if test="dto.userId != null">
+                    AND suo.id = #{dto.userId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sdo.NAME LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.companyId != null">
+                    AND sco.id  = #{dto.companyId}
+                </if>
+                <if test="dto.parentId != null">
+                    AND sdo.parent_id  = #{dto.parentId}
+                </if>
+             UNION
+            SELECT
+                sdo.id AS "id",
+                sdo.parent_id AS "parentId",
+                sdo.parent_ids AS "parentIds",
+                sco.`name` "company"
+            FROM
+                sys_dept_outer sdo
+                LEFT JOIN sys_company_outer sco ON sco.id = sdo.company_outer_id
+                AND sco.del_flag = '0'
+                LEFT JOIN sys_role_outer sro ON sro.company_outer_id = sco.id
+                AND sro.del_flag = '0'
+                LEFT JOIN sys_user_role_outer suro ON suro.role_outer_id = sro.id
+                AND suro.del_flag = '0'
+                LEFT JOIN sys_user_outer suo ON suo.id = suro.user_outer_id
+                AND suo.del_flag = '0'
+            WHERE
+                sdo.del_flag = '0'
+                <if test="dto.userId != null">
+                    AND suo.id = #{dto.userId}
+                </if>
+                <if test="dto.name != null and dto.name != ''">
+                    AND sdo.NAME LIKE concat( '%', #{dto.name}, '%' )
+                </if>
+                <if test="dto.companyId != null">
+                    AND sco.id  = #{dto.companyId}
+                </if>
+                <if test="dto.parentId != null">
+                    AND sdo.parent_id  = #{dto.parentId}
+                </if>
+            ) alls
+        WHERE
+            dept.del_flag = '0'
+            AND (
+            LOCATE( dept.id, alls.parentIds ) > 0
+            OR dept.id = alls.id
+            )
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                order by ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by dept.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectDeptCacheInfoByCompanyId" resultType="cn.kun.base.api.entity.auth.vo.DeptInfoVO">
+        SELECT
+            dept.id AS "deptId",
+            dept.parent_id AS "parentId",
+            dept.parent_ids AS "parentIds",
+            dept.`name` AS "deptName",
+            dept.company_outer_id AS "companyId"
+        FROM
+        sys_dept_outer dept
+        WHERE dept.del_flag = '0'
+        <if test="companyId != null">
+            AND dept.company_outer_id = #{companyId}
+        </if>
+    </select>
+
+    <!-- 部门详情 -->
+    <select id="detail" resultType="cn.kun.auth.system.dept.entity.vo.DeptDetailVO">
+            SELECT
+            dept.id AS "id",
+            dept.parent_id AS "parentId",
+            dept.parent_ids AS "parentIds",
+            parent.`name` AS "parentDept",
+            dept.`name` AS "name",
+            dept.create_date AS "createDate",
+            dept.create_name AS "createName",
+            dept.update_date AS "updateDate",
+            dept.update_name AS "updateName",
+            dept.remarks AS "remarks",
+            sco.id AS "companyId",
+            sco.`name` AS "company"
+        FROM
+            sys_dept_outer dept
+            LEFT JOIN sys_dept_outer parent ON parent.id = dept.parent_id
+            AND parent.del_flag = '0'
+            LEFT JOIN sys_company_outer sco ON sco.id = dept.company_outer_id
+            AND sco.del_flag = '0'
+        WHERE
+            dept.del_flag = '0'
+            <if test="id != null">
+                AND dept.id = #{id}
+            </if>
+    </select>
+
+    <!--     获取公司下所有部门-->
+    <select id="selectDeptByCompanyIds" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        SELECT
+            DISTINCT
+            sdo.`id` AS "value",
+            sdo.`name` AS "label",
+            "dept" AS "type",
+            IF
+            ( sdo.`parent_id` = 0, sdo.`company_outer_id`, sdo.`parent_id` ) AS "parentValue",
+            sdo.`parent_ids` AS "parentValues"
+        FROM
+            sys_dept_outer sdo
+        WHERE
+            sdo.del_flag = '0'
+            <if test="companyIds != null and companyIds.size > 0">
+                AND sdo.company_outer_id in
+                <foreach item="item" index="index" collection="companyIds"  open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+    </select>
+</mapper>
