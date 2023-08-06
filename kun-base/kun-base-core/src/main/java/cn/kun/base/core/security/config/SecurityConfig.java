@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * 安全配置
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)

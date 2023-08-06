@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Minio工具类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Component
 @Slf4j

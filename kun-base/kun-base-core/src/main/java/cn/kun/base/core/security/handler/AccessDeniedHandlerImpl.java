@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 授权失败处理器
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Component
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {

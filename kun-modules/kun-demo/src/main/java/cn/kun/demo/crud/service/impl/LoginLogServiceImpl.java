@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 登录日志 服务实现类
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-04-09 16:48
  */
 @Slf4j

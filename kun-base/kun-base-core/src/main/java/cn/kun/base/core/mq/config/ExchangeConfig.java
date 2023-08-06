@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * RabbitMQ交换机-配置类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-24 15:20
  */
 @Configuration

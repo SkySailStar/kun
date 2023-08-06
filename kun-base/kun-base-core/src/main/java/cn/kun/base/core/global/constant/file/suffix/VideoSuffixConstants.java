@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.file.suffix;
 /**
  * 视频文件常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-28 20:14
  */
 public class VideoSuffixConstants {

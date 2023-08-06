@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 内部用户
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Schema(description = "内部用户")
 @Data

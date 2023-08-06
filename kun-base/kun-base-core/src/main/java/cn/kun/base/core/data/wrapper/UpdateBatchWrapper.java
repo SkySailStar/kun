@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 自定义批量更新Wrapper
  * 
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-02-28 11:48
  */
 public class UpdateBatchWrapper<T> extends AbstractLambdaWrapper<T, UpdateBatchWrapper<T>> {

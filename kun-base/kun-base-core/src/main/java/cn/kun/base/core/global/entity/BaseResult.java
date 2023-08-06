@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * 公共响应
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Schema(description = "返回值")
 public class BaseResult<T> implements Serializable {

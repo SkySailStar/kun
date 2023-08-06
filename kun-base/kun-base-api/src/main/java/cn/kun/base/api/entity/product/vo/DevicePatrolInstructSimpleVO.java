@@ -9,7 +9,7 @@ import java.io.Serial;
 /**
  * 挂载装置巡检指令-简单-返回值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-05-19 15:52
  */
 @Schema(description = "挂载装置巡检指令-简单-返回值")

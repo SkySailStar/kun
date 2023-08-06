@@ -9,7 +9,7 @@ import java.util.Properties;
 /**
  * 消息推送-服务层
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-08 10:56
  */
 public interface RabbitService {

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 代码生成常量
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-08 13:45
  */
 public class GeneratorConstants {

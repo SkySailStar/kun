@@ -3,7 +3,7 @@ package cn.kun.base.core.cache.constant;
 /**
  * 产品-缓存-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-09 20:37
  */
 public class ProductCacheConstants {

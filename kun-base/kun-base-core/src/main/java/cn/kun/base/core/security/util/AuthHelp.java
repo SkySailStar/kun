@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 认证授权工具类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public class AuthHelp {
 

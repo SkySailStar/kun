@@ -10,7 +10,7 @@ import java.io.Serial;
 /**
  * 字典类型-分页-返回值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-23 11:30
  */
 @Schema(description = "字典类型-分页-返回值")

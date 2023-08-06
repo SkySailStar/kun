@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * 远程区域服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-26 16:40
  */
 @FeignClient(value = ServiceConstants.SYSTEM, fallbackFactory = RemoteAreaFallbackFactory.class)

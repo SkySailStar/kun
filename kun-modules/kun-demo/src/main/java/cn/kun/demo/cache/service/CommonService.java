@@ -5,7 +5,7 @@ import cn.kun.demo.cache.entity.dto.ExpireDTO;
 /**
  * 通用-服务层
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-13 14:19
  */
 public interface CommonService {

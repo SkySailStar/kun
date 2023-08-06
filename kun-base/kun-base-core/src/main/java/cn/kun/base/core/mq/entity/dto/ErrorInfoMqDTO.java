@@ -13,7 +13,7 @@ import java.io.Serializable;
 /**
  * 错误信息-消息队列-传入值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-11 17:30
  */
 @NoArgsConstructor

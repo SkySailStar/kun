@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 /**
  * 公共实体类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Schema(description = "公共实体类对象")
 @Data

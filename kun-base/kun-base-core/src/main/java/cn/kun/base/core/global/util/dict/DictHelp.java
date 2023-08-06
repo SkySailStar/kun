@@ -6,7 +6,7 @@ import cn.kun.base.core.global.constant.BaseConstants;
 /**
  * 字典工具类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-07 15:16
  */
 public class DictHelp {

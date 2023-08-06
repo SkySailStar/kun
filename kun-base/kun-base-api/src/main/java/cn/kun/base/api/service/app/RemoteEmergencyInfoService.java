@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * 远程预警服务
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @FeignClient(value = ServiceConstants.APP, fallbackFactory = RemoteEmergencyInfoFallbackFactory.class)
 public interface RemoteEmergencyInfoService {

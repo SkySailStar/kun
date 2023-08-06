@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.type;
 /**
  * 调度服务-字典类型-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-06 10:42
  */
 public class DispatchDictTypeConstants {

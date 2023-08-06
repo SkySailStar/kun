@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 通过ID批量更新
  * 
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-02-28 11:44
  */
 public class UpdateBatchById extends AbstractMethod {

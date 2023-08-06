@@ -12,7 +12,7 @@ import lombok.Setter;
  * 字典类型
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-03-28 17:41
  */
 @Getter

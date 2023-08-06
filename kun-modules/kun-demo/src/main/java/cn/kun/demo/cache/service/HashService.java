@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * 哈希-服务层
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-13 14:21
  */
 public interface HashService {

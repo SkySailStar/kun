@@ -3,7 +3,7 @@ package cn.kun.base.core.cache.constant;
 /**
  * APP-缓存-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-13 09:27
  */
 public class AppCacheConstants {

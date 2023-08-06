@@ -27,7 +27,7 @@ import java.util.Properties;
 /**
  * 发送消息-控制层
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Tag(name = "消息队列")
 @RestController

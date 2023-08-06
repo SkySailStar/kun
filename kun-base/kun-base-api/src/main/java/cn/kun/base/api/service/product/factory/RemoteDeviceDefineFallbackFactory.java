@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 远程挂载装置定义服务-降级处理
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-05-16 11:14
  */
 @Slf4j

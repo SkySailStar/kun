@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 自定义权限校验
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Component("custom")
 public class CustomAuth {

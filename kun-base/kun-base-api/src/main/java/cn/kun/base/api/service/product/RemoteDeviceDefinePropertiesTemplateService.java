@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 远程挂载装置定义属性配置模板服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-27 17:34
  */
 @FeignClient(value = ServiceConstants.PRODUCT, fallbackFactory = RemoteDeviceDefinePropertiesTemplateFallbackFactory.class)

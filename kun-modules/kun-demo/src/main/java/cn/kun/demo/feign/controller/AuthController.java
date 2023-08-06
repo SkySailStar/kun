@@ -18,7 +18,7 @@ import javax.validation.Valid;
 /**
  * 认证-控制层
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Tag(name = "认证")
 @RestController

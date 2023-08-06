@@ -9,7 +9,7 @@ import redis.clients.jedis.JedisPoolConfig;
 /**
  * Jedis-配置类（兼容老数据）
  * 
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-13 18:41
  */
 @Configuration

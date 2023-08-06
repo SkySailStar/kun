@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.system.software.mapper.SoftwareInfoMapper">
+
+    <select id="selectPage" resultType="cn.kun.system.software.entity.vo.SoftwareInfoPageVO">
+        select t1.id,
+               t1.server_id serverId,
+               t2.name serverName,
+               t1.code,
+               t1.name,
+               t1.type,
+               t1.version,
+               t1.intranet_port intranetPort,
+               t1.public_port publicPort,
+               t1.use_status useStatus,
+               t1.run_status runStatus,
+               t1.warn_flag warnFlag
+          from software_info t1
+          left join server_info t2 on t2.id = t1.server_id and t2.del_flag = 0
+        <where>
+            t1.del_flag = 0
+            <if test="dto.serverId != null">
+                and t1.server_id = #{dto.serverId}
+            </if>
+            <if test="dto.code != null and dto.code != ''">
+                and t1.code like concat('%', #{dto.code}, '%')
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                and t1.name like concat('%', #{dto.name}, '%')
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                and t1.type = #{dto.type}
+            </if>
+            <if test="dto.version != null and dto.version != ''">
+                and t1.version like concat('%', #{dto.version}, '%')
+            </if>
+            <if test="dto.useStatus != null and dto.useStatus != ''">
+                and t1.use_status = #{dto.useStatus}
+            </if>
+            <if test="dto.runStatus != null and dto.runStatus != ''">
+                and t1.run_status = #{dto.runStatus}
+            </if>
+            <if test="dto.warnFlag != null and dto.warnFlag != ''">
+                and t1.warn_flag = #{dto.warnFlag}
+            </if>
+        </where>
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by t1.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

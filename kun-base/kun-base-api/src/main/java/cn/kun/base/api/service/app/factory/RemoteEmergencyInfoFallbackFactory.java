@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * 远程预警服务-服务降级
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Slf4j
 @Component

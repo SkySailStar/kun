@@ -7,7 +7,7 @@ import org.springframework.beans.BeansException;
 /**
  * 对象工具类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-23 16:40
  */
 public class BeanHelp extends BeanUtil {

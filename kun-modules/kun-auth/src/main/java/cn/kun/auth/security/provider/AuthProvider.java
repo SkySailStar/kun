@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 /**
  * 认证供应端
  * 
- * @author 廖航
+ * @author SkySailStar
  */
 @Slf4j
 @Component

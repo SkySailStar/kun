@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.type;
 /**
  * 手机应用-字典类型-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-14 14:41
  */
 public class AppDictTypeConstants {

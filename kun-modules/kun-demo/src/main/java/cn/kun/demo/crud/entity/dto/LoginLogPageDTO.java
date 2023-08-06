@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 /**
  * 登录日志-分页-传入值
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Schema(description = "登录日志-分页-传入值")
 @EqualsAndHashCode(callSuper = true)

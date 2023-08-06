@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * 内部职位菜单表 服务实现类
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-02-27 17:54
  */
 @Slf4j

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 自定义方法注入
  * 
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-02-28 11:53
  */
 public class CustomSqlInjector extends DefaultSqlInjector {

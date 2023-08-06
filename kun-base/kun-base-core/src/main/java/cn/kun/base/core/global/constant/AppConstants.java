@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant;
 /**
  * 手机应用服务-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-13 14:10
  */
 public class AppConstants {

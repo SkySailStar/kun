@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 用户信息
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Schema(description = "用户信息")
 @Data

@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.file.suffix;
 /**
  * 音频文件常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-28 20:02
  */
 public class AudioSuffixConstants {

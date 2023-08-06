@@ -20,7 +20,7 @@ import java.util.Properties;
 /**
  * 消息推送-服务层实现类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Service
 public class RabbitServiceImpl implements RabbitService {

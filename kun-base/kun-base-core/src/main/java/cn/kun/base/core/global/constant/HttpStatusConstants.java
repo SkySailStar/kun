@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant;
 /**
  * 返回状态码
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public class HttpStatusConstants {
 

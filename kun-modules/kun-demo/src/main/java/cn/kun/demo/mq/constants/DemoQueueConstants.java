@@ -3,7 +3,7 @@ package cn.kun.demo.mq.constants;
 /**
  * 消息队列
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-19 14:50
  */
 public class DemoQueueConstants {

@@ -28,7 +28,7 @@ import java.util.Objects;
 /**
  * 全局异常处理器
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-30 11:17
  */
 @Slf4j

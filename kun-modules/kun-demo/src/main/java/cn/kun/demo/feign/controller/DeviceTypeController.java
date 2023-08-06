@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 挂载装置类型-控制层
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-17 17:39
  */
 @Tag(name = "挂载装置类型")

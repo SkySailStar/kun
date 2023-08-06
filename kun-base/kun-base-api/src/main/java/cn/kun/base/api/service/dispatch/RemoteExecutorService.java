@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * 远程执行器服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-07 10:07
  */
 @FeignClient(value = ServiceConstants.DISPATCH, fallbackFactory = RemoteExecutorFallbackFactory.class)

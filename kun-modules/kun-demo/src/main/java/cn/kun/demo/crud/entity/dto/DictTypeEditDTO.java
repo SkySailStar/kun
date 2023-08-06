@@ -11,7 +11,7 @@ import java.io.Serial;
 /**
  * 字典类型-修改-传入值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-23 10:56
  */
 @Schema(description = "字典类型-修改-传入值")

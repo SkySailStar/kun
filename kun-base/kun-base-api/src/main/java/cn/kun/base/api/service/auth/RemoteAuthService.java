@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 远程认证服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-07 16:24
  */
 @FeignClient(value = ServiceConstants.AUTH, fallbackFactory = RemoteAuthFallbackFactory.class)

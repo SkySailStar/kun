@@ -10,7 +10,7 @@ import java.io.Serial;
 /**
  * 供应商基本信息分页-传入值
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Schema(description = "供应商基本信息分页-传入值")
 @EqualsAndHashCode(callSuper = true)

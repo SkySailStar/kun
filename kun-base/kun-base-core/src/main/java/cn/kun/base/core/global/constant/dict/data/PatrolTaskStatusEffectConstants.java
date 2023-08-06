@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 巡检任务生效状态-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-16 15:28
  */
 public class PatrolTaskStatusEffectConstants {

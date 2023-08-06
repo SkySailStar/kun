@@ -7,7 +7,7 @@ import java.io.Serial;
 /**
  * 业务异常
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

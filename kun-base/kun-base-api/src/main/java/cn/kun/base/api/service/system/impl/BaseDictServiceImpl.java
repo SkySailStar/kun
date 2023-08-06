@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 字典-服务层实现类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-23 17:39
  */
 @SuppressWarnings("all")

@@ -1,5 +1,6 @@
 version : '3.9'
 services:
+  # 关系型数据库
   mysql:
     container_name: mysql
     image: mysql:8.0.32
@@ -14,6 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: kun_mysql
     privileged: true
     restart: always
+  # 缓存
   redis:
     container_name: redis
     image: redis:7.0.10
@@ -25,6 +27,7 @@ services:
     privileged: true
     restart: always
     command: redis-server /etc/redis/redis.conf
+  # 非结构化数据存储
   minio:
     container_name: minio
     image: minio/minio:RELEASE.2023-03-24T21-41-23Z
@@ -40,6 +43,7 @@ services:
     privileged: true
     restart: always
     command: server /data --console-address ":9090" -address ":9000"
+  # 消息队列
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3.11.11-management
@@ -51,6 +55,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=kun_rabbitmq
     privileged: true
     restart: always
+  # 定时任务
   xxl-job-admin:
     container_name: xxl-job-admin
     image: xuxueli/xxl-job-admin:2.4.0
@@ -64,6 +69,7 @@ services:
     restart: always
     depends_on:
       - mysql
+  # 服务注册与发现
   nacos:
     container_name: nacos
     image: nacos/nacos-server:v2.1.1

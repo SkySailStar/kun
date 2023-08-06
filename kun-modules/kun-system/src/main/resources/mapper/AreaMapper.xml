@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.system.area.mapper.AreaMapper">
+
+    <!-- 查询分页列表 -->
+    <select id="selectPage" resultType="cn.kun.system.area.entity.vo.AreaPageVO">
+        select t1.id,
+               t1.code,
+               t1.name,
+               t1.type,
+               t1.postal_code postalCode,
+               t1.update_name updateName,
+               t1.update_date updateDate
+          from area t1
+        <where>
+            t1.del_flag = 0
+            <if test="dto.name != null and dto.name != ''">
+                and t1.name like concat('%', #{dto.name}, '%')
+            </if>
+            <if test="dto.type != null and dto.type != ''">
+                and t1.type = #{dto.type}
+            </if>
+            <if test="dto.postalCode != null and dto.postalCode != ''">
+                and t1.postal_code like concat('%', #{dto.postalCode}, '%')
+            </if>
+            <if test="dto.startTime != null">
+                and t1.update_date &gt;= #{dto.startTime}
+            </if>
+            <if test="dto.endTime != null">
+                and t1.update_date &lt;= #{dto.endTime}
+            </if>
+        </where>
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by t1.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+    
+    <select id="selectAllList" resultType="cn.kun.base.core.global.entity.vo.BaseSelectVO">
+        select id value,
+               name label,
+               parent_id parentValue
+          from area
+        <where>
+            del_flag = 0
+        </where> 
+    </select>
+
+</mapper>

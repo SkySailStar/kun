@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * 远程日志服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-07 10:16
  */
 @FeignClient(value = ServiceConstants.DISPATCH, fallbackFactory = RemoteLogFallbackFactory.class)

@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant;
 /**
  * 服务-常量类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public class ServiceConstants {
     

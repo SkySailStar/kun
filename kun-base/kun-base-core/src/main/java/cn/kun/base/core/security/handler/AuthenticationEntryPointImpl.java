@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 认证失败处理器
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {

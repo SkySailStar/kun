@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 /**
  * 处理新增和更新的基础数据填充，配合BaseEntity和MyBatisPlusConfig使用
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Component
 public class MetaHandler implements MetaObjectHandler {

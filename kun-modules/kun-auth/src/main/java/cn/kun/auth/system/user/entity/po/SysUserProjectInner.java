@@ -14,7 +14,7 @@ import java.io.Serial;
  * 内部用户项目表
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-02-10 11:06
  */
 @Getter

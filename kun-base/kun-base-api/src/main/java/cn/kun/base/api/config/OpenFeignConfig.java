@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 远程服务调用配置类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-07 17:45
  */
 @Slf4j

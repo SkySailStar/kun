@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * 字符串-服务层
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-13 14:20
  */
 public interface StringService {

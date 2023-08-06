@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * 登录日志
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-04-09 16:48
  */
 @Getter

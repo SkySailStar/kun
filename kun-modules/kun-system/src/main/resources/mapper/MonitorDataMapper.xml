@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.system.monitor.mapper.MonitorDataMapper">
+
+    <select id="selectPage" resultType="cn.kun.system.monitor.entity.vo.MonitorDataPageVO">
+        select t1.id,
+               t1.code,
+               t1.name,
+               t1.value,
+               t1.unit,
+               t2.name projectName,
+               t1.source_type sourceType,
+               t1.record_time recordTime
+          from monitor_data t1
+          left join sevnce_auth.sys_project t2 on t2.project_no = t1.project_no and t2.del_flag = 0
+        <where>
+            t1.del_flag = 0
+            <if test="dto.code != null and dto.code != ''">
+                and t1.code like concat('%', #{dto.code}, '%')
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                and t1.name like concat('%', #{dto.name}, '%')
+            </if>
+            <if test="dto.projectNo != null and dto.projectNo != ''">
+                and t1.project_no = #{dto.projectNo}
+            </if>
+            <if test="dto.sourceType != null and dto.sourceType != ''">
+                and t1.source_type = #{dto.sourceType}
+            </if>
+            <if test="dto.recordStartTime != null">
+                and t1.record_time &gt;= #{dto.recordStartTime}
+            </if>
+            <if test="dto.recordEndTime != null">
+                and t1.record_time &lt;= #{dto.recordEndTime}
+            </if>
+        </where>
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by t1.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

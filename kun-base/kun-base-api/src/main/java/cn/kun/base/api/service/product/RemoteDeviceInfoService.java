@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 远程挂载装置信息服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-27 17:31
  */
 @FeignClient(value = ServiceConstants.PRODUCT, fallbackFactory = RemoteDeviceInfoFallbackFactory.class)

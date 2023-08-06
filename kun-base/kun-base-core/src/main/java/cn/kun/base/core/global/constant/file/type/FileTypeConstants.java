@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 文件类型常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-28 19:52
  */
 public class FileTypeConstants {

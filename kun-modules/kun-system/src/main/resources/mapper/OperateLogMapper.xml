@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.system.log.mapper.OperateLogMapper">
+
+    <select id="selectPage" resultType="cn.kun.system.log.entity.vo.OperateLogPageVO">
+        select t1.id,
+        t2.name menuName,
+        t1.serial_number serialNumber,
+        t1.operate_type operateType,
+        t1.operate_user operateUser,
+        t1.operate_time operateTime,
+        t1.operate_content operateContent,
+        t1.operate_flag operateFlag,
+        t1.operate_target_type operateTargetType
+        from operate_log t1
+        left join sevnce_auth.sys_menu t2 on t2.id = t1.menu_id and t2.del_flag = 0
+        <where>
+            t1.del_flag = 0
+            <if test="dto.menuId != null">
+                and t1.menu_id = #{dto.menuId}
+            </if>
+            <if test="dto.serialNumber != null and dto.serialNumber != ''">
+                and t1.serial_number like concat('%', #{dto.serialNumber}, '%')
+            </if>
+            <if test="dto.operateType != null and dto.operateType != ''">
+                and t1.operate_type = #{dto.operateType}
+            </if>
+            <if test="dto.operateUser != null and dto.operateUser != ''">
+                and t1.operate_user like concat('%', #{dto.operateUser}, '%')
+            </if>
+            <if test="dto.operateStartTime != null">
+                and t1.operate_time &gt;= #{dto.operateStartTime}
+            </if>
+            <if test="dto.operateEndTime != null">
+                and t1.operate_time &lt;= #{dto.operateEndTime}
+            </if>
+            <if test="dto.operateContent != null and dto.operateContent != ''">
+                and t1.operate_content like concat('%', #{dto.operateContent}, '%')
+            </if>
+            <if test="dto.operateFlag != null and dto.operateFlag != ''">
+                and t1.operate_flag = #{dto.operateFlag}
+            </if>
+            <if test="dto.operateTargetType != null and dto.operateTargetType != ''">
+                and t1.operate_target_type = #{dto.operateTargetType}
+            </if>
+        </where>
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                ${dto.orderBy}
+            </when>
+            <otherwise>
+                order by t1.update_date desc
+            </otherwise>
+        </choose>
+    </select>
+    
+</mapper>

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 死信队列-配置类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-04 09:49
  */
 @Configuration

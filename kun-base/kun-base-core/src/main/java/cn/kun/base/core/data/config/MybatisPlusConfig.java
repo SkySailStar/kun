@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * MyBatis-Plus配置类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Configuration
 public class MybatisPlusConfig {

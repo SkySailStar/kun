@@ -29,7 +29,7 @@ import java.util.List;
  * 字典类型表 服务实现类
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-03-23 10:24
  */
 @Slf4j

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 挂载装置定义的巡检能力-查询-传入值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-21 11:44
  */
 @Schema(description = "挂载装置定义的巡检能力-查询-传入值")

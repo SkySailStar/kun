@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant;
 /**
  * 异常编码常量
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-01-30 16:00
  */
 public class ErrorCodeConstants {

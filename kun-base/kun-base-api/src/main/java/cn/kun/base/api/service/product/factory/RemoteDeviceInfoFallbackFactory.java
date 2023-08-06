@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 远程挂载装置信息服务-降级处理
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-05-16 11:16
  */
 @Slf4j

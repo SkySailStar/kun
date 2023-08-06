@@ -16,14 +16,14 @@ import java.util.List;
 /**
  * 代码快速生成
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public class FastGenerator {
 
     /**
      * 作者名
      */
-    public static final String AUTHOR = "廖航";
+    public static final String AUTHOR = "SkySailStar";
     
     /**
      * 生成的表名（多个表用英文逗号分隔，所有表输入 all）

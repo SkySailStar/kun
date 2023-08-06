@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * 远程区域服务-降级处理
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-27 13:57
  */
 @Slf4j

@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 文件类型-字典数据常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-28 19:32
  */
 public class FileTypeConstants {

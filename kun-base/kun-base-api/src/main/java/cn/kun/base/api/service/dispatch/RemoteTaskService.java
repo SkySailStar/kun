@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 远程任务服务
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-06-07 10:27
  */
 @FeignClient(value = ServiceConstants.DISPATCH, fallbackFactory = RemoteTaskFallbackFactory.class)

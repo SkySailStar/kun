@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 挂载装置类型-查询-返回值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-09 19:03
  */
 @Schema(description = "挂载装置类型-查询-返回值")

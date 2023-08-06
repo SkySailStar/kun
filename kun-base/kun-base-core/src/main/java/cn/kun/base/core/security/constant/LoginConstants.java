@@ -3,7 +3,7 @@ package cn.kun.base.core.security.constant;
 /**
  * 认证常量
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public class LoginConstants {
 

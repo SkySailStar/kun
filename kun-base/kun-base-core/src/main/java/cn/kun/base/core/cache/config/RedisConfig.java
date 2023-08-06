@@ -34,7 +34,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Redis 配置类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @Configuration
 @EnableCaching

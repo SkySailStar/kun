@@ -3,7 +3,7 @@ package cn.kun.base.core.data.enums;
 /**
  * 自定义SQL方法
  * 
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-02-28 11:40
  */
 public enum CustomSqlMethod {

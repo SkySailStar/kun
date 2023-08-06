@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 认证-服务层
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public interface AuthService {
 

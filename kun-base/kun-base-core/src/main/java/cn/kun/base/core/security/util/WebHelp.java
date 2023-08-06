@@ -6,7 +6,7 @@ import java.io.IOException;
 /**
  * 网页工具类
  * 
- * @author 廖航
+ * @author SkySailStar
  */
 public class WebHelp {
     

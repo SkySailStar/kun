@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.type;
 /**
  * 产品服务字典类型常量类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-28 15:10
  */
 public class ProductDictTypeConstants {

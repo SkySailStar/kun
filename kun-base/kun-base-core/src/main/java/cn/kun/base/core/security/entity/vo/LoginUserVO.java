@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 登录用户-返回值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-24 14:20
  */
 @Schema(description = "登录用户-返回值")

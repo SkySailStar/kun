@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 主题模式-配置类
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-19 16:11
  */
 @Configuration

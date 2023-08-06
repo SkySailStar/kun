@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * 自定义公用持久层
  * 
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-02-28 11:50
  */
 public interface CustomBaseMapper<T> extends BaseMapper<T> {

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 /**
  * 自定义主键生成
  *
- * @author 廖航
+ * @author SkySailStar
  */
 public class CustomIdGenerator implements IdentifierGenerator {
 

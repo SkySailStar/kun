@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 内部职位菜单表 Mapper 接口
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-02-27 17:54
  */
 public interface SysJobMenuInnerMapper extends BaseMapper<SysJobMenuInner> {

@@ -10,7 +10,7 @@ import java.io.Serial;
 /**
  * 挂载装置定义-分页-返回值
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-03-16 14:47
  */
 @Schema(description = "挂载装置定义-分页-返回值")

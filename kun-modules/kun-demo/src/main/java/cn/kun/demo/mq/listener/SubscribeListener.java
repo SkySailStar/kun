@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * 发布订阅模式-监听器
  *
- * @author 廖航
+ * @author SkySailStar
  * @date 2023-04-19 18:11
  */
 @Slf4j

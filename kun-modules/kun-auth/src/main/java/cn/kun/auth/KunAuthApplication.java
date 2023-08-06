@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 /**
  * 启动类
  *
- * @author 廖航
+ * @author SkySailStar
  */
 @MapperScan("cn.kun.**.mapper")
 @EnableFeignClients(basePackages = "cn.kun")
@@ -30,14 +30,14 @@ public class KunAuthApplication {
         String ip = Inet4Address.getLocalHost().getHostAddress();
         String port = environment.getProperty("server.port");
         System.out.println(
-                "  ████████                                          \n" +
-                " ██░░░░░░                                           \n" +
-                "░██         █████  ██    ██ ███████   █████   █████ \n" +
-                "░█████████ ██░░░██░██   ░██░░██░░░██ ██░░░██ ██░░░██\n" +
-                "░░░░░░░░██░███████░░██ ░██  ░██  ░██░██  ░░ ░███████\n" +
-                "       ░██░██░░░░  ░░████   ░██  ░██░██   ██░██░░░░ \n" +
-                " ████████ ░░██████  ░░██    ███  ░██░░█████ ░░██████\n" +
-                "░░░░░░░░   ░░░░░░    ░░    ░░░   ░░  ░░░░░   ░░░░░░ \n" +
+                " ██                         \n" +
+                "░██                         \n" +
+                "░██  ██   ██   ██   ███████ \n" +
+                "░██ ██   ░██  ░██  ░░██░░░██\n" +
+                "░████    ░██  ░██   ░██  ░██\n" +
+                "░██░██   ░██  ░██   ░██  ░██\n" +
+                "░██░░██  ░░██████   ███  ░██\n" +
+                "░░  ░░    ░░░░░░   ░░░   ░░ \n" +
                 "认证服务-启动成功！接口文档：http://" + ip + ":" + port + "/doc.html"
         );
     }

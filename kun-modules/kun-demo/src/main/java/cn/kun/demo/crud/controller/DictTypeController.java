@@ -22,7 +22,7 @@ import javax.validation.Valid;
  * 字典类型表 前端控制器
  * </p>
  *
- * @author 廖航
+ * @author SkySailStar
  * @since 2023-03-23 10:24
  */
 @Tag(name = "字典类型")
