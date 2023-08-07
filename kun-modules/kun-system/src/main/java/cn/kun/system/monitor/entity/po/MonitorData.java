@@ -39,7 +39,7 @@ public class MonitorData extends BaseEntity {
     @TableField("unit")
     private String unit;
 
-    @Schema(description = "项目编号;关联sevnce_auth.sys_project表project_no")
+    @Schema(description = "项目编号;关联kun_auth.sys_project表project_no")
     @TableField("project_no")
     private String projectNo;
 

@@ -1,3 +1,5 @@
+CREATE SCHEMA kun_auth;
+
 USE kun_auth;
 
 SET NAMES utf8mb4;

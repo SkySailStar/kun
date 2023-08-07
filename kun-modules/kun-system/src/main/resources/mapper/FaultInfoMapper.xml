@@ -11,7 +11,7 @@
                t1.status,
                t1.record_time recordTime
           from fault_info t1
-          left join sevnce_auth.sys_project t2 on t2.project_no = t1.project_no and t2.del_flag = 0
+          left join kun_auth.sys_project t2 on t2.project_no = t1.project_no and t2.del_flag = 0
         <where>
             t1.del_flag = 0
             <if test="dto.code != null and dto.code != ''">

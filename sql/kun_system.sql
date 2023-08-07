@@ -1,3 +1,5 @@
+CREATE SCHEMA kun_system;
+
 USE kun_system;
 
 SET NAMES utf8mb4;

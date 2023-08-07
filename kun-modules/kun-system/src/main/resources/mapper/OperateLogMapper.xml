@@ -13,7 +13,7 @@
         t1.operate_flag operateFlag,
         t1.operate_target_type operateTargetType
         from operate_log t1
-        left join sevnce_auth.sys_menu t2 on t2.id = t1.menu_id and t2.del_flag = 0
+        left join kun_auth.sys_menu t2 on t2.id = t1.menu_id and t2.del_flag = 0
         <where>
             t1.del_flag = 0
             <if test="dto.menuId != null">

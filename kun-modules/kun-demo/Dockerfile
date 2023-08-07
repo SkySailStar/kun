@@ -1,11 +1,11 @@
 # 基础镜像
-FROM swr.cn-north-1.myhuaweicloud.com/sevnce/jdk:17.0.5
+FROM kun/jdk:17.0.5
 
 # 将工作目录设置为 /myapps
 WORKDIR /usr/local/myapps
 
 # 添加
-ADD target/sevnce-demo-*.jar sevnce-demo.jar
+ADD target/kun-demo-*.jar kun-demo.jar
 
 # 指定运行环境
 SHELL ["/bin/bash", "-c"]
@@ -18,7 +18,7 @@ RUN rm -rf /var/lib/apt/lists/* \
         && mkdir /logs \
         && echo 'nohup java -Djava.security.egd=file:/dev/./urandom \
                  -Dspring.config.location=/usr/local/config/ \
-                 -jar /usr/local/myapps/sevnce-demo.jar > /logs/startLog.file 2>&1 &' > appstart.sh
+                 -jar /usr/local/myapps/kun-demo.jar > /logs/startLog.file 2>&1 &' > appstart.sh
 
 # 设置编码
 ENV LANG zh_CN.UTF-8
