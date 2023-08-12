@@ -23,26 +23,24 @@
         <kun-base-api.version>1.0.0</kun-base-api.version>
         <kun-base-core.version>1.0.0</kun-base-core.version>
         <kun-base-job.version>1.0.0</kun-base-job.version>
-        <spring-boot.version>2.7.6</spring-boot.version>
-        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <spring-boot.version>3.1.2</spring-boot.version>
+        <spring-cloud.version>2022.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
-        <fastjson2.version>2.0.19</fastjson2.version>
+        <fastjson2.version>2.0.38</fastjson2.version>
         <knife4j.version>4.3.0</knife4j.version>
-        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
         <velocity.version>2.3</velocity.version>
-        <hutool.version>5.8.16</hutool.version>
-        <druid.version>1.2.14</druid.version>
+        <hutool.version>5.8.21</hutool.version>
+        <druid.version>	1.2.18</druid.version>
         <jwt.version>0.9.1</jwt.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
-        <jaxb-impl.version>4.0.1</jaxb-impl.version>
-        <jaxb-core.version>4.0.1</jaxb-core.version>
+        <jaxb-impl.version>4.0.3</jaxb-impl.version>
+        <jaxb-core.version>	4.0.3</jaxb-core.version>
         <activation.version>1.1.1</activation.version>
-        <minio.version>8.4.5</minio.version>
+        <minio.version>8.5.4</minio.version>
         <xxl-job.version>2.4.0</xxl-job.version>
         <javax-mail.version>1.6.2</javax-mail.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <pinyin4j.version>2.5.1</pinyin4j.version>
-        <jedis.version>2.5.1</jedis.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     </properties>
     
     <!-- 依赖声明 -->
@@ -203,21 +201,7 @@
                 <artifactId>javax.mail</artifactId>
                 <version>${javax-mail.version}</version>
             </dependency>
-
-            <!-- 汉语拼音 -->
-            <dependency>
-                <groupId>com.belerweb</groupId>
-                <artifactId>pinyin4j</artifactId>
-                <version>${pinyin4j.version}</version>
-            </dependency>
-
-            <!-- Jedis -->
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>${jedis.version}</version>
-            </dependency>
-
+            
         </dependencies>
     </dependencyManagement>
 
