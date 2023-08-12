@@ -12,8 +12,8 @@
     
     <modules>
         <module>kun-base</module>
-        <module>kun-generator</module>
-        <module>kun-modules</module>
+        <module>kun-generate</module>
+        <module>kun-module</module>
     </modules>
 
     <properties>

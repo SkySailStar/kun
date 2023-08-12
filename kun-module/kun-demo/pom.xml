@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.skysailstar</groupId>
-        <artifactId>kun-modules</artifactId>
+        <artifactId>kun-module</artifactId>
         <version>1.0.0</version>
     </parent>
 

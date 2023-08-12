@@ -54,40 +54,77 @@
 
 # 技术选型
 
-- **系统环境**
-  - **Java 环境**：OracleJDK `17.0.5`
-  - **关系型数据库**：MySQL `8.0.32`
-  - **非关系型数据库**：Redis `7.0.10`、~~MongDB~~、~~Elasticsearch~~
-  - **非结构化数据存储**：MinIO `RELEASE.2023-03-24T21-41-23Z`
-  - **项目管理**：Gradle `8.2.1`
-- **主框架**：Spring Boot `3.1.2`
-- **微服务框架**：Spring Cloud Alibaba `2021.0.4.0`
-  - **分布式配置 服务注册与发现**：Nacos `2.1.1`
-  - **服务熔断**：~~Sentinel~~
-  - **服务调用**：HTTP Interface
-  - **服务路由**：~~Spring Cloud Gateway~~
-  - **分布式消息**：RabbitMQ `3.11.11`
-  - **分布式事务**：~~Seata~~
-- **安全框架**：Spring Security `3.1.2`
-- **定时任务框架**：xxl-job `2.4.0`
-- **编码工具**
-  - **持久层 代码生成**：MyBatis-Flex `1.5.7`
-  - **多数据源**：Druid
-  - **外部服务调用**：~~Dubbo~~
-  - **接口文档**：Knife4j `4.3.0`
-  - **Json 处理**：FastJson `2.0.19`
-  - **文档处理**：~~POI~~、FreeMarker
-  - **类构建 日志打印**：Lombok
-  - **工具类**：Hutool
-- **工作流**：~~Activiti~~
-- **服务监控**：~~Spring Boot Admin~~
-- **链路追踪**：~~SkyWalking~~
-- **分库分表**：~~Sharding-JDBC~~
-- **分布式日志**：~~ELK（Filebeat+Kafka+Elasticsearch+Logstash+Kibana）~~
-- **服务部署**：Docker、~~K8s~~、~~Jenkins~~
-- **反向代理 服务器端负载均衡**：Nginx
-- **数据处理 数据同步**：~~NIFI~~
-- **大数据**：~~Hadoop~~
+## 环境
+
+- Java
+  - OracleJDK `17.0.5`
+- 关系型数据库
+  - MySQL `8.0.32`
+- 非关系型数据库
+  - Redis `7.0.10`
+  - ~~MongDB~~
+  - ~~Elasticsearch~~
+- 非结构化数据存储
+  - MinIO `RELEASE.2023-03-24T21-41-23Z`
+- 项目管理
+  - Gradle `8.2.1`
+
+## 框架
+
+- 主框架
+  - Spring Boot `3.1.2`
+- 微服务框架
+  - Spring Cloud Alibaba `2021.0.4.0`
+- 服务调用
+  - HTTP Interface
+- 服务路由
+  - ~~Spring Cloud Gateway~~
+- 安全框架
+  - Spring Security `3.1.2`
+- 定时任务框架
+  - xxl-job `2.4.0`
+
+## 工具
+
+- 持久层、代码生成
+  - MyBatis-Flex `1.5.7`
+- 多数据源
+  - Druid
+- 消息队列
+  - RabbitMQ `3.11.11`
+- 外部服务调用
+  - ~~Dubbo~~
+- 接口文档
+  - Knife4j `4.3.0`
+- Json 处理
+  - FastJson `2.0.19`
+- 文档处理
+  - ~~POI~~、FreeMarker
+- 类构建、日志打印
+  - Lombok
+- 工具类
+  - Hutool
+
+## 扩展
+
+- 工作流
+  - ~~Activiti~~
+- 服务监控
+  - ~~Spring Boot Admin~~
+- 链路追踪
+  - ~~SkyWalking~~
+- 分库分表
+  - ~~Sharding-JDBC~~
+- 分布式日志
+  - ~~ELK（Filebeat+Kafka+Elasticsearch+Logstash+Kibana）~~
+- 服务部署
+  - Docker、~~K8s~~、~~Jenkins~~
+- 反向代理、服务器端负载均衡
+  - Nginx
+- 数据处理、数据同步
+  - ~~NIFI~~
+- 大数据
+  - ~~Hadoop~~
 
 # 项目结构
 
@@ -97,11 +134,12 @@ kun
 │      └── kun-base-api         // 公用模块-接口
 │      └── kun-base-core        // 公用模块-核心（全局、缓存、数据、文件、安全）
 │      └── kun-base-job         // 公用模块-定时任务
-├── kun-generator               // 代码生成模块
-├── kun-modules                 // 业务模块
+├── kun-generate                // 代码生成模块
+├── kun-module                  // 业务模块
 │      └── kun-demo             // 示例服务[45000]
 │      └── kun-auth             // 认证服务[45001]
-├── sql                        // SQL脚本
+│      └── kun-system           // 系统服务[45002]
+├── sql                         // SQL脚本
 ├── .gitignore                  // Git忽略文件
 ├── docker-compose.yaml         // Docker Compose配置文件
 ├── LICENSE                     // 版权说明

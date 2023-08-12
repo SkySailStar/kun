@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kun-modules</artifactId>
+    <artifactId>kun-module</artifactId>
     <packaging>pom</packaging>
     <description>业务模块</description>
     
