@@ -18,7 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import cn.kun.base.core.global.controller.BaseController;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * <p>

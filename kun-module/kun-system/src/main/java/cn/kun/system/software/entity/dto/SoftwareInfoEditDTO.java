@@ -4,7 +4,7 @@ import cn.kun.base.core.global.entity.dto.BaseEditDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 import java.io.Serial;
 
 /**

@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.Serial;
 import java.io.Serializable;
 

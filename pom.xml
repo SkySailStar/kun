@@ -41,6 +41,7 @@
         <xxl-job.version>2.4.0</xxl-job.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <hanlp.version>portable-1.8.4</hanlp.version>
     </properties>
     
     <!-- 依赖声明 -->
@@ -200,6 +201,13 @@
                 <groupId>com.sun.mail</groupId>
                 <artifactId>javax.mail</artifactId>
                 <version>${javax-mail.version}</version>
+            </dependency>
+
+            <!-- 汉语拼音（能够辨别多音字） -->
+            <dependency>
+                <groupId>com.hankcs</groupId>
+                <artifactId>hanlp</artifactId>
+                <version>${hanlp.version}</version>
             </dependency>
             
         </dependencies>

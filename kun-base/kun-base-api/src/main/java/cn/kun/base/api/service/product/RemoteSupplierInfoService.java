@@ -11,7 +11,7 @@ import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**

@@ -3,7 +3,7 @@ package cn.kun.demo.file.service;
 import cn.kun.demo.file.entity.vo.ItemVO;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**

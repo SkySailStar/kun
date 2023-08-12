@@ -5,7 +5,7 @@ import cn.kun.base.core.global.annotation.SwaggerDisplayEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.Serial;
 import java.io.Serializable;
 
