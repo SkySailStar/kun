@@ -13,7 +13,7 @@ import cn.kun.system.external.entity.vo.ExternalUrlPageVO;
 import cn.kun.system.external.service.ExternalUrlService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/external/external-url")
 public class ExternalUrlController extends BaseController {
 
-    @Autowired
+    @Resource
     private ExternalUrlService externalUrlService;
 
     @Operation(summary = "分页")

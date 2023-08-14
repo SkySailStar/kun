@@ -21,7 +21,7 @@ import cn.kun.system.external.entity.po.ExternalUrl;
 import cn.kun.system.external.entity.vo.ExternalUrlPageVO;
 import cn.kun.system.external.service.ExternalUrlService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ExternalUrlServiceImpl extends ServiceImpl<ExternalUrlMapper, ExternalUrl> implements ExternalUrlService {
 
-    @Autowired
+    @Resource
     private DictDataService dictDataService;
     
     @Override

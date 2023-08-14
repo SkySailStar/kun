@@ -15,7 +15,7 @@ import cn.kun.base.api.entity.system.vo.DictDataListVO;
 import cn.kun.system.dict.service.DictDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("/dict/dict-data")
 public class DictDataController extends BaseController {
 
-    @Autowired
+    @Resource
     private DictDataService dictDataService;
 
     @Operation(summary = "分页")

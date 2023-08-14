@@ -13,7 +13,7 @@ import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/software/software-info")
 public class SoftwareInfoController extends BaseController {
 
-    @Autowired
+    @Resource
     private SoftwareInfoService softwareInfoService;
 
     @Operation(summary = "分页")

@@ -5,7 +5,7 @@ import cn.kun.base.core.mq.constant.ExchangeConstants;
 import cn.kun.base.core.mq.service.RabbitService;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DirectDeadLetterConfig {
 
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
     
     @Bean

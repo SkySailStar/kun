@@ -6,7 +6,7 @@ import cn.kun.base.api.service.product.RemoteDeviceTypeService;
 import cn.kun.base.api.service.system.RemoteAreaService;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
@@ -20,16 +20,16 @@ import java.util.Arrays;
 @SpringBootTest
 public class KunDemoTest {
     
-    @Autowired
+    @Resource
     private DictTypeService dictTypeService;
     
-    @Autowired
+    @Resource
     private RemoteAreaService remoteAreaService;
     
-    @Autowired
+    @Resource
     private RemoteDeviceTypeService remoteDeviceTypeService;
 
-    @Autowired
+    @Resource
     private RemoteProjectService remoteProjectService;
 
     /**

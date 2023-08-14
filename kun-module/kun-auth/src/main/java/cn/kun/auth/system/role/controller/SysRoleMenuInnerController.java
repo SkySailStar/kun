@@ -5,7 +5,7 @@ import cn.kun.auth.system.role.entity.dto.RoleMenuDTO;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/system/sysRoleMenuInner")
 public class SysRoleMenuInnerController extends BaseController {
-    @Autowired
+    @Resource
     private SysRoleMenuInnerService sysRoleMenuInnerService;
 
     /**

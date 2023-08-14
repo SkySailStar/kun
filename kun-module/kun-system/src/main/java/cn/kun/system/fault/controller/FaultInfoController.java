@@ -9,7 +9,7 @@ import cn.kun.system.fault.entity.vo.FaultInfoPageVO;
 import cn.kun.system.fault.service.FaultInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/fault/fault-info")
 public class FaultInfoController extends BaseController {
 
-    @Autowired
+    @Resource
     private FaultInfoService faultInfoService;
 
     @Operation(summary = "分页")

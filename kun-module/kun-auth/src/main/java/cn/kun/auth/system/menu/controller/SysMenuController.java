@@ -13,7 +13,7 @@ import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/sysMenu")
 public class SysMenuController extends BaseController {
-    @Autowired
+    @Resource
     private SysMenuService sysMenuService;
 
 

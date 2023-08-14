@@ -20,7 +20,7 @@ import cn.kun.base.core.global.controller.BaseController;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +45,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/sysUserOuter")
 public class SysUserOuterController extends BaseController {
-    @Autowired
+    @Resource
     private SysUserOuterService sysUserOuterService;
 
 

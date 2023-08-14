@@ -33,7 +33,7 @@ import cn.kun.base.core.global.exception.BusinessException;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,18 +51,18 @@ import java.util.List;
 @Service
 @Slf4j
 public class SysJobInnerServiceImpl extends ServiceImpl<SysJobInnerMapper, SysJobInner> implements SysJobInnerService {
-    @Autowired
+    @Resource
     private SysMenuService sysMenuService;
     
-    @Autowired
+    @Resource
     private SysCompanyInnerService sysCompanyInnerService;
-    @Autowired
+    @Resource
     private SysDeptInnerService sysDeptInnerService;
-    @Autowired
+    @Resource
     private SysUserInnerService sysUserInnerService;
-    @Autowired
+    @Resource
     private SysUserJobInnerService sysUserJobInnerService;
-    @Autowired
+    @Resource
     private SysJobMenuInnerService sysJobMenuInnerService;
     @Override
     public Page<JobPageVO> page(JobPageDTO dto) {

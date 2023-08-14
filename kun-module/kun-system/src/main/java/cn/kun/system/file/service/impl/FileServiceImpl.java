@@ -28,7 +28,7 @@ import cn.kun.system.file.mapper.FileMapper;
 import cn.kun.system.file.service.FileService;
 import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,7 +45,7 @@ import java.util.List;
 @Service
 public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements FileService {
 
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
     
     @Override

@@ -25,7 +25,7 @@ import cn.kun.base.core.global.constant.dict.type.AuthDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +46,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public class LoginLimitInfoOuterServiceImpl extends ServiceImpl<LoginLimitInfoOuterMapper, LoginLimitInfoOuter> implements LoginLimitInfoOuterService {
 
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
 
     @Override

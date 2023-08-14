@@ -19,7 +19,7 @@ import cn.kun.system.log.entity.po.LoginLog;
 import cn.kun.system.log.mapper.LoginLogMapper;
 import cn.kun.system.log.service.LoginLogService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> implements LoginLogService {
 
-    @Autowired
+    @Resource
     private DictDataService dictDataService;
     
     @Override

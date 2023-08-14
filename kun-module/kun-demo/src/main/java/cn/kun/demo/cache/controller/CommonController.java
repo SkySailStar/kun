@@ -6,7 +6,7 @@ import cn.kun.demo.cache.entity.dto.ExpireDTO;
 import cn.kun.demo.cache.service.CommonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("cache/common")
 public class CommonController extends BaseController {
 
-    @Autowired
+    @Resource
     private CommonService commonService;
     
     @Operation(summary = "切换数据库")

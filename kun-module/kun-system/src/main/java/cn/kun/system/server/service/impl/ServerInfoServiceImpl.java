@@ -23,7 +23,7 @@ import cn.kun.base.core.global.util.dict.DictHelp;
 import cn.kun.system.server.entity.po.ServerInfo;
 import cn.kun.system.server.service.ServerInfoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,10 +39,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ServerInfoServiceImpl extends ServiceImpl<ServerInfoMapper, ServerInfo> implements ServerInfoService {
 
-    @Autowired
+    @Resource
     private DictDataService dictDataService;
     
-    @Autowired
+    @Resource
     private SoftwareInfoService softwareInfoService;
 
     @Override

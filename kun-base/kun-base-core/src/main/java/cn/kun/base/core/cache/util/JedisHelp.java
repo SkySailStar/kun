@@ -7,7 +7,7 @@ import cn.kun.base.core.global.exception.BusinessException;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.global.util.obj.ObjHelp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -27,7 +27,7 @@ import java.util.Set;
 public class JedisHelp {
 	
 	private static JedisPool jedisPool;
-	@Autowired
+	@Resource
 	public void setJedisPool(JedisPool jedisPool) {
 		JedisHelp.jedisPool = jedisPool;
 	}
