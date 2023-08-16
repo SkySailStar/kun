@@ -75,11 +75,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
-        
-        <!-- Mybatis-Plus -->
+
+        <!-- Mybatis-Flex -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
         </dependency>
 
         <!-- 多数据源 -->

@@ -27,16 +27,16 @@
             <artifactId>kun-base-core</artifactId>
         </dependency>
 
-        <!-- Mybatis-Plus代码生成 -->
+        <!-- Mybatis-Flex代码生成 -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-codegen</artifactId>
         </dependency>
 
-        <!-- Velocity模板引擎 -->
+        <!-- 数据源 -->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-engine-core</artifactId>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
     </dependencies>
 
