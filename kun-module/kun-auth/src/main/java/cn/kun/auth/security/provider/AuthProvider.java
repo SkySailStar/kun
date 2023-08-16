@@ -10,7 +10,7 @@ import cn.kun.base.core.global.util.obj.ObjHelp;
 import cn.kun.base.core.security.entity.LoginUser;
 import cn.kun.base.core.security.entity.UserInfo;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthProvider implements AuthenticationProvider {
  
-    @Resource
+    @Autowired
     private UserDetailsService userDetailsService;
     
     @Override

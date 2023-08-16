@@ -13,7 +13,7 @@ import cn.kun.system.monitor.entity.vo.MonitorConfigDetailVO;
 import cn.kun.system.monitor.entity.vo.MonitorConfigPageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/monitor/monitor-config")
 public class MonitorConfigController extends BaseController {
 
-    @Resource
+    @Autowired
     private MonitorConfigService monitorConfigService;
 
     @Operation(summary = "分页")

@@ -1,5 +1,4 @@
 cn.kun.base.api.config.OpenFeignConfig
-cn.kun.base.api.config.RestTemplateConfig
 cn.kun.base.api.service.system.impl.BaseDictServiceImpl
 cn.kun.base.api.service.system.factory.RemoteAreaFallbackFactory
 cn.kun.base.api.service.system.factory.RemoteDictFallbackFactory

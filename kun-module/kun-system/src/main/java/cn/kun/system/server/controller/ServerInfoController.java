@@ -13,7 +13,7 @@ import cn.kun.system.server.entity.po.ServerInfo;
 import cn.kun.system.server.service.ServerInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/server/server-info")
 public class ServerInfoController extends BaseController {
 
-    @Resource
+    @Autowired
     private ServerInfoService serverInfoService;
 
     @Operation(summary = "分页")

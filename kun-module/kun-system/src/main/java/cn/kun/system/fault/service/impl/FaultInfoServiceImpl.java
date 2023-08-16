@@ -19,7 +19,7 @@ import cn.kun.system.fault.entity.vo.FaultInfoPageVO;
 import cn.kun.system.fault.mapper.FaultInfoMapper;
 import cn.kun.system.fault.service.FaultInfoService;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,10 +35,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class FaultInfoServiceImpl extends ServiceImpl<FaultInfoMapper, FaultInfo> implements FaultInfoService {
 
-    @Resource
+    @Autowired
     private DictDataService dictDataService;
     
-    @Resource
+    @Autowired
     private RemoteProjectService remoteProjectService;
 
     @Override

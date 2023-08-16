@@ -18,7 +18,7 @@ import cn.kun.base.core.mq.entity.dto.ErrorInfoMqDTO;
 import cn.kun.system.error.entity.dto.ErrorInfoPageDTO;
 import cn.kun.system.error.entity.vo.ErrorInfoDetailVO;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ErrorInfoServiceImpl extends ServiceImpl<ErrorInfoMapper, ErrorInfo> implements ErrorInfoService {
 
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
 
     @Override

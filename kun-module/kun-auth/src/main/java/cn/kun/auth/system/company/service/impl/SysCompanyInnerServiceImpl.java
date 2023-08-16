@@ -46,7 +46,7 @@ import cn.kun.base.core.global.util.check.ParentHelp;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,21 +65,21 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysCompanyInnerServiceImpl extends ServiceImpl<SysCompanyInnerMapper, SysCompanyInner> implements SysCompanyInnerService {
-    @Resource
+    @Autowired
     private SysDeptInnerService sysDeptInnerService;
-    @Resource
+    @Autowired
     private SysCompanyDetailInnerService sysCompanyDetailInnerService;
-    @Resource
+    @Autowired
     private SysJobInnerService sysJobInnerService;
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
-    @Resource
+    @Autowired
     private RemoteFileService remoteFileService;
-    @Resource
+    @Autowired
     private RemoteAreaService remoteAreaService;
-    @Resource
+    @Autowired
     private SysRoleInnerService sysRoleInnerService;
-    @Resource
+    @Autowired
     private SysUserRoleInnerService sysUserRoleInnerService;
     @Override
     public Page<CompanyPageVO> page(CompanyPageDTO dto) {

@@ -21,7 +21,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
@@ -35,7 +35,7 @@ import java.util.Objects;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @Resource
+    @Autowired
     private RabbitService rabbitService;
     
     /**

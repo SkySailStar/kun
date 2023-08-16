@@ -21,7 +21,7 @@ import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
@@ -42,10 +42,10 @@ import java.util.Objects;
 @Slf4j
 public class AuthServiceImpl implements AuthService {
 
-    @Resource
+    @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
     
-    @Resource
+    @Autowired
     private UserDetailsService userDetailsService;
     
     @Override

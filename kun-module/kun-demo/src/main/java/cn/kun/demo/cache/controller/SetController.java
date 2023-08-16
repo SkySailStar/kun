@@ -9,7 +9,7 @@ import cn.kun.demo.cache.entity.dto.SetSetTimeDTO;
 import cn.kun.demo.cache.service.SetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ import java.util.Set;
 @RequestMapping("cache/set")
 public class SetController extends BaseController {
 
-    @Resource
+    @Autowired
     private SetService setService;
 
     @Operation(summary = "取值")

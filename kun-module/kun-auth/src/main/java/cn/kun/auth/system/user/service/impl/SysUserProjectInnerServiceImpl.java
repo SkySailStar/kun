@@ -16,7 +16,7 @@ import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.base.core.global.constant.AuthConstants;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +38,10 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysUserProjectInnerServiceImpl extends ServiceImpl<SysUserProjectInnerMapper, SysUserProjectInner> implements SysUserProjectInnerService {
-    @Resource
+    @Autowired
     private SysUserInnerService sysUserInnerService;
 
-    @Resource
+    @Autowired
     private SysProjectService sysProjectService;
 
     /**

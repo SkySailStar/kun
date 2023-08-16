@@ -1,7 +1,7 @@
 package cn.kun.base.core.global.util.http;
 
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import java.net.SocketTimeoutException;
@@ -18,7 +18,7 @@ public class HttpHelp {
 
     private static RestTemplate restTemplate;
     
-    @Resource
+    @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {
         
         HttpHelp.restTemplate = restTemplate;

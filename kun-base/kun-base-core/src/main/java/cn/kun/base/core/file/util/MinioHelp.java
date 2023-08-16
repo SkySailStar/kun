@@ -16,7 +16,7 @@ import io.minio.http.Method;
 import io.minio.messages.Bucket;
 import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,12 +38,12 @@ public class MinioHelp {
 
     private static MinioClient minioClient;
 
-    @Resource
+    @Autowired
     public void setMinioConfig(MinioConfig minioConfig) {
         MinioHelp.minioConfig = minioConfig;
     }
 
-    @Resource
+    @Autowired
     public void setMinioClient(MinioClient minioClient) {
         MinioHelp.minioClient = minioClient;
     }

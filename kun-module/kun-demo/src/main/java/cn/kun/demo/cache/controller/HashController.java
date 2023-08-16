@@ -15,7 +15,7 @@ import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.demo.cache.service.HashService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -31,7 +31,7 @@ import java.util.Map;
 @RequestMapping("cache/hash")
 public class HashController extends BaseController {
 
-    @Resource
+    @Autowired
     private HashService hashService;
 
     @Operation(summary = "获取键对应的所有值")

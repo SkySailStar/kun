@@ -6,7 +6,7 @@ import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.demo.crud.entity.dto.JobMenuInnerSaveDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/crud/sysJobMenuInner")
 public class SysJobMenuInnerController extends BaseController {
 
-    @Resource
+    @Autowired
     private SysJobMenuInnerService sysJobMenuInnerService;
 
     @Operation(summary = "保存")

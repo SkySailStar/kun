@@ -9,7 +9,7 @@ import cn.kun.system.monitor.entity.vo.MonitorDataDetailVO;
 import cn.kun.system.monitor.entity.vo.MonitorDataPageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/monitor/monitor-data")
 public class MonitorDataController extends BaseController {
 
-    @Resource
+    @Autowired
     private MonitorDataService monitorDataService;
 
     @Operation(summary = "分页")

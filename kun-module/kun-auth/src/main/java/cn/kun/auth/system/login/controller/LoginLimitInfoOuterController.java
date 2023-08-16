@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import cn.kun.base.core.global.controller.BaseController;
@@ -32,7 +32,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/system.login/loginLimitInfoOuter")
 public class LoginLimitInfoOuterController extends BaseController {
-    @Resource
+    @Autowired
     private LoginLimitInfoOuterService loginLimitInfoOuterService;
 
     @Operation(summary = "分页")

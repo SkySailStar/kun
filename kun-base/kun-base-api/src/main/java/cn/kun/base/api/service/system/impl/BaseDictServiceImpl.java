@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class BaseDictServiceImpl implements BaseDictService {
     @Value("${spring.redis.database}")
     private int database;
     
-    @Resource
+    @Autowired
     private RemoteDictService remoteDictService;
     
     @Override

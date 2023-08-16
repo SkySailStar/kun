@@ -13,7 +13,7 @@ import cn.kun.system.dict.entity.vo.DictTypePageVO;
 import cn.kun.system.dict.service.DictTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/dict/dict-type")
 public class DictTypeController extends BaseController {
 
-    @Resource
+    @Autowired
     private DictTypeService dictTypeService;
 
     @Operation(summary = "分页")

@@ -19,7 +19,7 @@ import cn.kun.system.param.entity.dto.ParamConfigEditDTO;
 import cn.kun.system.param.entity.dto.ParamConfigPageDTO;
 import cn.kun.system.param.service.ParamConfigService;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ParamConfigServiceImpl extends ServiceImpl<ParamConfigMapper, ParamConfig> implements ParamConfigService {
     
-    @Resource
+    @Autowired
     private SoftwareInfoService softwareInfoService;
     
     @Override

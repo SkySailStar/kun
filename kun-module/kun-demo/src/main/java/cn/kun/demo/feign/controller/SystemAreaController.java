@@ -5,7 +5,7 @@ import cn.kun.base.core.global.controller.BaseController;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("area")
 public class SystemAreaController extends BaseController {
 
-    @Resource
+    @Autowired
     private RemoteAreaService remoteAreaService;
     
     @Operation(summary = "通过id获取名称")

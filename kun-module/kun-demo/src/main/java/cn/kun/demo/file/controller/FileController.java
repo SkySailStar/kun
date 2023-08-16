@@ -6,7 +6,7 @@ import cn.kun.base.core.global.controller.BaseController;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping("file")
 public class FileController extends BaseController {
 
-    @Resource
+    @Autowired
     private FileService fileService;
 
     @Operation(summary = "上传")

@@ -19,7 +19,7 @@ import cn.kun.system.monitor.entity.vo.MonitorDataDetailVO;
 import cn.kun.system.monitor.entity.vo.MonitorDataPageVO;
 import cn.kun.system.monitor.mapper.MonitorDataMapper;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,10 +35,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MonitorDataServiceImpl extends ServiceImpl<MonitorDataMapper, MonitorData> implements MonitorDataService {
 
-    @Resource
+    @Autowired
     private DictDataService dictDataService;
     
-    @Resource
+    @Autowired
     private RemoteProjectService remoteProjectService;
 
     @Override

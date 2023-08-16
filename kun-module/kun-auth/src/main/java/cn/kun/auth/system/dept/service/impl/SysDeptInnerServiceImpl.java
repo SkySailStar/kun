@@ -32,7 +32,7 @@ import cn.kun.base.core.global.util.check.ParentHelp;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,9 +51,9 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysDeptInnerServiceImpl extends ServiceImpl<SysDeptInnerMapper, SysDeptInner> implements SysDeptInnerService {
-    @Resource
+    @Autowired
     private SysJobInnerService sysJobInnerService;
-    @Resource
+    @Autowired
     private SysCompanyInnerService sysCompanyInnerService;
 
     @Override

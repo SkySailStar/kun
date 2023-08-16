@@ -13,7 +13,7 @@ import cn.kun.demo.cache.entity.dto.ListSetTimeDTO;
 import cn.kun.demo.cache.service.ListService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("cache/list")
 public class ListController extends BaseController {
 
-    @Resource
+    @Autowired
     private ListService listService;
 
     @Operation(summary = "取值")

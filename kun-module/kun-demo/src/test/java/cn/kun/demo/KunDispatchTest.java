@@ -6,7 +6,7 @@ import cn.kun.base.api.entity.dispatch.dto.TaskPageDTO;
 import cn.kun.base.api.entity.dispatch.vo.TaskPageVO;
 import cn.kun.base.api.service.dispatch.RemoteTaskService;
 import org.junit.jupiter.api.Test;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class KunDispatchTest {
     
-    @Resource
+    @Autowired
     private RemoteTaskService remoteTaskService;
     
     @Test

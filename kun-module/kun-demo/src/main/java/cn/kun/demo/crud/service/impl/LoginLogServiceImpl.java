@@ -20,7 +20,7 @@ import cn.kun.demo.crud.entity.po.LoginLog;
 import cn.kun.demo.crud.entity.vo.LoginLogDetailVO;
 import cn.kun.demo.crud.entity.vo.LoginLogPageVO;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> implements LoginLogService {
 
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
     
     @Override

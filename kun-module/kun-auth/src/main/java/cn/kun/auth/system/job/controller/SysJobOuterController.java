@@ -14,7 +14,7 @@ import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import cn.kun.base.core.global.controller.BaseController;
@@ -34,7 +34,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/sysJobOuter")
 public class SysJobOuterController extends BaseController {
-    @Resource
+    @Autowired
     private SysJobOuterService sysJobOuterService;
 
 

@@ -4,7 +4,7 @@ import cn.kun.auth.system.role.service.SysRoleTemplateOuterService;
 import cn.kun.auth.system.role.entity.po.SysRoleTemplateOuter;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.kun.base.core.global.controller.BaseController;
 
@@ -20,7 +20,7 @@ import cn.kun.base.core.global.controller.BaseController;
 @RestController
 @RequestMapping("/system/sysRoleTemplateOuter")
 public class SysRoleTemplateOuterController extends BaseController {
-    @Resource
+    @Autowired
     private SysRoleTemplateOuterService sysRoleTemplateOuterService;
 
 

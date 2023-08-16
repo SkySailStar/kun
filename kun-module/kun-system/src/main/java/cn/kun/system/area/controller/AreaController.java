@@ -14,7 +14,7 @@ import cn.kun.system.area.entity.vo.AreaPageVO;
 import cn.kun.system.area.service.AreaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,7 @@ import java.util.List;
 @RequestMapping("area")
 public class AreaController extends BaseController {
 
-    @Resource
+    @Autowired
     private AreaService areaService;
 
     @Operation(summary = "分页")

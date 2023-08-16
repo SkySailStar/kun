@@ -54,7 +54,7 @@ import cn.kun.base.core.global.exception.BusinessException;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,21 +72,21 @@ import java.util.List;
 @Service
 @Slf4j
 public class SysRoleOuterServiceImpl extends ServiceImpl<SysRoleOuterMapper, SysRoleOuter> implements SysRoleOuterService {
-    @Resource
+    @Autowired
     private SysProjectService sysProjectService;
-    @Resource
+    @Autowired
     private SysMenuService sysMenuService;
-    @Resource
+    @Autowired
     private SysUserOuterService sysUserOuterService;
-    @Resource
+    @Autowired
     private SysUserRoleOuterService sysUserRoleOuterService;
-    @Resource
+    @Autowired
     private SysRoleProjectOuterService sysRoleProjectOuterService;
-    @Resource
+    @Autowired
     private SysRoleMenuOuterService sysRoleMenuOuterService;
-    @Resource
+    @Autowired
     private SysCompanyOuterService sysCompanyOuterService;
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
 
 

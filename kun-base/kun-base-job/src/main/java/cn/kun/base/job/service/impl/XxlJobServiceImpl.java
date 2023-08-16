@@ -14,7 +14,7 @@ import cn.kun.base.api.entity.dispatch.dto.TaskPageDTO;
 import cn.kun.base.api.entity.dispatch.dto.TaskTriggerDTO;
 import cn.kun.base.job.service.XxlJobService;
 import com.xxl.job.core.biz.model.ReturnT;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +51,7 @@ public class XxlJobServiceImpl implements XxlJobService {
     /**
      * 请求模板
      */
-    @Resource
+    @Autowired
     private RestTemplate restTemplate;
     
     /**

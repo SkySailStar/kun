@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;;
 import java.util.LinkedList;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysUserRoleInnerServiceImpl extends ServiceImpl<SysUserRoleInnerMapper, SysUserRoleInner> implements SysUserRoleInnerService {
-    @Resource
+    @Autowired
     private SysUserInnerService sysUserInnerService;
 
     @Override

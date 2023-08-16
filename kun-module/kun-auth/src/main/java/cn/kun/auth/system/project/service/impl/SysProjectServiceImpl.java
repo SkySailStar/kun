@@ -71,7 +71,7 @@ import cn.kun.base.core.global.util.check.ParentHelp;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
@@ -91,39 +91,39 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysProjectServiceImpl extends ServiceImpl<SysProjectMapper, SysProject> implements SysProjectService {
-    @Resource
+    @Autowired
     private SysProjectDetailService sysProjectDetailService;
-    @Resource
+    @Autowired
     private SysCompanyInnerService sysCompanyInnerService;
-    @Resource
+    @Autowired
     private SysCompanyOuterService sysCompanyOuterService;
-    @Resource
+    @Autowired
     private SysRoleInnerService sysRoleInnerService;
-    @Resource
+    @Autowired
     private SysRoleProjectInnerService sysRoleProjectInnerService;
-    @Resource
+    @Autowired
     private SysRoleProjectOuterService sysRoleProjectOuterService;
-    @Resource
+    @Autowired
     private SysUserProjectInnerService sysUserProjectInnerService;
-    @Resource
+    @Autowired
     private SysUserProjectOuterService sysUserProjectOuterService;
-    @Resource
+    @Autowired
     private SysUserInnerService sysUserInnerService;
-    @Resource
+    @Autowired
     private SysUserOuterService sysUserOuterService;
-    @Resource
+    @Autowired
     private SysDeptInnerService sysDeptInnerService;
-    @Resource
+    @Autowired
     private SysDeptOuterService sysDeptOuterService;
-    @Resource
+    @Autowired
     private SysJobInnerService sysJobInnerService;
-    @Resource
+    @Autowired
     private SysJobOuterService sysJobOuterService;
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
-    @Resource
+    @Autowired
     private RemoteFileService remoteFileService;
-    @Resource
+    @Autowired
     private RemoteAreaService remoteAreaService;
 
     @Override

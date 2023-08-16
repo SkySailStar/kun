@@ -25,7 +25,7 @@ import cn.kun.system.area.entity.vo.AreaPageVO;
 import cn.kun.system.area.mapper.AreaMapper;
 import cn.kun.system.area.service.AreaService;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +43,7 @@ import java.util.List;
 @Service
 public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements AreaService {
 
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
 
     @Override

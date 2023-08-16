@@ -66,7 +66,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,31 +86,31 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysUserInnerServiceImpl extends ServiceImpl<SysUserInnerMapper, SysUserInner> implements SysUserInnerService {
-    @Resource
+    @Autowired
     private SysJobInnerService sysJobInnerService;
-    @Resource
+    @Autowired
     private SysRoleInnerService sysRoleInnerService;
-    @Resource
+    @Autowired
     private SysProjectService sysProjectService;
-    @Resource
+    @Autowired
     private SysMenuService sysMenuService;
-    @Resource
+    @Autowired
     private SysUserDetailInnerService sysUserDetailInnerService;
-    @Resource
+    @Autowired
     private SysUserJobInnerService sysUserJobInnerService;
-    @Resource
+    @Autowired
     private SysUserProjectInnerService sysUserProjectInnerService;
-    @Resource
+    @Autowired
     private SysUserMenuInnerService sysUserMenuInnerService;
-    @Resource
+    @Autowired
     private SysUserRoleInnerService sysUserRoleInnerService;
-    @Resource
+    @Autowired
     private SysCompanyInnerService sysCompanyInnerService;
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
-    @Resource
+    @Autowired
     private RemoteFileService remoteFileService;
-    @Resource
+    @Autowired
     private SysUserOuterService sysUserOuterService;
 
     @Override

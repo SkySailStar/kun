@@ -6,7 +6,7 @@ import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("dict/data")
 public class DictDataController extends BaseController {
 
-    @Resource
+    @Autowired
     private BaseDictService baseDictService;
     
     @Operation(summary = "根据类型获取列表")

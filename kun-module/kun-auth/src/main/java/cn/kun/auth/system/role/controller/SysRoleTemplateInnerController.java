@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/system/sysRoleTemplateInner")
 public class SysRoleTemplateInnerController extends BaseController {
-//    @Resource
+//    @Autowired
 //    private SysRoleTemplateInnerService sysRoleTemplateInnerService;
 //
 //    @Operation(summary = "分页列表")

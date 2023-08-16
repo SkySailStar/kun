@@ -21,7 +21,7 @@ import cn.kun.system.monitor.entity.vo.MonitorConfigPageVO;
 import cn.kun.system.monitor.mapper.MonitorConfigMapper;
 import cn.kun.system.monitor.service.MonitorConfigService;
 import lombok.extern.slf4j.Slf4j;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MonitorConfigServiceImpl extends ServiceImpl<MonitorConfigMapper, MonitorConfig> implements MonitorConfigService {
 
-    @Resource
+    @Autowired
     private DictDataService dictDataService;
     
     @Override
