@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.role.mapper.SysRoleOuterMapper">
+<mapper namespace="cn.kun.auth.role.mapper.SysRoleOuterMapper">
 
     <!--    角色详情-->
-    <select id="detail" resultType="cn.kun.auth.system.role.entity.vo.RoleDetailVO">
+    <select id="detail" resultType="cn.kun.auth.role.entity.vo.RoleDetailVO">
         SELECT
             sro.`id` AS "id",
             sro.`name`,
@@ -29,7 +29,7 @@
     </select>
 
     <!--    角色分页列表-->
-    <select id="selectPage" resultType="cn.kun.auth.system.role.entity.vo.RolePageVO">
+    <select id="selectPage" resultType="cn.kun.auth.role.entity.vo.RolePageVO">
         SELECT DISTINCT
             sro.`id` AS "id",
             sro.`name`,
@@ -114,7 +114,7 @@
     </select>
 
     <!--    根据 角色id、公司id信息 获取当前角色有多少内部用户-->
-    <select id="selectOuterPersonnelInfoRoleId" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+    <select id="selectOuterPersonnelInfoRoleId" resultType="cn.kun.auth.user.entity.po.UserDetailList">
         SELECT DISTINCT
             suo.id AS "value",
             suo.`name` AS "userName",
@@ -152,7 +152,7 @@
     </select>
 
     <!--   角色-人员配置-分页-->
-    <select id="personnelRoleInfoPage" resultType="cn.kun.auth.system.user.entity.vo.UserPersonnelPageVO">
+    <select id="personnelRoleInfoPage" resultType="cn.kun.auth.user.entity.vo.UserPersonnelPageVO">
         SELECT DISTINCT
             suo.id AS "userId",
             suo.`name` AS "userName",

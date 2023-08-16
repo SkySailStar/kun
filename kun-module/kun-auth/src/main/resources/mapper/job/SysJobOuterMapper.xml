@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.job.mapper.SysJobOuterMapper">
+<mapper namespace="cn.kun.auth.job.mapper.SysJobOuterMapper">
     <!--    分页列表-->
-    <select id="selectPage" resultType="cn.kun.auth.system.job.entity.vo.JobPageVO">
+    <select id="selectPage" resultType="cn.kun.auth.job.entity.vo.JobPageVO">
         SELECT DISTINCT
             vo.id AS "id",
             vo.companyId AS "companyId",
@@ -90,7 +90,7 @@
     </select>
 
     <!--    通过用户id查询职位、部门、公司信息-->
-    <select id="getJobOuterInfoByUserOuterId" resultType="cn.kun.auth.system.job.entity.vo.JobInfoByUserIdVO">
+    <select id="getJobOuterInfoByUserOuterId" resultType="cn.kun.auth.job.entity.vo.JobInfoByUserIdVO">
         SELECT
             sjo.`id` jobId,
             sjo.`name` jobName,
@@ -114,7 +114,7 @@
     </select>
 
     <!--    通过用户id查询职位、部门、公司信息-->
-    <select id="detail" resultType="cn.kun.auth.system.job.entity.vo.JobDetailVO">
+    <select id="detail" resultType="cn.kun.auth.job.entity.vo.JobDetailVO">
         SELECT
             job.id AS "id",
             job.`name` AS "name",
@@ -140,7 +140,7 @@
             </if>
     </select>
     <!--    添加用户-选择职位-->
-    <select id="jobs" resultType="cn.kun.auth.system.job.entity.vo.JobDetailVO">
+    <select id="jobs" resultType="cn.kun.auth.job.entity.vo.JobDetailVO">
         SELECT
             job.id AS "id",
             job.`name` AS "name",

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.dept.mapper.SysDeptOuterMapper">
+<mapper namespace="cn.kun.auth.dept.mapper.SysDeptOuterMapper">
     <!--分页查询-->
-    <select id="selectPage" resultType="cn.kun.auth.system.dept.entity.vo.DeptPageVO">
+    <select id="selectPage" resultType="cn.kun.auth.dept.entity.vo.DeptPageVO">
         SELECT DISTINCT
             dept.id AS "id",
             dept.`id` "value",
@@ -105,7 +105,7 @@
     </select>
 
     <!-- 部门详情 -->
-    <select id="detail" resultType="cn.kun.auth.system.dept.entity.vo.DeptDetailVO">
+    <select id="detail" resultType="cn.kun.auth.dept.entity.vo.DeptDetailVO">
             SELECT
             dept.id AS "id",
             dept.parent_id AS "parentId",

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.company.mapper.SysCompanyInnerMapper">
+<mapper namespace="cn.kun.auth.company.mapper.SysCompanyInnerMapper">
     <select id="getCompanyInfoByCompanyId" resultType="cn.kun.base.api.entity.auth.vo.SysCompanyInfoVO">
         SELECT
             sci.id companyId,
@@ -19,7 +19,7 @@
           AND sci.del_flag = 0
     </select>
     <!--  公司分页-->
-    <select id="selectPage" resultType="cn.kun.auth.system.company.entity.vo.CompanyPageVO">
+    <select id="selectPage" resultType="cn.kun.auth.company.entity.vo.CompanyPageVO">
         SELECT
             *
         FROM
@@ -107,7 +107,7 @@
     </select>
 
 <!--    查询内部用户所拥有的内部公司信息-->
-    <select id="selectInnerParent" resultType="cn.kun.auth.system.company.entity.vo.CompanyInfoVO">
+    <select id="selectInnerParent" resultType="cn.kun.auth.company.entity.vo.CompanyInfoVO">
         SELECT
             sci.id as "companyId",
             sci.parent_id as "0",

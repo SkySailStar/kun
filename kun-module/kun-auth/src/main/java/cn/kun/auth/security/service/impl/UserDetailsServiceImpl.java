@@ -1,13 +1,13 @@
 package cn.kun.auth.security.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import cn.kun.auth.system.user.entity.po.SysUserInner;
-import cn.kun.auth.system.user.entity.po.SysUserOuter;
-import cn.kun.auth.system.user.service.SysUserInnerService;
-import cn.kun.auth.system.user.service.SysUserOuterService;
+import cn.kun.auth.user.entity.po.SysUserInner;
+import cn.kun.auth.user.entity.po.SysUserOuter;
+import cn.kun.auth.user.service.SysUserInnerService;
+import cn.kun.auth.user.service.SysUserOuterService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import cn.kun.auth.system.menu.service.SysMenuService;
-import cn.kun.auth.system.project.service.SysProjectService;
+import cn.kun.auth.menu.service.SysMenuService;
+import cn.kun.auth.project.service.SysProjectService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.entity.LoginUser;

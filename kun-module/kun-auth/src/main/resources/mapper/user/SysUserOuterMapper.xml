@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.user.mapper.SysUserOuterMapper">
+<mapper namespace="cn.kun.auth.user.mapper.SysUserOuterMapper">
 <!--    通过用户id查询用户缓存信息-->
     <select id="getUserInfoByUserId" resultType="cn.kun.base.api.entity.auth.vo.SysUserInfoVO">
         SELECT
@@ -28,7 +28,7 @@
     </select>
 
     <!--    分页列表查询-->
-    <select id="selectPage" resultType="cn.kun.auth.system.user.entity.vo.UserPageVO">
+    <select id="selectPage" resultType="cn.kun.auth.user.entity.vo.UserPageVO">
         SELECT
             suo.id AS "userId",
             suo.NAME AS "name",
@@ -106,7 +106,7 @@
 
 
     <!--    人员配置：获取当前用户所拥有的所有公司信息、部门信息、职位信息的用户  -->
-    <select id="selectOuterPersonnelInfo" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+    <select id="selectOuterPersonnelInfo" resultType="cn.kun.auth.user.entity.po.UserDetailList">
         SELECT
         DISTINCT
             suo.id AS "userId",
@@ -212,7 +212,7 @@
     </select>
 
     <!--    根据用户id获取用户职位、部门、公司信息-->
-    <select id="getUserJobInfo" resultType="cn.kun.auth.system.user.entity.vo.UserJobInfoVO">
+    <select id="getUserJobInfo" resultType="cn.kun.auth.user.entity.vo.UserJobInfoVO">
         SELECT
             sjo.id AS "jobId",
             sjo.`name` AS "jobName",

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.project.mapper.SysProjectMapper">
+<mapper namespace="cn.kun.auth.project.mapper.SysProjectMapper">
 
 <!--    通过项目id查询项目详细信息-->
     <select id = "getProjectInfoByProjectNo" resultType="cn.kun.base.api.entity.auth.vo.SysProjectInfoVO">
@@ -23,7 +23,7 @@
     </select>
 
     <!--    通过内部角色id查询项目权限-->
-    <select id="getRoleProjectInnerAuth" resultType="cn.kun.auth.system.project.entity.vo.ProjectRedisVO">
+    <select id="getRoleProjectInnerAuth" resultType="cn.kun.auth.project.entity.vo.ProjectRedisVO">
         SELECT
             sp.id projectId,
             sp.project_no projectNo,
@@ -50,7 +50,7 @@
     </select>
 
     <!--    通过外部角色id查询项目权限信息-->
-    <select id="getRoleProjectOuterAuth" resultType="cn.kun.auth.system.project.entity.vo.ProjectRedisVO">
+    <select id="getRoleProjectOuterAuth" resultType="cn.kun.auth.project.entity.vo.ProjectRedisVO">
         SELECT
         sp.id projectId,
         sp.project_no projectNo,
@@ -77,7 +77,7 @@
     </select>
 
 <!--    内部用户-项目分页-->
-    <select id="selectInnerPage" resultType="cn.kun.auth.system.project.entity.vo.ProjectPageVO">
+    <select id="selectInnerPage" resultType="cn.kun.auth.project.entity.vo.ProjectPageVO">
         SELECT * from (SELECT
             sp.id,
             sp.id as "value",
@@ -191,7 +191,7 @@
     </select>
 
     <!--    外部用户-项目分页-->
-    <select id="selectOuterPage" resultType="cn.kun.auth.system.project.entity.vo.ProjectPageVO">
+    <select id="selectOuterPage" resultType="cn.kun.auth.project.entity.vo.ProjectPageVO">
         SELECT * from (SELECT
             sp.id,
             sp.id as "value",
@@ -419,7 +419,7 @@
     </select>
 
     <!--    根据 项目编号、公司id信息 获取当前项目有多少内部用户   旧版设计，目前保留，确定使用新版后删除-->
-    <select id="selectInnerPersonnelInfoProjectNo" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+    <select id="selectInnerPersonnelInfoProjectNo" resultType="cn.kun.auth.user.entity.po.UserDetailList">
         SELECT DISTINCT
             sui.id AS "userId",
             sui.`name` AS "userName",
@@ -499,7 +499,7 @@
 
 
     <!--    根据 项目编号、公司id信息 获取当前项目有多少外部用户  旧版设计，目前保留，确定使用新版后删除-->
-    <select id="selectOuterPersonnelInfoProjectNo" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+    <select id="selectOuterPersonnelInfoProjectNo" resultType="cn.kun.auth.user.entity.po.UserDetailList">
         SELECT DISTINCT
             suo.id AS "userId",
             suo.`name` AS "userName",
@@ -578,7 +578,7 @@
     </select>
 
     <!--    项目-人员配置-分页功能-->
-    <select id="selectInnerPersonnelInfoPage" resultType="cn.kun.auth.system.user.entity.vo.UserPersonnelPageVO">
+    <select id="selectInnerPersonnelInfoPage" resultType="cn.kun.auth.user.entity.vo.UserPersonnelPageVO">
         SELECT DISTINCT
             sui.id AS "userId",
             sui.`name` AS "userName",
@@ -660,7 +660,7 @@
 
 
     <!--    项目-外部人员配置-分页功能-->
-    <select id="outerPersonnelPage" resultType="cn.kun.auth.system.user.entity.vo.UserPersonnelPageVO">
+    <select id="outerPersonnelPage" resultType="cn.kun.auth.user.entity.vo.UserPersonnelPageVO">
         SELECT DISTINCT
             suo.id AS "userId",
             suo.`name` AS "userName",
@@ -783,7 +783,7 @@
     </select>
 
     <!--    根据 项目编号、公司id信息 获取当前项目有多少内部用户-->
-    <select id="innerPersonnelProject" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+    <select id="innerPersonnelProject" resultType="cn.kun.auth.user.entity.po.UserDetailList">
         SELECT DISTINCT
             sui.id AS "userId",
             sui.id AS "value",
@@ -821,7 +821,7 @@
 
 
     <!--    根据 项目编号、公司id信息 获取当前项目有多少外部用户-->
-    <select id="outerPersonnelProject" resultType="cn.kun.auth.system.user.entity.po.UserDetailList">
+    <select id="outerPersonnelProject" resultType="cn.kun.auth.user.entity.po.UserDetailList">
         SELECT DISTINCT
             suo.id AS "userId",
             suo.id AS "value",

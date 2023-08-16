@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.menu.mapper.SysMenuMapper">
+<mapper namespace="cn.kun.auth.menu.mapper.SysMenuMapper">
 
 <!-- 根据 内部职位id查询该职位授予的所有菜单信息   -->
-    <select id="selectListByJobInnerId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="selectListByJobInnerId" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT
         menu.id AS "id",
         menu.parent_id AS "parentId",
@@ -27,7 +27,7 @@
     </select>
 
     <!-- 根据 外部职位id查询该职位授予的所有菜单信息-->
-    <select id="selectListByJobOuterId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="selectListByJobOuterId" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT
         menu.id AS "id",
         menu.parent_id AS "parentId",
@@ -169,7 +169,7 @@
 
 
     <!--    通过内部角色id查询内部菜单权限信息-->
-    <select id="getRoleMenuInnerAuth" resultType="cn.kun.auth.system.menu.entity.vo.MenuRedisVo">
+    <select id="getRoleMenuInnerAuth" resultType="cn.kun.auth.menu.entity.vo.MenuRedisVo">
         SELECT
             menu.id AS "id",
             menu.parent_id AS "parentId",
@@ -196,7 +196,7 @@
     </select>
 
     <!--    通过外部角色id查询菜单权限信息-->
-    <select id="getRoleMenuOuterAuth" resultType="cn.kun.auth.system.menu.entity.vo.MenuRedisVo">
+    <select id="getRoleMenuOuterAuth" resultType="cn.kun.auth.menu.entity.vo.MenuRedisVo">
         SELECT
         menu.id id,
         menu.parent_id AS "parentId",
@@ -223,7 +223,7 @@
         </if>
     </select>
 
-    <select id="selectInnerPage" resultType="cn.kun.auth.system.menu.entity.vo.MenuPageVO">
+    <select id="selectInnerPage" resultType="cn.kun.auth.menu.entity.vo.MenuPageVO">
         SELECT DISTINCT
             menu.`id`,
             menu.`id` "value",
@@ -314,7 +314,7 @@
         </choose>
     </select>
 
-    <select id="selectOuterPage" resultType="cn.kun.auth.system.menu.entity.vo.MenuPageVO">
+    <select id="selectOuterPage" resultType="cn.kun.auth.menu.entity.vo.MenuPageVO">
         SELECT DISTINCT
             menu.`id`,
             menu.`id` "value",
@@ -403,7 +403,7 @@
     </select>
 
 <!--    添加-查询上级菜单 -->
-    <select id="menuList" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="menuList" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT DISTINCT
             menu.id AS "id",
             menu.parent_id AS "parentId",
@@ -540,7 +540,7 @@
     </select>
 
 <!--根据用户id查询外部用户菜单信息-->
-    <select id="menuListByUserOuterId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="menuListByUserOuterId" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT DISTINCT
             menu.id AS "id",
             menu.parent_id AS "parentId",
@@ -624,7 +624,7 @@
     </select>
 
     <!--    查询内部角色-菜单权限-->
-    <select id="selectListByRoleInnerId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="selectListByRoleInnerId" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT
         menu.id AS "id",
         menu.parent_id AS "parentId",
@@ -648,7 +648,7 @@
     </select>
 
     <!--    查询外部角色-项目菜单权限-->
-    <select id="selectListByRoleOuterId" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="selectListByRoleOuterId" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT
         menu.id AS "id",
         menu.parent_id AS "parentId",
@@ -671,7 +671,7 @@
         </if>
     </select>
 <!-- 根据内部用户获取当前用户所拥有的菜单信息（不包含上级信息） -->
-    <select id="innerMenuListInfo" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="innerMenuListInfo" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT
             menu.id AS "id",
             menu.parent_id AS "parentId",
@@ -738,7 +738,7 @@
             </if>
     </select>
 <!-- 根据外部用户获取当前用户所拥有的菜单信息（不包含上级信息）-->
-    <select id="outerMenuListInfo" resultType="cn.kun.auth.system.menu.entity.po.SysMenu">
+    <select id="outerMenuListInfo" resultType="cn.kun.auth.menu.entity.po.SysMenu">
         SELECT
             menu.id AS "id",
             menu.parent_id AS "parentId",

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.company.mapper.SysCompanyOuterMapper">
+<mapper namespace="cn.kun.auth.company.mapper.SysCompanyOuterMapper">
 
     <!--    公司分页-->
-    <select id="selectPage" resultType="cn.kun.auth.system.company.entity.vo.CompanyPageVO">
+    <select id="selectPage" resultType="cn.kun.auth.company.entity.vo.CompanyPageVO">
         SELECT
             *
         FROM
@@ -111,7 +111,7 @@
 
 
     <!--    查询内部用户所拥有的外部公司信息-->
-    <select id="selectOuterParent" resultType="cn.kun.auth.system.company.entity.vo.CompanyInfoVO">
+    <select id="selectOuterParent" resultType="cn.kun.auth.company.entity.vo.CompanyInfoVO">
         SELECT
             sco.id as "companyId",
             sco.parent_id as "0",

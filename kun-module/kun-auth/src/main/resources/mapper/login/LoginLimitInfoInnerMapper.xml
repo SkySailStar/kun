@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kun.auth.system.login.mapper.LoginLimitInfoInnerMapper">
+<mapper namespace="cn.kun.auth.login.mapper.LoginLimitInfoInnerMapper">
 <!--    分页查询用户登陆限制信息-->
-    <select id="selectPage" resultType="cn.kun.auth.system.login.entity.vo.LoginLimitPageVO">
+    <select id="selectPage" resultType="cn.kun.auth.login.entity.vo.LoginLimitPageVO">
         SELECT
         a.id,
         a.login_name loginName,
