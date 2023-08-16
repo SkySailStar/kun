@@ -22,7 +22,7 @@ import cn.kun.system.server.service.ServerInfoService;
 import cn.kun.system.software.mapper.SoftwareInfoMapper;
 import cn.kun.system.software.service.SoftwareInfoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +38,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SoftwareInfoServiceImpl extends ServiceImpl<SoftwareInfoMapper, SoftwareInfo> implements SoftwareInfoService {
 
-    @Autowired
+    @Resource
     private DictDataService dictDataService;
     
-    @Autowired
+    @Resource
     private ServerInfoService serverInfoService;
     
     @Override

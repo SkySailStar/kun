@@ -23,7 +23,7 @@ import cn.kun.base.core.global.controller.BaseController;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +43,7 @@ import java.util.List;
 @RequestMapping("/system/sysProject")
 public class SysProjectController extends BaseController {
 
-    @Autowired
+    @Resource
     private SysProjectService sysProjectService;
 
     @Operation(summary = "分页")

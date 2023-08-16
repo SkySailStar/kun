@@ -5,7 +5,7 @@ import cn.kun.auth.system.user.service.SysUserDetailInnerService;
 import cn.kun.base.core.global.controller.BaseController;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/system/sysUserDetailInner")
 public class SysUserDetailInnerController extends BaseController {
-    @Autowired
+    @Resource
     private SysUserDetailInnerService sysUserDetailInnerService;
 
 

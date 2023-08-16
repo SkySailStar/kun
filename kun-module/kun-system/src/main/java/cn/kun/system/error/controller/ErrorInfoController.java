@@ -10,7 +10,7 @@ import cn.kun.system.error.entity.vo.ErrorInfoDetailVO;
 import cn.kun.system.error.entity.vo.ErrorInfoPageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +33,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/error/error-info")
 public class ErrorInfoController extends BaseController {
 
-    @Autowired
+    @Resource
     private ErrorInfoService errorInfoService;
 
     @Operation(summary = "分页")

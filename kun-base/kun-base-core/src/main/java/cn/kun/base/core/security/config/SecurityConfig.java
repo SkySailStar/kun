@@ -1,7 +1,7 @@
 package cn.kun.base.core.security.config;
 
 import cn.kun.base.core.security.filter.AuthFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,13 +26,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
+    @Resource
     private AuthFilter authFilter;
 
-    @Autowired
+    @Resource
     private AuthenticationEntryPoint authenticationEntryPoint;
 
-    @Autowired
+    @Resource
     private AccessDeniedHandler accessDeniedHandler;
 
     @Bean

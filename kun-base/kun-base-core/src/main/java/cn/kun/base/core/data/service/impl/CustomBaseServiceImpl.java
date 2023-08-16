@@ -3,7 +3,7 @@ package cn.kun.base.core.data.service.impl;
 import cn.kun.base.core.data.mapper.CustomBaseMapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import cn.kun.base.core.data.service.CustomBaseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,7 +17,7 @@ import java.util.Collection;
 @Service
 public class CustomBaseServiceImpl<M extends CustomBaseMapper<T>, T> implements CustomBaseService<T> {
 
-    @Autowired
+    @Resource
     protected M customBaseMapper;
     
     @Override

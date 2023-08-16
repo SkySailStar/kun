@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.auth.system.menu.service.SysMenuService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,10 +31,10 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysUserMenuOuterServiceImpl extends ServiceImpl<SysUserMenuOuterMapper, SysUserMenuOuter> implements SysUserMenuOuterService {
-    @Autowired
+    @Resource
     private SysUserOuterService sysUserOuterService;
 
-    @Autowired
+    @Resource
     private SysMenuService sysMenuService;
 
     /**

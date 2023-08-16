@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -32,7 +32,7 @@ public class OpenFeignConfig {
     @Value("${spring.profiles.active}")
     private String active;
     
-    @Autowired
+    @Resource
     private RemoteAuthService remoteAuthService;
     
     @Bean

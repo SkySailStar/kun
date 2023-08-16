@@ -33,7 +33,7 @@ import cn.kun.base.core.global.util.check.ParentHelp;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,10 +52,10 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysDeptOuterServiceImpl extends ServiceImpl<SysDeptOuterMapper, SysDeptOuter> implements SysDeptOuterService {
-    @Autowired
+    @Resource
     private SysCompanyOuterService sysCompanyOuterService;
 
-    @Autowired
+    @Resource
     private SysJobOuterService sysJobOuterService;
     @Override
     public Page<DeptPageVO> page(DeptPageDTO dto) {

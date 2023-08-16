@@ -12,7 +12,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueInformation;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.Properties;
@@ -25,25 +25,25 @@ import java.util.Properties;
 @Service
 public class RabbitServiceImpl implements RabbitService {
 
-    @Autowired
+    @Resource
     private RabbitTemplate rabbitTemplate;
 
-    @Autowired
+    @Resource
     private AmqpAdmin amqpAdmin;
 
-    @Autowired
+    @Resource
     private DirectExchange directExchange;
 
-    @Autowired
+    @Resource
     private FanoutExchange fanoutExchange;
 
-    @Autowired
+    @Resource
     private TopicExchange topicExchange;
 
-    @Autowired
+    @Resource
     private HeadersExchange headersExchange;
 
-    @Autowired
+    @Resource
     private DirectExchange directDeadLetterExchange;
 
     @Override

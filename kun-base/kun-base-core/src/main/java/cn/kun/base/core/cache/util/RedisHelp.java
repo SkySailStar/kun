@@ -3,7 +3,7 @@ package cn.kun.base.core.cache.util;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
@@ -26,7 +26,7 @@ public class RedisHelp {
 
     private static RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
+    @Resource
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         
         RedisHelp.redisTemplate = redisTemplate;

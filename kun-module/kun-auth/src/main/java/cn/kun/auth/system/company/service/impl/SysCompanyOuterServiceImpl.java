@@ -46,7 +46,7 @@ import cn.kun.base.core.global.util.check.ParentHelp;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,21 +66,21 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SysCompanyOuterServiceImpl extends ServiceImpl<SysCompanyOuterMapper, SysCompanyOuter> implements SysCompanyOuterService {
 
-    @Autowired
+    @Resource
     private SysDeptOuterService sysDeptOuterService;
-    @Autowired
+    @Resource
     private SysCompanyDetailOuterService sysCompanyDetailOuterService;
-    @Autowired
+    @Resource
     private SysJobOuterService sysJobOuterService;
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
-    @Autowired
+    @Resource
     private RemoteFileService remoteFileService;
-    @Autowired
+    @Resource
     private RemoteAreaService remoteAreaService;
-    @Autowired
+    @Resource
     private SysRoleOuterService sysRoleOuterService;
-    @Autowired
+    @Resource
     private SysUserRoleOuterService sysUserRoleOuterService;
 
     @Override

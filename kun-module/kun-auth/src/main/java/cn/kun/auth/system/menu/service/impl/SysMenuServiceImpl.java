@@ -45,7 +45,7 @@ import cn.kun.base.core.global.util.check.ParentHelp;
 import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.security.util.AuthHelp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,21 +65,21 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
-    @Autowired
+    @Resource
     private SysUserMenuInnerService sysUserMenuInnerService;
-    @Autowired
+    @Resource
     private SysUserMenuOuterService sysUserMenuOuterService;
-    @Autowired
+    @Resource
     private SysUserInnerService sysUserInnerService;
-    @Autowired
+    @Resource
     private SysJobMenuOuterService sysJobMenuOuterService;
-    @Autowired
+    @Resource
     private SysJobMenuInnerService sysJobMenuInnerService;
-    @Autowired
+    @Resource
     private SysRoleMenuInnerService sysRoleMenuInnerService;
-    @Autowired
+    @Resource
     private SysRoleMenuOuterService sysRoleMenuOuterService;
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
 
 

@@ -4,7 +4,7 @@ import cn.kun.auth.system.user.entity.po.SysUserDetailOuter;
 import cn.kun.auth.system.user.service.SysUserDetailOuterService;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 import cn.kun.base.core.global.controller.BaseController;
 
@@ -20,7 +20,7 @@ import cn.kun.base.core.global.controller.BaseController;
 @RestController
 @RequestMapping("/system/sysUserDetailOuter")
 public class SysUserDetailOuterController extends BaseController {
-    @Autowired
+    @Resource
     private SysUserDetailOuterService sysUserDetailOuterService;
 
 

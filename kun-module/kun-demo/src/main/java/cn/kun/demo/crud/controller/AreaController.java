@@ -12,7 +12,7 @@ import cn.kun.demo.crud.entity.vo.AreaDetailVO;
 import cn.kun.demo.crud.entity.vo.AreaPageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +41,7 @@ import java.util.List;
 @RequestMapping("area")
 public class AreaController extends BaseController {
 
-    @Autowired
+    @Resource
     private AreaService areaService;
 
     @Operation(summary = "分页")

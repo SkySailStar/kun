@@ -11,7 +11,7 @@ import cn.kun.auth.system.role.entity.po.SysRoleProjectInner;
 import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysRoleProjectInnerServiceImpl extends ServiceImpl<SysRoleProjectInnerMapper, SysRoleProjectInner> implements SysRoleProjectInnerService {
-    @Autowired
+    @Resource
     private SysRoleInnerService sysRoleInnerService;
 
     /**

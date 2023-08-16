@@ -2,7 +2,7 @@ package cn.kun.system.mq.config;
 
 import cn.kun.base.core.mq.constant.QueueConstants;
 import cn.kun.base.core.mq.service.RabbitService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DirectConfig {
 
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
     
     @Bean

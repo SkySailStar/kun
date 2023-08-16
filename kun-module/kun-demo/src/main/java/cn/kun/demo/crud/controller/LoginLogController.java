@@ -9,7 +9,7 @@ import cn.kun.demo.crud.entity.vo.LoginLogPageVO;
 import cn.kun.demo.crud.service.LoginLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/log/login-log")
 public class LoginLogController extends BaseController {
 
-    @Autowired
+    @Resource
     private LoginLogService loginLogService;
 
     @Operation(summary = "分页")

@@ -6,7 +6,7 @@ import cn.kun.base.core.mq.entity.dto.ErrorInfoMqDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DirectListener {
     
-    @Autowired
+    @Resource
     private ErrorInfoService errorInfoService;
     
     @RabbitListener(queuesToDeclare = {@Queue(QueueConstants.DIRECT_SYSTEM_ERROR_INFO)})

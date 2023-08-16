@@ -14,7 +14,7 @@ import cn.kun.base.core.security.entity.LoginUser;
 import cn.kun.base.core.security.entity.UserInfo;
 import cn.kun.base.core.global.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,16 +31,16 @@ import java.util.List;
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private SysUserInnerService sysUserInnerService;
     
-    @Autowired
+    @Resource
     private SysUserOuterService sysUserOuterService;
     
-    @Autowired
+    @Resource
     private SysMenuService sysMenuService;
     
-    @Autowired
+    @Resource
     private SysProjectService sysProjectService;
 
     @Override

@@ -4,7 +4,7 @@ import cn.kun.auth.system.project.entity.po.SysProjectDetail;
 import cn.kun.auth.system.project.service.SysProjectDetailService;
 import cn.kun.base.core.global.entity.BaseResult;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 import cn.kun.base.core.global.controller.BaseController;
 
@@ -20,7 +20,7 @@ import cn.kun.base.core.global.controller.BaseController;
 @RestController
 @RequestMapping("/system/sysProjectDetail")
 public class SysProjectDetailController extends BaseController {
-    @Autowired
+    @Resource
     private SysProjectDetailService sysProjectDetailService;
 
     /**
