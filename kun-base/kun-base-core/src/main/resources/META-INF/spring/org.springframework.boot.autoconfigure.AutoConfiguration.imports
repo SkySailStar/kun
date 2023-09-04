@@ -1,13 +1,11 @@
 cn.kun.base.core.global.config.GlobalConfig
 cn.kun.base.core.global.config.JsonConfig
 cn.kun.base.core.global.util.id.IdHelp
-cn.kun.base.core.data.config.MybatisPlusConfig
 cn.kun.base.core.cache.config.RedisConfig
 cn.kun.base.core.cache.util.RedisHelp
 cn.kun.base.core.file.config.MinioConfig
 cn.kun.base.core.file.util.FileHelp
 cn.kun.base.core.file.util.MinioHelp
-cn.kun.base.core.data.handler.MetaHandler
 cn.kun.base.core.security.filter.AuthFilter
 cn.kun.base.core.security.config.CorsConfig
 cn.kun.base.core.security.config.SecurityConfig

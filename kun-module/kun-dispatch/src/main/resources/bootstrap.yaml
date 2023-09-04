@@ -1,0 +1,36 @@
+# Server
+server:
+  port: 45003
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: kun-dispatch
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    # 遇到同名bean时，是否允许覆盖注册
+    allow-bean-definition-overriding: true
+    # 允许循环依赖
+    allow-circular-references: true
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: 2e49473c-3831-4304-88b1-816f87518c74
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8848
+        # 命名空间
+        namespace: 2e49473c-3831-4304-88b1-816f87518c74
+        # 配置文件格式
+        file-extension: yaml
+        # 共享配置
+        extension-configs:
+          # 公共配置
+          - dataId: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          # 模块配置
+          - dataId: ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

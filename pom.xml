@@ -28,7 +28,7 @@
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
         <fastjson2.version>2.0.38</fastjson2.version>
         <knife4j.version>4.3.0</knife4j.version>
-        <mybatis-flex.version>1.5.7</mybatis-flex.version>
+        <mybatis-flex.version>1.5.8</mybatis-flex.version>
         <mybatis-spring.version>3.0.2</mybatis-spring.version>
         <mysql.version>8.0.32</mysql.version>
         <hutool.version>5.8.21</hutool.version>
@@ -42,6 +42,7 @@
         <xxl-job.version>2.4.0</xxl-job.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <hanlp.version>portable-1.8.4</hanlp.version>
     </properties>
     
@@ -154,9 +155,10 @@
                 <version>${mybatis-spring.version}</version>
             </dependency>
 
+            <!-- MySQL连接Java -->
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
 
@@ -267,6 +269,21 @@
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <skipTests>true</skipTests>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>com.mybatis-flex</groupId>
+                                <artifactId>mybatis-flex-processor</artifactId>
+                                <version>${mybatis-flex.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
                 
