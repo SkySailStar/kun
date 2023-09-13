@@ -17,6 +17,7 @@
         <module>kun-auth</module>
         <module>kun-demo</module>
         <module>kun-system</module>
+        <module>kun-dispatch</module>
     </modules>
 
     <properties>

@@ -1,13 +1,11 @@
 package cn.kun.generate.util;
 
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.entity.BaseEntity;
 import cn.kun.generate.constant.GenerateConstants;
 import com.mybatisflex.codegen.Generator;
-import com.mybatisflex.codegen.config.ColumnConfig;
+import com.mybatisflex.codegen.config.EntityConfig;
 import com.mybatisflex.codegen.config.GlobalConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CodeGenerate {
 
@@ -17,14 +15,14 @@ public class CodeGenerate {
     public static final String AUTHOR = "SkySailStar";
     
     /**
-     * 生成的表名（多个表用英文逗号分隔，所有表输入 all）
+     * 生成的表名（多个表用英文逗号分隔，所有表则不输入）
      */
-    private static final String TABLES = "warn_level";
+    private static final String TABLES = "";
 
     /**
      * 数据库
      */
-    private static final String DATABASE = "rmp";
+    private static final String DATABASE = "kun_auth";
 
     /**
      * 项目所在目录
@@ -34,19 +32,20 @@ public class CodeGenerate {
     /**
      * 模块名
      */
-    private static final String MODEL = "kun-modules\\kun-app";
+    private static final String MODEL = "kun-modules\\kun-auth";
 
     /**
      * 包名
      */
-    private static final String PACKAGE = "cn.skysailstar.app";
+    private static final String PACKAGE = "cn.kun.auth";
 
     /**
      * 业务名
      */
-    private static final String BUSINESS = "warn";
+    private static final String BUSINESS = "";
     
     public static void main(String[] args) {
+        
         //配置数据源
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(GenerateConstants.DATABASE_URL + DATABASE + GenerateConstants.DATABASE_ENCODE);
@@ -55,7 +54,6 @@ public class CodeGenerate {
 
         //创建配置内容，两种风格都可以。
         GlobalConfig globalConfig = createGlobalConfig();
-        //GlobalConfig globalConfig = createGlobalConfigUseStyle2();
 
         //通过 datasource 和 globalConfig 创建代码生成器
         Generator generator = new Generator(dataSource, globalConfig);
@@ -65,33 +63,55 @@ public class CodeGenerate {
     }
 
     public static GlobalConfig createGlobalConfig() {
-        //创建配置内容
+        
+        // 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
 
-        //设置根包
-        globalConfig.setBasePackage(PACKAGE);
-
-        //设置生成哪些表
-        if (StrHelp.equals(TABLES, "all")) {
-            globalConfig.setGenerateTable(DATABASE);
-        } else {
-            globalConfig.setGenerateTable(TABLES.split(","));
-        }
+        // 注释配置
+        globalConfig.getJavadocConfig()
+                // 作者
+                .setAuthor(AUTHOR);
         
-        //设置生成 entity 并启用 Lombok
-        globalConfig.setEntityGenerateEnable(true);
-        globalConfig.setEntityWithLombok(true);
+        // 包配置
+        globalConfig.getPackageConfig()
+                // 包名
+                .setBasePackage(PACKAGE + BUSINESS);
+        
+        // 策略配置
+        globalConfig.getStrategyConfig()
+                // 生成的数据库
+                .setGenerateSchema(DATABASE)
+                // 生成的表（未配置时，生成所有表）
+                .setGenerateTable(TABLES);
 
-        //设置生成 mapper
-        globalConfig.setMapperGenerateEnable(true);
+        // Entity配置
+        globalConfig.enableEntity()
+                // 启用 Lombok
+                .setWithLombok(true)
+                // 设置父类
+                .setSuperClass(BaseEntity.class)
+                // Swagger版本配置
+                .setSwaggerVersion(EntityConfig.SwaggerVersion.DOC)
+                // 是否覆盖原有文件
+                .setOverwriteEnable(true);
 
-        //可以单独配置某个列
-        ColumnConfig columnConfig = new ColumnConfig();
-        columnConfig.setColumnName("tenant_id");
-        columnConfig.setLarge(true);
-        columnConfig.setVersion(true);
-        globalConfig.setColumnConfig("tb_account", columnConfig);
+        // Mapper配置
+        globalConfig.enableMapper();
 
+        // Mapper.xml配置
+        globalConfig.enableMapperXml();
+        
+        // Service配置
+        globalConfig.enableService();
+        
+        // ServiceImpl配置
+        globalConfig.enableServiceImpl();
+        
+        // Controller配置
+        globalConfig.enableController()
+                // REST风格
+                .setRestStyle(true);
+        
         return globalConfig;
     }
 }

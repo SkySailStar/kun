@@ -139,6 +139,7 @@ kun
 │      └── kun-demo             // 示例服务[45000]
 │      └── kun-auth             // 认证服务[45001]
 │      └── kun-system           // 系统服务[45002]
+│      └── kun-dispatch         // 调度服务[45003]
 ├── sql                         // SQL脚本
 ├── .gitignore                  // Git忽略文件
 ├── docker-compose.yaml         // Docker Compose配置文件
@@ -146,3 +147,7 @@ kun
 ├── pom.xml                     // 公共依赖
 ├── README.md                   // 项目说明文件
 ```
+
+# 使用手册
+
+[https://www.wolai.com/sTytmKYTirQzF7nKdHrzqL](https://www.wolai.com/sTytmKYTirQzF7nKdHrzqL)
