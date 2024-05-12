@@ -1,4 +1,4 @@
-package cn.kun.base.core.global.util.id;
+package cn.kun.base.core.data.util;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;

@@ -14,12 +14,6 @@
     <packaging>jar</packaging>
     <description>公用模块-接口</description>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <!-- 公用模块-核心 -->
         <dependency>

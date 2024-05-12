@@ -1,13 +1,12 @@
 package cn.kun.base.core.file.util;
 
 import cn.hutool.core.util.StrUtil;
+import cn.kun.base.core.data.util.SeqHelp;
 import cn.kun.base.core.global.constant.file.type.FileTypeConstants;
 import cn.kun.base.core.global.config.GlobalConfig;
 import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
-import cn.kun.base.core.global.util.id.SeqHelp;
 import cn.kun.base.core.global.util.str.StrHelp;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDateTime;
 
 /**

@@ -14,12 +14,6 @@
     <packaging>jar</packaging>
     <description>代码生成</description>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <!-- 公用模块-核心 -->
         <dependency>
@@ -27,16 +21,16 @@
             <artifactId>kun-base-core</artifactId>
         </dependency>
 
-        <!-- Mybatis-Flex代码生成 -->
+        <!-- Mybatis-Plus代码生成 -->
         <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-codegen</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
         </dependency>
 
-        <!-- 数据源 -->
+        <!-- Velocity模板引擎 -->
         <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
         </dependency>
     </dependencies>
 

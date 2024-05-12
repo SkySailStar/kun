@@ -1,7 +1,6 @@
 package cn.kun.demo.cache.service.impl;
 
 import cn.kun.demo.cache.service.CommonService;
-import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.demo.cache.entity.dto.ExpireDTO;
 import org.springframework.stereotype.Service;
 

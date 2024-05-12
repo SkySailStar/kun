@@ -4,7 +4,6 @@ import cn.kun.demo.cache.entity.dto.ListDelDTO;
 import cn.kun.demo.cache.entity.dto.ListSetIndexDTO;
 import cn.kun.demo.cache.entity.dto.ListSetListTimeDTO;
 import cn.kun.demo.cache.service.ListService;
-import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.demo.cache.entity.dto.ListGetByIndexDTO;
 import cn.kun.demo.cache.entity.dto.ListGetDTO;
 import cn.kun.demo.cache.entity.dto.ListSetDTO;

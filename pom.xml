@@ -17,33 +17,55 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <!-- JDK -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <!-- 编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 公用模块-接口 -->
         <kun-base-api.version>1.0.0</kun-base-api.version>
+        <!-- 公共模块-核心 -->
         <kun-base-core.version>1.0.0</kun-base-core.version>
+        <!-- 公共模块-定时任务 -->
         <kun-base-job.version>1.0.0</kun-base-job.version>
-        <spring-boot.version>3.1.2</spring-boot.version>
+        <!-- 主框架 -->
+        <spring-boot.version>3.2.5</spring-boot.version>
+        <!-- 微服务框架 -->
         <spring-cloud.version>2022.0.3</spring-cloud.version>
+        <!-- 阿里巴巴微服务框架 -->
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <!-- Json数据处理 -->
         <fastjson2.version>2.0.38</fastjson2.version>
-        <knife4j.version>4.3.0</knife4j.version>
-        <mybatis-flex.version>1.5.8</mybatis-flex.version>
-        <mybatis-spring.version>3.0.2</mybatis-spring.version>
-        <mysql.version>8.0.32</mysql.version>
-        <hutool.version>5.8.21</hutool.version>
+        <!-- 接口文档增强 -->
+        <knife4j.version>4.4.0</knife4j.version>
+        <!-- 数据库框架增强 -->
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.3.1</mybatis-plus-generator.version>
+        <velocity.version>2.3</velocity.version>
+        <!-- 工具集 -->
+        <hutool.version>5.8.27</hutool.version>
+        <!-- 多数据源 -->
         <druid.version>	1.2.18</druid.version>
+        <!-- 安全验证 -->
         <jwt.version>0.9.1</jwt.version>
+        <!-- JDK1.8包含了，后面的版本不再包含，需要手动引入 -->
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jaxb-impl.version>4.0.3</jaxb-impl.version>
         <jaxb-core.version>	4.0.3</jaxb-core.version>
+        <!-- 校验 -->
         <activation.version>1.1.1</activation.version>
+        <!-- 非结构化数据存储 -->
         <minio.version>8.5.4</minio.version>
+        <!-- 定时任务 -->
         <xxl-job.version>2.4.0</xxl-job.version>
+        <!-- 邮件 -->
         <javax-mail.version>1.6.2</javax-mail.version>
+        <!-- 单元测试代码出错不影响项目的编译 -->
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <!-- 汉语拼音（能够辨别多音字） -->
         <hanlp.version>portable-1.8.4</hanlp.version>
+        <!-- 缓存处理 -->
+        <jedis.version>5.1.0</jedis.version>
     </properties>
     
     <!-- 依赖声明 -->
@@ -77,13 +99,6 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-                <!--排除 mybatis-spring 依赖-->
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.mysql</groupId>
-                        <artifactId>mysql-connector-j</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <!-- SpringCloud 微服务 -->
@@ -127,39 +142,25 @@
                 <version>${fastjson2.version}</version>
             </dependency>
 
-            <!-- Mybatis-Flex -->
+            <!-- Mybatis-Plus -->
             <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-                <version>${mybatis-flex.version}</version>
-                <!--排除 mybatis-spring 依赖-->
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mybatis</groupId>
-                        <artifactId>mybatis-spring</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            
-            <!-- Mybatis-Flex代码生成 -->
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-codegen</artifactId>
-                <version>${mybatis-flex.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
 
-            <!-- 添加已适配 springboot 3 的 mybatis-spring 依赖-->
+            <!-- Mybatis-Plus代码生成 -->
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
             </dependency>
 
-            <!-- MySQL连接Java -->
+            <!-- Velocity模板引擎 -->
             <dependency>
-                <groupId>com.mysql</groupId>
-                <artifactId>mysql-connector-j</artifactId>
-                <version>${mysql.version}</version>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
 
             <!-- 多数据源 -->
@@ -269,21 +270,6 @@
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <skipTests>true</skipTests>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
-                    <configuration>
-                        <annotationProcessorPaths>
-                            <path>
-                                <groupId>com.mybatis-flex</groupId>
-                                <artifactId>mybatis-flex-processor</artifactId>
-                                <version>${mybatis-flex.version}</version>
-                            </path>
-                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
                 

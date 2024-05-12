@@ -1,0 +1,129 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+#if(${table.serviceInterface})
+import ${package.Service}.${table.serviceName};
+#end
+import ${superServiceImplClassPackage};
+import org.springframework.stereotype.Service;
+import ${dto}.${entity}SaveDTO;
+import ${dto}.${entity}PageDTO;
+import ${vo}.${entity}DetailVO;
+import ${vo}.${entity}PageVO;
+import ${baseDto}.BaseIdListDTO;
+import lombok.extern.slf4j.Slf4j;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import org.springframework.transaction.annotation.Transactional;
+import com.sevnce.common.core.exception.ServiceException;
+
+/**
+ * $!{table.comment}-服务层实现类
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Slf4j
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>()#if(${table.serviceInterface}), ${table.serviceName}#end {
+
+}
+#else
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>#if(${table.serviceInterface}) implements ${table.serviceName}#end {
+    
+    @Override
+    public Page<${entity}PageVO> page(${entity}PageDTO dto) {
+
+        // 封装分页参数
+        Page<${entity}> page = Page.of(dto.getPageNum(), dto.getPageSize());
+        // 分页列表查询
+        Page<${entity}PageVO> voPage = baseMapper.selectPage(page, dto);
+        // 字段编码转换（如果没有需要转换的字段，可以删除以下代码）
+        try {
+            voPage.convert(this::cast);
+        } catch (Exception e) {
+            log.warn("$!{table.comment}：字段编码转换失败");
+        }
+        return voPage;
+    }
+
+    @Override
+    public ${entity}DetailVO detail(Long id) {
+
+        if (ObjUtil.isEmpty(id)) {
+            log.warn("$!{table.comment}-详情：主键不能为空");
+        }
+        // 查询详情
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = getById(id);
+        if (ObjUtil.isEmpty(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)})) {
+            log.warn("$!{table.comment}-详情：数据不存在");
+        }
+        // 复制到返回值
+        return BeanUtil.copyProperties(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}, ${entity}DetailVO.class);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ${entity} add(${entity}SaveDTO dto) {
+
+        log.info("$!{table.comment}-添加：{}", dto);
+        // 传入值复制到数据库对象
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = BeanUtil.copyProperties(dto, ${entity}.class);
+        // 添加
+        save(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        return ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)};
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ${entity} edit(${entity}SaveDTO dto) {
+
+        log.info("$!{table.comment}-修改：{}", dto);
+        // 获取数据库对象
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = getById(dto.getId());
+        if (ObjUtil.isNull(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)})) {
+            log.warn("$!{table.comment}-修改：数据不存在");
+            throw new ServiceException("$!{table.comment}-修改：数据不存在");
+        }
+        // 传入值复制到数据库对象
+        BeanUtil.copyProperties(dto, ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}, CopyOptions.create().setIgnoreNullValue(true));
+        // 修改
+        updateById(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        return ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)};
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean logicRemove(BaseIdListDTO dto) {
+
+        log.info("$!{table.comment}-逻辑删除：{}", dto);
+        // 逻辑删除
+        return removeByIds(dto.getIds());
+    }
+    
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean physicsRemove(BaseIdListDTO dto) {
+
+        log.info("$!{table.comment}-物理删除：{}", dto);
+        // 物理删除
+        return baseMapper.deleteAbsoluteByIds(dto.getIds()) > 0;
+    }
+    
+    /**
+     * 转换（如果没有需要转换的字段，可以删除该方法）
+     * @param vo $!{table.comment}-分页-返回值
+     * @return $!{table.comment}-分页-返回值
+     */
+    private ${entity}PageVO cast(${entity}PageVO vo) {
+
+        // TODO 在这里编写转换代码
+        return vo;
+    }
+    
+}
+#end

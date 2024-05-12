@@ -1,0 +1,66 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+import ${dto}.${entity}SaveDTO;
+import ${dto}.${entity}PageDTO;
+import ${vo}.${entity}DetailVO;
+import ${vo}.${entity}PageVO;
+import ${baseDto}.BaseIdListDTO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+/**
+ * $!{table.comment}-服务层
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+    /**
+     * 分页
+     * @param dto 分页-传入值
+     * @return 分页-返回值
+     */
+    Page<${entity}PageVO> page(${entity}PageDTO dto);
+
+    /**
+     * 详情
+     * @param id 主键
+     * @return 详情-返回值
+     */
+    ${entity}DetailVO detail(Long id);
+
+    /**
+     * 添加
+     * @param dto 添加-传入值
+     * @return 对象
+     */
+    ${entity} add(${entity}SaveDTO dto);
+
+    /**
+     * 修改
+     *
+     * @param dto 保存-传入值
+     * @return 对象
+     */
+    ${entity} edit(${entity}SaveDTO dto);
+
+    /**
+     * 逻辑删除
+     * @param dto ID列表-公用传入值
+     * @return 结果
+     */
+    Boolean logicRemove(BaseIdListDTO dto);
+    
+    /**
+     * 物理删除
+     * @param dto ID列表-公用传入值
+     * @return 结果
+     */
+    Boolean physicsRemove(BaseIdListDTO dto);
+}
+#end

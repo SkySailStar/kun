@@ -1,0 +1,36 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+#if(${mapperAnnotationClass})
+import ${mapperAnnotationClass.name};
+#end
+import ${base}.config.mapper.MpMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
+import ${dto}.${entity}PageDTO;
+import ${vo}.${entity}PageVO;
+
+
+/**
+ * $!{table.comment}-持久层
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+#if(${mapperAnnotationClass})
+@${mapperAnnotationClass.simpleName}
+#end
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+public interface ${table.mapperName} extends MpMapper<${entity}> {
+
+    /**
+     * 查询分页列表
+     * @param page 分页参数
+     * @param dto 分页列表-传入值
+     * @return 分页列表
+     */
+    Page<${entity}PageVO> selectPage(Page<${entity}> page, @Param("dto") ${entity}PageDTO dto);
+}
+#end

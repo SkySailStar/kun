@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${table.mapperName}">
+
+#if(${enableCache})
+    <!-- 开启二级缓存 -->
+    <cache type="${cacheClassName}"/>
+
+#end
+#if(${baseResultMap})
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
+#foreach($field in ${table.fields})
+#if(${field.keyFlag})##生成主键排在第一位
+        <id column="${field.name}" property="${field.propertyName}" />
+#end
+#end
+#foreach($field in ${table.commonFields})##生成公共字段
+        <result column="${field.name}" property="${field.propertyName}" />
+#end
+#foreach($field in ${table.fields})
+#if(!${field.keyFlag})##生成普通字段
+        <result column="${field.name}" property="${field.propertyName}" />
+#end
+#end
+    </resultMap>
+
+#end
+#if(${baseColumnList})
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+#foreach($field in ${table.commonFields})
+        ${field.columnName},
+#end
+        ${table.fieldNames}
+    </sql>
+
+#end
+    <select id="selectPage" resultType="${vo}.${entity}PageVO">
+        SELECT
+          #foreach($field in ${table.fields})
+            t1.`${field.annotationColumnName}` ${field.propertyName},
+          #end
+            t1.`create_by` createBy,
+            t1.`create_time` createTime,
+            t1.`update_by` updateBy,
+            t1.`update_time` updateTime
+        FROM
+            ${schemaName}${table.name} t1
+        <where>
+            t1.del_flag = '0'
+          #foreach($field in ${table.fields})
+            #if(!${field.keyFlag})
+            #if(!${field.annotationColumnName.equals("del_flag")})
+            #if(${field.propertyType.equals("String")})
+            <if test="dto.${field.propertyName} != null and dto.${field.propertyName} != ''">
+                AND t1.`${field.annotationColumnName}` like concat('%', #{dto.${field.propertyName}}, '%')
+            </if>
+            #else
+            <if test="dto.${field.propertyName} != null">
+                AND t1.`${field.annotationColumnName}` = #{dto.${field.propertyName}}
+            </if>
+            #end
+            #end
+            #end
+          #end
+        </where>
+        <choose>
+            <when test="dto.orderBy != null and dto.orderBy != ''">
+                ${dto.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t1.update_time DESC
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

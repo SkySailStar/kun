@@ -13,7 +13,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.api.entity.system.dto.DictDataListDTO;
 import cn.kun.base.api.entity.system.vo.DictDataListVO;
-import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.base.core.global.constant.BaseConstants;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.cache.constant.SystemCacheConstants;

@@ -1,13 +1,14 @@
 package cn.kun.base.core.global.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import cn.kun.base.core.global.config.LongJsonDeserializer;
 import cn.kun.base.core.global.config.LongJsonSerializer;
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import java.io.Serial;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 /**
  * 公共实体类
  *
- * @author SkySailStar
+ * @author 廖航
  */
 @Schema(description = "公共实体类对象")
 @Data
@@ -27,48 +28,29 @@ public class BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "主键")
-    @Id(keyType = KeyType.Auto)
+    @TableId(type = IdType.ASSIGN_ID)
     @JsonSerialize(using = LongJsonSerializer.class)
     @JsonDeserialize(using = LongJsonDeserializer.class)
     protected Long id;
+
+    @Schema(description = "创建人")
+    @TableField(value = "create_person", fill = FieldFill.INSERT)
+    @JsonIgnore
+    protected Long createPerson;
+
+    @Schema(description = "创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @JsonIgnore
+    protected LocalDateTime createTime;
+
+    @Schema(description = "更新人")
+    @TableField(value = "update_person", fill = FieldFill.INSERT_UPDATE)
+    @JsonIgnore
+    protected Long updatePerson;
     
-    @Schema(description = "创建者")
-    @Column("create_by")
+    @Schema(description = "更新时间")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     @JsonIgnore
-    protected String createBy;
-
-    @Schema(description = "创建者名称")
-    @Column("create_name")
-    @JsonIgnore
-    protected String createName;
-
-    @Schema(description = "创建日期")
-    @Column(value = "create_date", onInsertValue = "now()")
-    @JsonIgnore
-    protected LocalDateTime createDate;
-
-    @Schema(description = "更新者")
-    @Column("update_by")
-    @JsonIgnore
-    protected String updateBy;
-
-    @Schema(description = "更新者名称")
-    @Column("update_name")
-    @JsonIgnore
-    protected String updateName;
-
-    @Schema(description = "更新日期")
-    @Column(value = "update_date", onUpdateValue = "now()")
-    @JsonIgnore
-    protected LocalDateTime updateDate;
-
-    @Schema(description = "删除标记;1是，0否")
-    @Column("del_flag")
-    @JsonIgnore
-    protected String delFlag;
-
-    @Schema(description = "备注")
-    @Column("remarks")
-    @JsonIgnore
-    protected String remarks;
+    protected LocalDateTime updateTime;
+    
 }

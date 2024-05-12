@@ -1,0 +1,127 @@
+package ${package.Controller};
+
+#if(${springdoc})
+import io.swagger.v3.oas.annotations.tags.Tag;
+#elseif(${swagger})
+import io.swagger.annotations.Api;
+#end
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import ${package.Entity}.${entity};
+import ${dto}.${entity}SaveDTO;
+import ${dto}.${entity}PageDTO;
+import ${vo}.${entity}DetailVO;
+import ${vo}.${entity}PageVO;
+import ${service}.${entity}Service;
+import ${baseDto}.BaseIdListDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.sevnce.common.core.domain.R;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cn.hutool.core.util.ObjUtil;
+import javax.validation.Valid;
+
+
+/**
+ * $!{table.comment}
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+#if(${springdoc})
+@Tag(name = "$!{table.comment}")
+#elseif(${swagger})
+@Api(tags = "$!{table.comment}")
+#end
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+    
+    @Autowired
+    private ${entity}Service ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
+
+    /**
+     * 分页
+     */
+    #if(${springdoc})
+    @Operation(summary = "分页")
+    #elseif(${swagger})
+    @ApiOperation("分页")
+    #end
+    @PostMapping("page")
+    public R<Page<${entity}PageVO>> page(@RequestBody ${entity}PageDTO dto) {
+        return R.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(dto));
+    }
+
+    /**
+     * 详情
+     */
+    #if(${springdoc})
+    @Operation(summary = "详情")
+    #elseif(${swagger})
+    @ApiOperation("详情")
+    #end
+    @GetMapping("{id}")
+    public R<${entity}DetailVO> detail(@PathVariable("id") Long id) {
+        return R.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.detail(id));
+    }
+
+    /**
+     * 保存
+     */
+    #if(${springdoc})
+    @Operation(summary = "保存")
+    #elseif(${swagger})
+    @ApiOperation("保存")
+    #end
+    @PostMapping
+    public R<${entity}> save(@RequestBody @Valid ${entity}SaveDTO dto) {
+        // 添加
+        if (ObjUtil.isEmpty(dto.getId())) {
+            return R.ok("添加成功", ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.add(dto));
+        } 
+        // 修改
+        else{
+            return R.ok("修改成功", ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.edit(dto));
+        }
+    }
+
+    /**
+     * 删除
+     */
+    #if(${springdoc})
+    @Operation(summary = "删除")
+    #elseif(${swagger})
+    @ApiOperation("删除")
+    #end
+    @DeleteMapping
+    public R<Boolean> remove(@RequestBody @Valid BaseIdListDTO dto) {
+        // 如需使用物理删除，将调用的方法名改为 physicsRemove 即可
+        return R.ok("删除成功", ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.logicRemove(dto));
+    }
+    
+}
+#end

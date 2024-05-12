@@ -6,6 +6,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
 import cn.kun.base.core.cache.util.RedisHelp;
+import cn.kun.base.core.global.util.convert.ConvertHelp;
 import cn.kun.base.core.global.util.str.StrHelp;
 import cn.kun.base.core.security.constant.LoginConstants;
 import cn.kun.base.core.security.entity.LoginUser;
@@ -75,7 +76,7 @@ public class LoginServiceImpl implements LoginService {
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "未获取到用户信息");
         }
         // 用户ID
-        String userId = userInfo.getId();
+        Long userId = userInfo.getId();
         // 如果用户被限制登录
         if (RedisHelp.has(AuthCacheConstants.LOGIN_LIMIT + userId)) {
             long expire = RedisHelp.getExpire(AuthCacheConstants.LOGIN_LIMIT + userId);
@@ -94,9 +95,9 @@ public class LoginServiceImpl implements LoginService {
             validTime = LoginConstants.JWT_TTL;
         }
         // 生成token
-        String token = JwtHelp.create(userId, validTime * 60 * 1000L);
+        String token = JwtHelp.create(ConvertHelp.toStr(userId), validTime * 60 * 1000L);
         // 登录用户信息存入Redis
-        RedisHelp.setHash(AuthCacheConstants.LOGIN_INFO_HASH, userId, loginUser);
+        RedisHelp.setHash(AuthCacheConstants.LOGIN_INFO_HASH, Convert.toStr(userId), loginUser);
         // 返回值
         LoginVO vo = new LoginVO();
         vo.setToken(token);
@@ -107,7 +108,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public void logout() {
         // 获取用户ID
-        String userId = AuthHelp.getUserId();
+        Long userId = AuthHelp.getUserId();
         // 清除缓存的登录信息
         RedisHelp.delHash(AuthCacheConstants.LOGIN_INFO_HASH, Convert.toStr(userId));
     }

@@ -66,7 +66,7 @@ public class AuthHelp {
      * 获取用户ID
      * @return 用户ID
      */
-    public static String getUserId() {
+    public static Long getUserId() {
         UserInfo userInfo = getUserInfo();
         if (ObjUtil.isNull(userInfo)) {
             return null;

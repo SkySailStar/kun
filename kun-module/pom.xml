@@ -19,13 +19,7 @@
         <module>kun-system</module>
         <module>kun-dispatch</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
+    
     <dependencies>
         
         <!-- bootstrap 启动器（在SpringBoot 2.4.x之后，对于Bootstrap配置文件的支持，需要导入该依赖） -->

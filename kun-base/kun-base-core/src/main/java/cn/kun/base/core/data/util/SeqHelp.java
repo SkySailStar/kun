@@ -1,9 +1,8 @@
-package cn.kun.base.core.global.util.id;
+package cn.kun.base.core.data.util;
 
+import cn.kun.base.core.global.config.GlobalConfig;
 import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
 import cn.kun.base.core.global.util.str.StrHelp;
-import cn.kun.base.core.global.config.GlobalConfig;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -60,6 +59,7 @@ public class SeqHelp {
      * @date 2022/12/15 15:07
      **/
     public static String getSeq(String seqType) {
+        
         //默认为通用序列
         AtomicInteger atomicInteger = COMM_SEQ;
         if (UPLOAD_SEQ_TYPE.equals(seqType)) {
@@ -79,6 +79,7 @@ public class SeqHelp {
      * @date 2022/12/15 15:09
      **/
     public static String getSeq(AtomicInteger atomicInteger, int length) {
+        
         // 时间戳
         String timeStr = LocalDateTimeHelp.nowStr(LocalDateTimeHelp.YYYYMMDDHHMMSS);
         // 机器码
@@ -94,6 +95,7 @@ public class SeqHelp {
      * @return 序列数
      **/
     public synchronized static String getSeqNo() {
+        
         // 先取值再+1
         int value = COMM_SEQ.getAndIncrement();
         // 如果更新后值>=10 的 (length)幂次方则重置为1
@@ -115,6 +117,7 @@ public class SeqHelp {
      * @date 2022/12/15 15:12
      **/
     private synchronized static String getSeqNo(AtomicInteger atomicInteger, int length) {
+        
         // 先取值再+1
         int value = atomicInteger.getAndIncrement();
 

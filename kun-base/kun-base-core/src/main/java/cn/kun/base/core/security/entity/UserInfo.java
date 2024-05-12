@@ -21,7 +21,7 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "主键")
-    private String id;
+    private Long id;
 
     @Schema(description = "登录名")
     private String loginName;
