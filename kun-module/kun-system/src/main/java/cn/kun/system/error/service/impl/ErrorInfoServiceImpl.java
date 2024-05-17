@@ -53,7 +53,7 @@ public class ErrorInfoServiceImpl extends ServiceImpl<ErrorInfoMapper, ErrorInfo
                 .like(StrUtil.isNotBlank(dto.getCode()), ErrorInfo::getCode, dto.getCode())
                 .like(StrUtil.isNotBlank(dto.getName()), ErrorInfo::getName, dto.getName())
                 .eq(StrUtil.isNotBlank(dto.getType()), ErrorInfo::getType, dto.getType())
-                .orderByDesc(ErrorInfo::getUpdateDate);
+                .orderByDesc(ErrorInfo::getUpdateTime);
         // 分页列表查询
         page = page(page, queryWrapper);
         return (Page<ErrorInfoPageVO>) page.convert(errorInfo -> {

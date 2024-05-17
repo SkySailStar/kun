@@ -3,6 +3,7 @@ package cn.kun.system.dict.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.kun.base.core.cache.util.RedisHelp;
 import cn.kun.system.dict.entity.dto.DictDataAddDTO;
 import cn.kun.system.dict.entity.dto.DictDataEditDTO;
 import cn.kun.system.dict.entity.dto.DictDataPageDTO;
@@ -59,8 +60,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
                         DictData::getEnLabel,
                         DictData::getSort,
                         DictData::getEnableFlag,
-                        DictData::getUpdateName,
-                        DictData::getUpdateDate)
+                        DictData::getUpdateTime)
                 .like(StrUtil.isNotBlank(dto.getTypeCode()), DictData::getTypeCode, dto.getTypeCode())
                 .like(StrUtil.isNotBlank(dto.getValue()), DictData::getValue, dto.getValue())
                 .like(StrUtil.isNotBlank(dto.getLabel()), DictData::getLabel, dto.getLabel())
@@ -68,7 +68,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
                 .eq(StrUtil.isNotBlank(dto.getEnableFlag()), DictData::getEnableFlag, dto.getEnableFlag())
                 .orderByAsc(DictData::getTypeCode)
                 .orderByAsc(DictData::getSort)
-                .orderByDesc(DictData::getUpdateDate);
+                .orderByDesc(DictData::getUpdateTime);
         // 分页列表查询
         page = page(page, queryWrapper);
         return (Page<DictDataPageVO>) page.convert(dictData -> BeanHelp.copyProperties(dictData, DictDataPageVO.class));

@@ -49,8 +49,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
                         DictType::getCode,
                         DictType::getName,
                         DictType::getEnName,
-                        DictType::getUpdateName,
-                        DictType::getUpdateDate)
+                        DictType::getUpdateTime)
                 .like(StrUtil.isNotBlank(dto.getCode()), DictType::getCode, dto.getCode())
                 .like(StrUtil.isNotBlank(dto.getName()), DictType::getName, dto.getName())
                 .like(StrUtil.isNotBlank(dto.getEnName()), DictType::getEnName, dto.getEnName());
@@ -62,7 +61,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
                 queryWrapper.lambda().orderByDesc(DictType::getCode);
             }
         } else {
-            queryWrapper.lambda().orderByDesc(DictType::getUpdateDate);
+            queryWrapper.lambda().orderByDesc(DictType::getUpdateTime);
         }
         // 分页列表查询
         page = page(page, queryWrapper);

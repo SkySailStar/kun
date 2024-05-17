@@ -74,7 +74,7 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
                 queryWrapper.lambda().orderByDesc(LoginLog::getLoginTime);
             }
         } else {
-            queryWrapper.lambda().orderByDesc(LoginLog::getUpdateDate);
+            queryWrapper.lambda().orderByDesc(LoginLog::getUpdateTime);
         }
         // 分页列表查询
         page = page(page, queryWrapper);

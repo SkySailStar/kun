@@ -68,7 +68,7 @@ public class RunLogServiceImpl extends ServiceImpl<RunLogMapper, RunLog> impleme
                 queryWrapper.lambda().orderByDesc(RunLog::getRunTime);
             }
         } else {
-            queryWrapper.lambda().orderByDesc(RunLog::getUpdateDate);
+            queryWrapper.lambda().orderByDesc(RunLog::getUpdateTime);
         }
         // 分页列表查询
         page = page(page, queryWrapper);

@@ -1,7 +1,6 @@
 package cn.kun.demo;
 
 import cn.kun.demo.crud.service.DictTypeService;
-import cn.kun.base.api.service.auth.RemoteProjectService;
 import cn.kun.base.api.service.product.RemoteDeviceTypeService;
 import cn.kun.base.api.service.system.RemoteAreaService;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
@@ -28,9 +27,6 @@ public class KunDemoTest {
     
     @Resource
     private RemoteDeviceTypeService remoteDeviceTypeService;
-
-    @Resource
-    private RemoteProjectService remoteProjectService;
 
     /**
      * 普通测试

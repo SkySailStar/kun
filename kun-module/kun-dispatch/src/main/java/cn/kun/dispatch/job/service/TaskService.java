@@ -6,6 +6,7 @@ import cn.kun.base.api.entity.dispatch.dto.TaskNextTriggerTimeDTO;
 import cn.kun.base.api.entity.dispatch.dto.TaskPageDTO;
 import cn.kun.base.api.entity.dispatch.dto.TaskTriggerDTO;
 import cn.kun.base.api.entity.dispatch.vo.TaskPageVO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.util.List;
 
 /**

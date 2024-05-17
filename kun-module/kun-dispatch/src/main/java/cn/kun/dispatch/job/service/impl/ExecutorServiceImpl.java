@@ -16,7 +16,7 @@ import cn.kun.base.api.entity.dispatch.vo.ExecutorDetailVO;
 import cn.kun.base.api.entity.dispatch.vo.ExecutorPageVO;
 import cn.kun.base.job.service.XxlJobService;
 import cn.kun.dispatch.job.service.ExecutorService;
-import com.mybatisflex.core.paginate.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

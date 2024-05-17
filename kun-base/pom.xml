@@ -17,6 +17,7 @@
         <module>kun-base-api</module>
         <module>kun-base-core</module>
         <module>kun-base-job</module>
+        <module>kun-base-generate</module>
     </modules>
     
 </project>
