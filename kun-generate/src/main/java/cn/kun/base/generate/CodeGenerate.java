@@ -33,29 +33,29 @@ public class CodeGenerate {
     /**
      * 生成的表名（多个表用英文逗号分隔）
      */
-    private static final String TABLES = "process_instance";
+    private static final String TABLES = "sys_user";
 
     /**
      * 业务名（一般取下划线分割的第一个单词）
      */
-    private static final String BUSINESS = "process";
+    private static final String BUSINESS = "system";
 
     /**
      * 项目所在目录
      */
-    private static final String PROJECT = "D:\\Project\\SEVNCE\\sevnce-cloud-pop";
+    private static final String PROJECT = "D:\\Project\\MY\\kun";
     
     /* ------------------------以下为固定配置，非必要不更改--------------------------- */
     
     /**
      * 数据库地址
      */
-    public static final String DATABASE_URL = "jdbc:mysql://8.137.108.163:45100";
+    public static final String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306";
 
     /**
      * 数据库
      */
-    private static final String DATABASE = "sevnce_pop";
+    private static final String DATABASE = "kun_auth";
 
     /**
      * 数据库账号
@@ -65,17 +65,17 @@ public class CodeGenerate {
     /**
      * 数据库密码
      */
-    public static final String DATABASE_PASSWORD = "robot@db";
+    public static final String DATABASE_PASSWORD = "kun_mysql";
     
     /**
      * 模块名
      */
-    private static final String MODEL = "sevnce-modules\\sevnce-pop";
+    private static final String MODEL = "sevnce-module\\kun-auth";
 
     /**
      * 包名
      */
-    private static final String PACKAGE = "com.sevnce.pop";
+    private static final String PACKAGE = "cn.kun.auth";
 
     /**
      * 公共包
@@ -145,7 +145,7 @@ public class CodeGenerate {
     /**
      * 实体类
      */
-    public static final String ENTITY = "domain";
+    public static final String ENTITY = "entity";
 
     /**
      * DTO
@@ -161,9 +161,9 @@ public class CodeGenerate {
      * 父类公共字段
      */
     public static final List<String> COMMON_COLUMNS = new ArrayList<>(Arrays.asList(
-            "create_by",
+            "create_person",
             "create_time",
-            "update_by",
+            "update_person",
             "update_time"
     ));
     
