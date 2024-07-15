@@ -41,6 +41,8 @@ target/
 **/*.ipr
 **/modules.xml
 
+### VS Code ###
+.vscode
 
 ### Maven ###
 **/mvnw
