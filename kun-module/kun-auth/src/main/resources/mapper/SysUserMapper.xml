@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.security.mapper.SysUserMapper">
+    
+    <select id="selectDeptUserTreeList" resultType="com.sevnce.pop.system.domain.vo.DeptUserTreeVo">
+        select concat('u',u.id) as id, concat('d',u.dept_id) as parentId, concat(d.ancestors,',',u.dept_id) as ancestors, u.nick_name as label,
+               u.job_name jobName, u.phonenumber
+        from sys_user u
+                 inner join sys_dept d on u.dept_id=d.id
+        where u.del_flag = '0'
+        union
+        select concat('d',d.id) as id, concat('d',d.parent_id) as parentId, d.ancestors, d.name as label, null jobName, null phonenumber
+        from sys_dept d
+        where d.del_flag = '0'
+    </select>
+
+    <select id="selectUserTreeList" resultType="com.sevnce.pop.system.domain.vo.DeptUserTreeVo">
+        select concat('u',u.id) as id, concat('d',u.dept_id) as parentId, concat(d.ancestors,',',u.dept_id) as ancestors, u.nick_name as label,
+               u.job_name jobName, u.phonenumber
+        from sys_user u
+        inner join sys_dept d on u.dept_id=d.id
+        where u.del_flag = '0'
+        and u.nick_name LIKE CONCAT('%',#{dto.searchValue},'%')
+    </select>
+
+    <select id="selectDeptTreeList" resultType="com.sevnce.pop.system.domain.vo.DeptUserTreeVo">
+        select concat('d',d.id) as id, concat('d',d.parent_id) as parentId, d.ancestors, d.name as label, null jobName, null phonenumber
+        from sys_dept d
+        where d.del_flag = '0'
+        and d.id in
+        <foreach item="deptId" collection="deptIds" open="(" separator="," close=")">
+            #{deptId}
+        </foreach>
+    </select>
+
+    <insert id="saveBatch" parameterType="pop_sys_user">
+        INSERT INTO sys_user (`id`, `user_name`, `nick_name`, `dept_id`,
+         `superior`, `phonenumber`, `job_name`, `status`, `wechat_id`, `email`,
+        `del_flag`, `create_by`, `create_time`,
+         `update_by`, `update_time`, `remark`)
+        VALUES
+        <foreach collection="coll" separator="," item="c">
+            (#{c.id}, #{c.userName}, #{c.nickName}, #{c.deptId},
+            #{c.superior}, #{c.phonenumber}, #{c.jobName}, #{c.status}, #{c.wechatId}, #{c.email},
+            #{c.delFlag}, #{c.createBy}, #{c.createTime},
+            #{c.updateBy}, #{c.updateTime}, #{c.remark})
+        </foreach>
+        on duplicate key update
+        user_name = values (user_name),
+        nick_name = values (nick_name),
+        dept_id = values (dept_id),
+        superior = values (superior),
+        phonenumber = values (phonenumber),
+        job_name = values (job_name),
+        status = values (status),
+        wechat_id = values (wechat_id),
+        email = values (email),
+        del_flag = values (del_flag),
+        create_by = values (create_by),
+        create_time = values (create_time),
+        update_by = values (update_by),
+        update_time = values (update_time),
+        remark = values (remark)
+    </insert>
+
+    <select id="selectListVO" resultType="com.sevnce.pop.system.domain.vo.SysUserListVO">
+        SELECT t1.id, t1.user_name userName, t1.nick_name nickName,
+            t1.dept_id deptId, t2.`name` deptName, t1.superior, t3.nick_name superiorName,
+            t1.phonenumber, t1.job_name jobName
+        FROM sys_user t1
+        LEFT JOIN sys_dept t2 on t2.id=t1.dept_id AND t2.del_flag = '0'
+        LEFT JOIN sys_user t3 on t3.id=t1.superior AND t3.del_flag = '0'
+        <where>
+            t1.del_flag = '0'
+            <if test="dto.searchValue != null and dto.searchValue != ''">
+                AND (
+                t1.user_name LIKE CONCAT('%',#{dto.searchValue},'%') OR
+                t1.nick_name LIKE CONCAT('%',#{dto.searchValue},'%') OR
+                t2.`name` LIKE CONCAT('%',#{dto.searchValue},'%') OR
+                t3.nick_name LIKE CONCAT('%',#{dto.searchValue},'%') OR
+                t1.job_name LIKE CONCAT('%',#{dto.searchValue},'%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserInfo" resultType="com.sevnce.pop.system.domain.SysDept">
+        WITH
+        RECURSIVE superiors AS (
+        SELECT
+        id,
+        parent_id,
+        name
+        FROM
+        sys_dept
+        WHERE
+        id =(
+        SELECT
+        dept_id
+        FROM
+        sys_user
+        WHERE
+        id = #{id}
+        )
+        UNION ALL
+        SELECT
+        d.id,
+        d.parent_id,
+        d.name
+        FROM
+        sys_dept d
+        INNER JOIN superiors s ON d.id = s.parent_id
+        )
+        SELECT
+        *
+        FROM
+        superiors
+        WHERE
+            id != 1;
+    </select>
+
+    <select id="selectLeaderList" resultType="com.sevnce.pop.system.domain.vo.SysUserLeaderListVO">
+        SELECT t1.id, t1.nick_name nickName,t1.dept_id deptId,t2.leader
+        FROM sys_user t1
+        LEFT JOIN sys_dept t2 ON t2.id = t1.dept_id AND t2.del_flag = '0'
+        WHERE t1.del_flag = '0'
+        AND t1.id in
+        <foreach item="id" collection="userIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <!-- 获取用户详情 -->
+    <select id="selectByRoleMark" resultType="com.sevnce.pop.system.domain.vo.PrePersonnelVO">
+        SELECT
+        t1.id,
+        t1.nick_name nickName,
+        t1.job_name jobName,
+        t1.state state,
+        t1.end_time endTime,
+        t1.lng_lat lngLat,
+        t1.location location
+        FROM
+        sys_user t1
+        LEFT JOIN sys_role_user t2 ON t2.user_id = t1.id
+        AND t2.del_flag = 0
+        LEFT JOIN sys_role t3 ON t3.id = t2.role_id
+        AND t3.del_flag = 0
+        WHERE
+        t1.del_flag = 0
+        AND t3.mark IN
+        <foreach item="mark" collection="roleMarkList" open="(" separator="," close=")">
+            #{mark}
+        </foreach>
+    </select>
+</mapper>

@@ -21,13 +21,13 @@ import ${vo}.${entity}DetailVO;
 import ${vo}.${entity}PageVO;
 import ${service}.${entity}Service;
 import ${baseDto}.BaseIdListDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.sevnce.common.core.domain.R;
+import cn.kun.common.core.domain.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hutool.core.util.ObjUtil;
 import javax.validation.Valid;
@@ -60,7 +60,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
 public class ${table.controllerName} {
 #end
     
-    @Autowired
+    @Resource
     private ${entity}Service ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
 
     /**

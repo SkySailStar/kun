@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.file;
 /**
  * 文件大小常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-29 10:46
  */
 public class FileSizeConstants {

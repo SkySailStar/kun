@@ -1,7 +1,6 @@
 package cn.kun.demo;
 
 import cn.kun.demo.crud.service.DictTypeService;
-import cn.kun.base.api.service.product.RemoteDeviceTypeService;
 import cn.kun.base.api.service.system.RemoteAreaService;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import java.util.Arrays;
 /**
  * 测试类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-10 17:29
  */
 @SpringBootTest
@@ -25,9 +24,6 @@ public class KunDemoTest {
     @Resource
     private RemoteAreaService remoteAreaService;
     
-    @Resource
-    private RemoteDeviceTypeService remoteDeviceTypeService;
-
     /**
      * 普通测试
      */
@@ -42,15 +38,6 @@ public class KunDemoTest {
     @Test
     public void test2() {
         System.out.println(remoteAreaService.getNameById(100000L).getData());
-    }
-    
-    @Test
-    public void test() {
-
-        BaseIdListDTO baseIdListDTO = new BaseIdListDTO();
-        baseIdListDTO.setIdList(Arrays.asList(1634098411003314176L, 1634099025594679296L));
-        System.out.println(remoteDeviceTypeService.simple(1634098411003314176L).getData());
-        System.out.println(remoteDeviceTypeService.queryListByIds(baseIdListDTO).getData());
     }
     
 }

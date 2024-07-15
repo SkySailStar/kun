@@ -19,9 +19,9 @@ import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.constant.dict.type.DispatchDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.coll.CollHelp;
-import cn.kun.base.core.global.util.obj.ObjHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.coll.CollUtils;
+import cn.kun.base.core.global.util.obj.ObjUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import cn.kun.base.core.job.constants.XxlJobDefaultConstants;
 import cn.kun.base.job.service.XxlJobService;
 import cn.kun.dispatch.job.service.ExecutorService;
@@ -29,7 +29,7 @@ import cn.kun.dispatch.job.service.TaskService;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.glue.GlueTypeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -50,13 +50,13 @@ public class TaskServiceImpl implements TaskService {
     @Value("${xxl.job.executor.appname}")
     private String appname;
     
-    @Autowired
+    @Resource
     private XxlJobService xxlJobService;
     
-    @Autowired
+    @Resource
     private ExecutorService executorService;
     
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
 
     @Override
@@ -68,7 +68,7 @@ public class TaskServiceImpl implements TaskService {
         // 分页数据
         Map<String, Object> resultMap = xxlJobService.pageTask(dto);
         // 失败情况
-        if (StrHelp.equals(Convert.toStr(resultMap.get("code")), HttpStatusConstants.ERROR)) {
+        if (StrUtils.equals(Convert.toStr(resultMap.get("code")), HttpStatusConstants.ERROR)) {
             log.warn("定时任务-分页-失败：{}", Convert.toStr(resultMap.get("msg")));
             throw new BusinessException(ErrorCodeConstants.QUERY_FAIL, "定时任务-分页-失败：" + Convert.toStr(resultMap.get("msg")));
         }
@@ -192,7 +192,7 @@ public class TaskServiceImpl implements TaskService {
     private void check(TaskAddDTO dto) {
         
         // 如果选择的是BEAN类型，则执行器处理器不能为空
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.BEAN.getDesc()) && StrHelp.isBlank(dto.getExecutorHandler())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.BEAN.getDesc()) && StrUtils.isBlank(dto.getExecutorHandler())) {
             throw new BusinessException(ErrorCodeConstants.NULL, "执行器处理器：不能为空");
         }
     }
@@ -213,7 +213,7 @@ public class TaskServiceImpl implements TaskService {
         vo.setExecutorId(executorId);
         // 执行器名称
         ExecutorDetailVO executorDetailVO = executorService.detail(executorId);
-        if (ObjHelp.isNotNull(executorDetailVO)) {
+        if (ObjUtils.isNotNull(executorDetailVO)) {
             vo.setExecutorName(executorDetailVO.getAppName());
         }
         // 任务描述
@@ -241,55 +241,55 @@ public class TaskServiceImpl implements TaskService {
     private void buildDefault(TaskAddDTO dto) {
 
         // 执行器ID
-        if (ObjHelp.isNull(dto.getExecutorId())) {
+        if (ObjUtils.isNull(dto.getExecutorId())) {
             dto.setExecutorId(buildExecutorId());
         }
         // 执行器路由策略
-        if (StrHelp.isBlank(dto.getExecutorRouteStrategy())) {
+        if (StrUtils.isBlank(dto.getExecutorRouteStrategy())) {
             dto.setExecutorRouteStrategy(XxlJobDefaultConstants.EXECUTOR_ROUTE_STRATEGY);
         }
         // 调度过期策略
-        if (StrHelp.isBlank(dto.getMisfireStrategy())) {
+        if (StrUtils.isBlank(dto.getMisfireStrategy())) {
             dto.setMisfireStrategy(XxlJobDefaultConstants.MISFIRE_STRATEGY);
         }
         // 阻塞处理策略
-        if (StrHelp.isBlank(dto.getExecutorBlockStrategy())) {
+        if (StrUtils.isBlank(dto.getExecutorBlockStrategy())) {
             dto.setExecutorBlockStrategy(XxlJobDefaultConstants.EXECUTOR_BLOCK_STRATEGY);
         }
         // 任务执行超时时间
-        if (ObjHelp.isNull(dto.getExecutorTimeout())) {
+        if (ObjUtils.isNull(dto.getExecutorTimeout())) {
             dto.setExecutorTimeout(XxlJobDefaultConstants.EXECUTOR_TIMEOUT);
         }
         // 失败重试次数
-        if (ObjHelp.isNull(dto.getExecutorFailRetryCount())) {
+        if (ObjUtils.isNull(dto.getExecutorFailRetryCount())) {
             dto.setExecutorFailRetryCount(XxlJobDefaultConstants.EXECUTOR_FAIL_RETRY_COUNT);
         }
         // GLUE备注
-        if (StrHelp.isBlank(dto.getGlueRemark())) {
+        if (StrUtils.isBlank(dto.getGlueRemark())) {
             dto.setGlueRemark(XxlJobDefaultConstants.GLUE_REMARK);
         }
         // GLUE_GROOVY
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.GLUE_GROOVY.name())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.GLUE_GROOVY.name())) {
             dto.setGlueSource(XxlJobDefaultConstants.GLUE_JAVA_SOURCE);
         }
         // GLUE_SHELL
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.GLUE_SHELL.name())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.GLUE_SHELL.name())) {
             dto.setGlueSource(XxlJobDefaultConstants.GLUE_SHELL_SOURCE);
         }
         // GLUE_PYTHON
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.GLUE_PYTHON.name())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.GLUE_PYTHON.name())) {
             dto.setGlueSource(XxlJobDefaultConstants.GLUE_PYTHON_SOURCE);
         }
         // GLUE_PHP
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.GLUE_PHP.name())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.GLUE_PHP.name())) {
             dto.setGlueSource(XxlJobDefaultConstants.GLUE_PHP_SOURCE);
         }
         // GLUE_NODEJS
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.GLUE_NODEJS.name())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.GLUE_NODEJS.name())) {
             dto.setGlueSource(XxlJobDefaultConstants.GLUE_NODEJS_SOURCE);
         }
         // GLUE_POWERSHELL
-        if (StrHelp.equals(dto.getGlueType(), GlueTypeEnum.GLUE_POWERSHELL.name())) {
+        if (StrUtils.equals(dto.getGlueType(), GlueTypeEnum.GLUE_POWERSHELL.name())) {
             dto.setGlueSource(XxlJobDefaultConstants.GLUE_POWERSHELL_SOURCE);
         }
     }
@@ -301,27 +301,27 @@ public class TaskServiceImpl implements TaskService {
     private void buildDefault(TaskEditDTO dto) {
 
         // 执行器ID
-        if (ObjHelp.isNull(dto.getExecutorId())) {
+        if (ObjUtils.isNull(dto.getExecutorId())) {
             dto.setExecutorId(buildExecutorId());
         }
         // 执行器路由策略
-        if (StrHelp.isBlank(dto.getExecutorRouteStrategy())) {
+        if (StrUtils.isBlank(dto.getExecutorRouteStrategy())) {
             dto.setExecutorRouteStrategy(XxlJobDefaultConstants.EXECUTOR_ROUTE_STRATEGY);
         }
         // 调度过期策略
-        if (StrHelp.isBlank(dto.getMisfireStrategy())) {
+        if (StrUtils.isBlank(dto.getMisfireStrategy())) {
             dto.setMisfireStrategy(XxlJobDefaultConstants.MISFIRE_STRATEGY);
         }
         // 阻塞处理策略
-        if (StrHelp.isBlank(dto.getExecutorBlockStrategy())) {
+        if (StrUtils.isBlank(dto.getExecutorBlockStrategy())) {
             dto.setExecutorBlockStrategy(XxlJobDefaultConstants.EXECUTOR_BLOCK_STRATEGY);
         }
         // 任务执行超时时间
-        if (ObjHelp.isNull(dto.getExecutorTimeout())) {
+        if (ObjUtils.isNull(dto.getExecutorTimeout())) {
             dto.setExecutorTimeout(XxlJobDefaultConstants.EXECUTOR_TIMEOUT);
         }
         // 失败重试次数
-        if (ObjHelp.isNull(dto.getExecutorFailRetryCount())) {
+        if (ObjUtils.isNull(dto.getExecutorFailRetryCount())) {
             dto.setExecutorFailRetryCount(XxlJobDefaultConstants.EXECUTOR_FAIL_RETRY_COUNT);
         }
     }
@@ -333,11 +333,11 @@ public class TaskServiceImpl implements TaskService {
     private void buildDefault(TaskPageDTO dto) {
 
         // 执行器ID
-        if (ObjHelp.isEmpty(dto.getExecutorId())) {
+        if (ObjUtils.isEmpty(dto.getExecutorId())) {
             dto.setExecutorId(buildExecutorId());
         }
         // 调度状态
-        if (ObjHelp.isEmpty(dto.getTriggerStatus())) {
+        if (ObjUtils.isEmpty(dto.getTriggerStatus())) {
             dto.setTriggerStatus(0);
         }
     }
@@ -354,11 +354,11 @@ public class TaskServiceImpl implements TaskService {
         // 执行器分页查询
         Page<ExecutorPageVO> page = executorService.page(executorPageDTO);
         // 获取执行器ID
-        if (ObjHelp.isNotNull(page)) {
+        if (ObjUtils.isNotNull(page)) {
             List<ExecutorPageVO> records = page.getRecords();
-            if (CollHelp.isNotEmpty(records)) {
+            if (CollUtils.isNotEmpty(records)) {
                 ExecutorPageVO executorPageVO = records.get(0);
-                if (ObjHelp.isNotNull(executorPageVO)) {
+                if (ObjUtils.isNotNull(executorPageVO)) {
                     return executorPageVO.getId();
                 }
             }

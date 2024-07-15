@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 挂载装置信息-查询-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-17 11:01
  */
 @Schema(description = "挂载装置信息-查询-传入值")

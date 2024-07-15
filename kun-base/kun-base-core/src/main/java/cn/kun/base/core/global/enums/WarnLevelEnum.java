@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 预警等级-枚举类
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Getter
 @AllArgsConstructor

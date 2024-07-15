@@ -10,7 +10,7 @@ import java.io.Serial;
 /**
  * 错误信息-详情-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-11 17:36
  */
 @Schema(description = "错误信息-详情-返回值")

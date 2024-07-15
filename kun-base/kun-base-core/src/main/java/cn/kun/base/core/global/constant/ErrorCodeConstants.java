@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant;
 /**
  * 异常编码常量
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-30 16:00
  */
 public class ErrorCodeConstants {
@@ -103,4 +103,8 @@ public class ErrorCodeConstants {
      */
     public static final String LOGIN_LIMIT = "login_limit";
 
+    /**
+     * 已停用
+     */
+    public static final String DISABLE = "disable";
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 直连模式-配置类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-24 13:57
  */
 @Configuration

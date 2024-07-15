@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 登录用户
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Schema(description = "登录用户")
 @Data
@@ -63,7 +63,7 @@ public class LoginUser implements UserDetails {
     @Override
     @JsonIgnore
     public String getUsername() {
-        return userInfo.getLoginName();
+        return userInfo.getUserName();
     }
 
     @Override

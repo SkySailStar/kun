@@ -3,11 +3,11 @@ package cn.kun.base.core.security.filter;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
-import cn.kun.base.core.cache.util.RedisHelp;
+import cn.kun.base.core.cache.util.RedisUtils;
 import cn.kun.base.core.security.constant.LoginConstants;
 import cn.kun.base.core.security.entity.LoginUser;
-import cn.kun.base.core.security.util.JwtHelp;
-import cn.kun.base.core.security.util.WebHelp;
+import cn.kun.base.core.security.util.JwtUtils;
+import cn.kun.base.core.security.util.WebUtils;
 import com.alibaba.fastjson2.JSON;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
@@ -30,7 +30,7 @@ import java.util.Objects;
 /**
  * 认证过滤器
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Component
 @Slf4j
@@ -53,15 +53,15 @@ public class AuthFilter extends OncePerRequestFilter {
             token = token.replace(LoginConstants.BEARER, "");
         }
         // 解析token
-        Claims claims = JwtHelp.parse(token);
+        Claims claims = JwtUtils.parse(token);
         // 获取用户ID
         String userId = claims.getSubject();
         // 从Redis中获取用户信息
-        Object cacheObj = RedisHelp.getHash(AuthCacheConstants.LOGIN_INFO_HASH, userId);
+        Object cacheObj = RedisUtils.getHash(AuthCacheConstants.LOGIN_INFO_HASH, userId);
         if (Objects.isNull(cacheObj)) {
             log.warn("请求地址：{}, 用户未登录", request.getRequestURI());
             // 封装异常消息到响应体
-            WebHelp.buildResponse(response, Convert.toInt(HttpStatusConstants.UNAUTHORIZED), JSON.toJSONString(BaseResult.fail(ErrorCodeConstants.NO_LOGIN, "用户未登录")));
+            WebUtils.buildResponse(response, Convert.toInt(HttpStatusConstants.UNAUTHORIZED), JSON.toJSONString(BaseResult.fail(ErrorCodeConstants.NO_LOGIN, "用户未登录")));
             return;
         }
         // 获取权限信息

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 文件信息-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-28 11:21
  */
 @Data

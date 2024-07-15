@@ -3,7 +3,7 @@ package cn.kun.base.core.mq.constant;
 /**
  * 消息队列
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-19 14:50
  */
 public class QueueConstants {

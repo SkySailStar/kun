@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 区域类型
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-18 11:11
  */
 public class AreaTypeConstants {

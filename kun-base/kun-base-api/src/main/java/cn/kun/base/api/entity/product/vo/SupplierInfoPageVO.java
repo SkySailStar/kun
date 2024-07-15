@@ -9,7 +9,7 @@ import java.io.Serial;
 /**
  * 供应商基本信息分页-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Schema(description = "供应商基本信息分页-返回值")
 @Data

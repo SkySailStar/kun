@@ -10,8 +10,8 @@ import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.obj.ObjHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.obj.ObjUtils;
 import cn.kun.demo.crud.entity.dto.AreaAddDTO;
 import cn.kun.demo.crud.entity.dto.AreaEditDTO;
 import cn.kun.demo.crud.entity.dto.AreaPageDTO;
@@ -30,7 +30,7 @@ import java.util.List;
  * 行政区划 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-06 18:08
  */
 @Slf4j
@@ -63,7 +63,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     public AreaDetailVO detail(Long id) {
 
         log.info("区域-详情：{}", id);
-        if (ObjHelp.isNull(id)) {
+        if (ObjUtils.isNull(id)) {
             log.warn("区域-详情：主键不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "区域-详情：主键不能为空");
         }
@@ -74,7 +74,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "区域-详情：数据不存在");
         }
         // 复制到返回值
-        AreaDetailVO vo = BeanHelp.copyProperties(area, AreaDetailVO.class);
+        AreaDetailVO vo = BeanUtils.copyProperties(area, AreaDetailVO.class);
         // 类别名称
         vo.setTypeName(baseDictService.getLabel(SystemDictTypeConstants.AREA_TYPE, area.getType()));
         // 上级名称
@@ -87,11 +87,11 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long add(AreaAddDTO dto) {
+    public String add(AreaAddDTO dto) {
 
         log.info("区域-添加：{}", dto);
         // 传入值复制到数据库对象
-        Area area = BeanHelp.copyProperties(dto, Area.class);
+        Area area = BeanUtils.copyProperties(dto, Area.class);
         // 添加
         save(area);
         return area.getId();
@@ -120,7 +120,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "区域-修改：数据不存在");
         }
         // 传入值复制到数据库对象（只复制不为空的属性）
-        BeanHelp.copyPropertiesIgnoreNull(dto, area);
+        BeanUtils.copyPropertiesIgnoreNull(dto, area);
         // 修改
         return updateById(area);
     }
@@ -166,7 +166,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
      * @return 行政区域表
      */
     private Area cast(AreaAddDTO dto) {
-        return BeanHelp.copyProperties(dto, Area.class);
+        return BeanUtils.copyProperties(dto, Area.class);
     }
 
     /**
@@ -179,7 +179,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
 
         Area area = new Area();
         // 传入值复制到数据库对象（只复制不为空的属性）
-        BeanHelp.copyPropertiesIgnoreNull(dto, area);
+        BeanUtils.copyPropertiesIgnoreNull(dto, area);
         return area;
     }
     

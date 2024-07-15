@@ -9,8 +9,8 @@ import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.constant.dict.type.DispatchDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.obj.ObjHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.obj.ObjUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import cn.kun.base.api.entity.dispatch.dto.ExecutorPageDTO;
 import cn.kun.base.api.entity.dispatch.vo.ExecutorDetailVO;
 import cn.kun.base.api.entity.dispatch.vo.ExecutorPageVO;
@@ -19,7 +19,7 @@ import cn.kun.dispatch.job.service.ExecutorService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +35,10 @@ import java.util.Map;
 @Service
 public class ExecutorServiceImpl implements ExecutorService {
     
-    @Autowired
+    @Resource
     private XxlJobService xxlJobService;
     
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
     
     @Override
@@ -48,7 +48,7 @@ public class ExecutorServiceImpl implements ExecutorService {
         // 分页数据
         Map<String, Object> resultMap = xxlJobService.pageExecutor(dto);
         // 失败情况
-        if (StrHelp.equals(Convert.toStr(resultMap.get("code")), HttpStatusConstants.ERROR)) {
+        if (StrUtils.equals(Convert.toStr(resultMap.get("code")), HttpStatusConstants.ERROR)) {
             log.warn("定时任务-分页-失败：{}", Convert.toStr(resultMap.get("msg")));
             throw new BusinessException(ErrorCodeConstants.QUERY_FAIL, "定时任务-分页-失败：" + Convert.toStr(resultMap.get("msg")));
         }
@@ -66,7 +66,7 @@ public class ExecutorServiceImpl implements ExecutorService {
     public ExecutorDetailVO detail(Integer id) {
 
         log.info("执行器-详情：{}", id);
-        if (ObjHelp.isNull(id)) {
+        if (ObjUtils.isNull(id)) {
             log.warn("执行器-详情：主键不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "执行器-详情：主键不能为空");
         }

@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 同比类型-常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-15 10:16
  */
 public class CompareTypeConstants {

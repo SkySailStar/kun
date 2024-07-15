@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.file.suffix;
 /**
  * 图片文件后缀常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-28 19:48
  */
 public class ImgSuffixConstants {

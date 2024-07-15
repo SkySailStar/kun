@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 预警状态-字典数据-常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-14 14:43
  */
 public class EmergencyStatusConstants {

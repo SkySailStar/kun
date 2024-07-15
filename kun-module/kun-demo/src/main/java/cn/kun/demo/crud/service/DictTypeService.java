@@ -15,7 +15,7 @@ import cn.kun.demo.crud.entity.vo.DictTypePageVO;
  * 字典类型表 服务类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:24
  */
 public interface DictTypeService extends IService<DictType> {
@@ -39,7 +39,7 @@ public interface DictTypeService extends IService<DictType> {
      * @param dto 添加-传入值
      * @return 添加的数据
      */
-    Long add(DictTypeAddDTO dto);
+    String add(DictTypeAddDTO dto);
 
     /**
      * 修改

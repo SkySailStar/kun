@@ -2,7 +2,7 @@ cn.kun.base.core.global.config.GlobalConfig
 cn.kun.base.core.global.config.JsonConfig
 cn.kun.base.core.global.util.id.IdHelp
 cn.kun.base.core.cache.config.JedisConfig
-cn.kun.base.core.cache.util.RedisHelp
+cn.kun.base.core.cache.util.RedisUtils
 cn.kun.base.core.file.config.MinioConfig
 cn.kun.base.core.file.util.FileHelp
 cn.kun.base.core.file.util.MinioHelp

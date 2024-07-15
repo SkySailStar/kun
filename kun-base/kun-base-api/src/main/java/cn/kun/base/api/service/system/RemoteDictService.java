@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 远程字典服务
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-23 16:58
  */
 @FeignClient(value = ServiceConstants.SYSTEM, fallbackFactory = RemoteDictFallbackFactory.class)

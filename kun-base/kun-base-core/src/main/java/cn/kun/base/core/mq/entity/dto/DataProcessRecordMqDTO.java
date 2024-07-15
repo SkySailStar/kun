@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * 数据处理记录-消息队列-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-26 15:44
  */
 @Schema(description = "数据处理记录-消息队列-传入值")

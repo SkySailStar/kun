@@ -3,7 +3,7 @@ package cn.kun.base.core.cache.constant;
 /**
  * Redis相关常量-认证服务
  *
- * @author SkySailStar
+ * @author 天航星
  */
 public class AuthCacheConstants {
 

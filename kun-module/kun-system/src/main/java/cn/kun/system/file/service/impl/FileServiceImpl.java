@@ -19,8 +19,8 @@ import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.constant.file.FileSizeConstants;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
 import cn.kun.base.api.entity.system.dto.FileEditDTO;
 import cn.kun.base.api.entity.system.po.File;
 import cn.kun.base.api.entity.system.vo.FileInfoVO;
@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * 文件-服务层实现类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-13 10:57
  */
 @Slf4j
@@ -90,7 +90,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "文件-修改：数据不存在");
         }
         // 传入值复制到数据库对象（只复制不为空的属性）
-        BeanHelp.copyPropertiesIgnoreNull(dto, file);
+        BeanUtils.copyPropertiesIgnoreNull(dto, file);
         // 修改
         updateById(file);
         return file;
@@ -212,7 +212,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
             log.warn("数据不存在");
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "数据不存在");
         }
-        FileInfoVO vo = BeanHelp.copyProperties(file, FileInfoVO.class);
+        FileInfoVO vo = BeanUtils.copyProperties(file, FileInfoVO.class);
         vo.setTypeName(baseDictService.getLabel(SystemDictTypeConstants.FILE_TYPE, file.getType()));
         return vo;
     }
@@ -238,7 +238,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
         // 所属人
         vo.setOwner(item.owner().displayName());
         // 更新时间
-        vo.setUpdateDate(LocalDateTimeHelp.castChina(item.lastModified().toLocalDateTime()));
+        vo.setUpdateDate(LocalDateTimeUtils.castChina(item.lastModified().toLocalDateTime()));
         // 是否文件夹
         vo.setDir(item.isDir());
         return vo;
@@ -298,7 +298,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
      */
     private FileInfoVO cast(File file) {
         
-        FileInfoVO vo = BeanHelp.copyProperties(file, FileInfoVO.class);
+        FileInfoVO vo = BeanUtils.copyProperties(file, FileInfoVO.class);
         vo.setTypeName(baseDictService.getLabel(SystemDictTypeConstants.FILE_TYPE, file.getType()));
         return vo;
     }

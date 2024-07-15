@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 行政区划 前端控制器
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-06 18:08
  */
 @Tag(name = "远程区域")

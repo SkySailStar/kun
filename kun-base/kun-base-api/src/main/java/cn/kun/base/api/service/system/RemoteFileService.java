@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 远程文件服务
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-29 14:10
  */
 @FeignClient(value = ServiceConstants.SYSTEM, fallbackFactory = RemoteFileFallbackFactory.class)

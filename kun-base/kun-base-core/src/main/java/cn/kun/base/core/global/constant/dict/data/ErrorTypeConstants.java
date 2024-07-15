@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 错误类型常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-17 17:39
  */
 public class ErrorTypeConstants {

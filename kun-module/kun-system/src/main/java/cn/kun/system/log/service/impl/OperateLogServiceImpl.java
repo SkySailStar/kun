@@ -15,8 +15,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.dict.DictHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.dict.DictUtils;
 import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 操作日志 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-09 16:48
  */
 @Slf4j
@@ -62,7 +62,7 @@ public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, Operate
             // 操作类型名称
             vo.setOperateTypeName(dictDataService.getLabel(SystemDictTypeConstants.OPERATE_TYPE, vo.getOperateType()));
             // 操作标识名称
-            vo.setOperateFlagName(DictHelp.castSuccessFlag(vo.getOperateFlag()));
+            vo.setOperateFlagName(DictUtils.castSuccessFlag(vo.getOperateFlag()));
             // 操作对象类型名称
             vo.setOperateTargetTypeName(dictDataService.getLabel(SystemDictTypeConstants.OPERATE_TARGET_TYPE, vo.getOperateTargetType()));
             return vo;
@@ -81,11 +81,11 @@ public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, Operate
         }
         // 复制到返回值
         OperateLogDetailVO vo = new OperateLogDetailVO();
-        BeanHelp.copyProperties(operateLog, vo);
+        BeanUtils.copyProperties(operateLog, vo);
         // 操作类型名称
         vo.setOperateTypeName(dictDataService.getLabel(SystemDictTypeConstants.OPERATE_TYPE, operateLog.getOperateType()));
         // 操作标识名称
-        vo.setOperateFlagName(DictHelp.castSuccessFlag(operateLog.getOperateFlag()));
+        vo.setOperateFlagName(DictUtils.castSuccessFlag(operateLog.getOperateFlag()));
         // 操作对象类型名称
         vo.setOperateTargetTypeName(dictDataService.getLabel(SystemDictTypeConstants.OPERATE_TARGET_TYPE, operateLog.getOperateTargetType()));
         return vo;
@@ -98,7 +98,7 @@ public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, Operate
         log.info("操作日志-添加-开始：{}", dto);
         // 传入值复制到数据库对象
         OperateLog operateLog = new OperateLog();
-        BeanHelp.copyProperties(dto, operateLog);
+        BeanUtils.copyProperties(dto, operateLog);
         // 添加
         save(operateLog);
         return operateLog;

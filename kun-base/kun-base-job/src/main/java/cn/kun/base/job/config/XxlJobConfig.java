@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * xxl-job配置类
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Slf4j
 @Configuration

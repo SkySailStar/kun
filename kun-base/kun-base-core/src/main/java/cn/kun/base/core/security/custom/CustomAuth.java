@@ -2,7 +2,7 @@ package cn.kun.base.core.security.custom;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.kun.base.core.security.util.AuthHelp;
+import cn.kun.base.core.security.util.AuthUtils;
 import cn.kun.base.core.global.constant.AuthConstants;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 自定义权限校验
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Component("custom")
 public class CustomAuth {
@@ -26,13 +26,13 @@ public class CustomAuth {
     public boolean hasAuthority(String authority) {
         
         // 获取登录名
-        String loginName = AuthHelp.getLoginName();
+        String loginName = AuthUtils.getLoginName();
         // 超级管理员账号具有最高权限，能够访问所有接口
         if (StrUtil.equals(loginName, AuthConstants.SYS_ADMIN)) {
             return true;
         }
         // 获取权限列表
-        List<String> permissions = AuthHelp.getPermissions();
+        List<String> permissions = AuthUtils.getPermissions();
         if (CollUtil.isEmpty(permissions)) {
             throw new BusinessException(ErrorCodeConstants.NO_AUTH, "权限不足，请联系管理员授权");
         }

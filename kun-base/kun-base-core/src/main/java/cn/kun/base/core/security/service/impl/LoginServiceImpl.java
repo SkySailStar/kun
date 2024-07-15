@@ -5,9 +5,8 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
-import cn.kun.base.core.cache.util.RedisHelp;
-import cn.kun.base.core.global.util.convert.ConvertHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.cache.util.RedisUtils;
+import cn.kun.base.core.global.util.convert.ConvertUtils;
 import cn.kun.base.core.security.constant.LoginConstants;
 import cn.kun.base.core.security.entity.LoginUser;
 import cn.kun.base.core.security.entity.UserInfo;
@@ -15,9 +14,8 @@ import cn.kun.base.core.security.entity.dto.CheckTokenDTO;
 import cn.kun.base.core.security.entity.dto.LoginDTO;
 import cn.kun.base.core.security.entity.vo.LoginVO;
 import cn.kun.base.core.security.service.LoginService;
-import cn.kun.base.core.security.util.AuthHelp;
-import cn.kun.base.core.security.util.JwtHelp;
-import cn.kun.base.core.global.constant.AuthConstants;
+import cn.kun.base.core.security.util.AuthUtils;
+import cn.kun.base.core.security.util.JwtUtils;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
 import io.jsonwebtoken.Claims;
@@ -37,7 +35,7 @@ import java.util.Objects;
 /**
  * 认证-服务层实现类
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Service
 @Slf4j
@@ -64,7 +62,7 @@ public class LoginServiceImpl implements LoginService {
             throw new BusinessException(ErrorCodeConstants.USERNAME_PASSWORD_ERROR, "用户名或密码错误");
         }
         // 当前登录用户信息
-        LoginUser loginUser = AuthHelp.cast(authenticate.getPrincipal());
+        LoginUser loginUser = AuthUtils.cast(authenticate.getPrincipal());
         if (ObjUtil.isNull(loginUser)) {
             log.warn("未获取到登录用户");
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "未获取到登录用户");
@@ -76,17 +74,12 @@ public class LoginServiceImpl implements LoginService {
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "未获取到用户信息");
         }
         // 用户ID
-        Long userId = userInfo.getId();
+        String userId = userInfo.getId();
         // 如果用户被限制登录
-        if (RedisHelp.has(AuthCacheConstants.LOGIN_LIMIT + userId)) {
-            long expire = RedisHelp.getExpire(AuthCacheConstants.LOGIN_LIMIT + userId);
+        if (RedisUtils.has(AuthCacheConstants.LOGIN_LIMIT + userId)) {
+            long expire = RedisUtils.getExpire(AuthCacheConstants.LOGIN_LIMIT + userId);
             log.warn("密码错误次数过多，已被限制登录，请" + expire + "秒后重试");
             throw new BusinessException(ErrorCodeConstants.LOGIN_LIMIT, "密码错误次数过多，已被限制登录，请" + expire + "秒后重试");
-        }
-        // 判断用户是否被设为黑名单
-        if (StrHelp.equals(userInfo.getStatus(), AuthConstants.USER_STATUS_BLACKLIST)) {
-            log.warn("用户被限制登录");
-            throw new BusinessException(ErrorCodeConstants.BLACKLIST, "用户被限制登录");
         }
         // 有效时间（单位：分钟）
         Long validTime = dto.getValidTime();
@@ -95,9 +88,9 @@ public class LoginServiceImpl implements LoginService {
             validTime = LoginConstants.JWT_TTL;
         }
         // 生成token
-        String token = JwtHelp.create(ConvertHelp.toStr(userId), validTime * 60 * 1000L);
+        String token = JwtUtils.create(ConvertUtils.toStr(userId), validTime * 60 * 1000L);
         // 登录用户信息存入Redis
-        RedisHelp.setHash(AuthCacheConstants.LOGIN_INFO_HASH, Convert.toStr(userId), loginUser);
+        RedisUtils.setHash(AuthCacheConstants.LOGIN_INFO_HASH, Convert.toStr(userId), loginUser);
         // 返回值
         LoginVO vo = new LoginVO();
         vo.setToken(token);
@@ -107,10 +100,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void logout() {
+        
         // 获取用户ID
-        Long userId = AuthHelp.getUserId();
+        String userId = AuthUtils.getUserId();
         // 清除缓存的登录信息
-        RedisHelp.delHash(AuthCacheConstants.LOGIN_INFO_HASH, Convert.toStr(userId));
+        RedisUtils.delHash(AuthCacheConstants.LOGIN_INFO_HASH, Convert.toStr(userId));
     }
 
     @Override
@@ -118,7 +112,7 @@ public class LoginServiceImpl implements LoginService {
         // 解析token
         Claims claims;
         try {
-            claims = JwtHelp.parse(dto.getToken());
+            claims = JwtUtils.parse(dto.getToken());
         } catch (Exception e) {
             return false;
         }
@@ -136,12 +130,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public List<String> permissions() {
-        return AuthHelp.getPermissions();
+        return AuthUtils.getPermissions();
     }
 
     @Override
     public LoginUser getRealUserInfo() {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(AuthHelp.getLoginName());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(AuthUtils.getLoginName());
         if (userDetails instanceof LoginUser loginUser) {
             return loginUser;
         }

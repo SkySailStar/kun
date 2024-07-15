@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * SpringDoc API文档相关配置
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-02-02 16:50
  */
 @Configuration

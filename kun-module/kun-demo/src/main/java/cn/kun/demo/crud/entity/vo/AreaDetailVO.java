@@ -10,7 +10,7 @@ import java.io.Serial;
 /**
  * 区域-详情-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Schema(description = "区域-详情-返回值")
 @EqualsAndHashCode(callSuper = true)

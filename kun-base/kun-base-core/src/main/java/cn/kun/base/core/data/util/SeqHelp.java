@@ -1,8 +1,8 @@
 package cn.kun.base.core.data.util;
 
 import cn.kun.base.core.global.config.GlobalConfig;
-import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -81,7 +81,7 @@ public class SeqHelp {
     public static String getSeq(AtomicInteger atomicInteger, int length) {
         
         // 时间戳
-        String timeStr = LocalDateTimeHelp.nowStr(LocalDateTimeHelp.YYYYMMDDHHMMSS);
+        String timeStr = LocalDateTimeUtils.nowStr(LocalDateTimeUtils.YYYYMMDDHHMMSS);
         // 机器码
         Integer machineCode = GlobalConfig.getMachineCode();
         // 序列数
@@ -104,7 +104,7 @@ public class SeqHelp {
             COMM_SEQ.set(1);
         }
         // 转字符串，用0左补齐、
-        return StrHelp.padl(value, SEQ_LENGTH);
+        return StrUtils.padl(value, SEQ_LENGTH);
     }
 
     /**
@@ -127,7 +127,7 @@ public class SeqHelp {
             atomicInteger.set(1);
         }
         // 转字符串，用0左补齐、
-        return StrHelp.padl(value, length);
+        return StrUtils.padl(value, length);
     }
 
 }

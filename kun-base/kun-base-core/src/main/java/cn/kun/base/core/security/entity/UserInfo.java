@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 用户信息
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Schema(description = "用户信息")
 @Data
@@ -20,31 +20,22 @@ public class UserInfo implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "主键")
-    private Long id;
+    @Schema(description = "id")
+    private String id;
 
-    @Schema(description = "登录名")
-    private String loginName;
+    @Schema(description = "账号")
+    private String userName;
 
     @Schema(description = "密码")
     @JsonIgnore
     private String password;
 
-    @Schema(description = "名称")
-    private String name;
+    @Schema(description = "姓名")
+    private String nickName;
 
     @Schema(description = "用户头像")
     private String avatar;
 
-    @Schema(description = "状态（0：正常；1注销；2：黑名单）")
-    private String status;
-
-    @Schema(description = "所属公司ID")
-    private String companyId;
-    
-    @Schema(description = "项目编码列表")
-    private List<String> projectNoList;
-
-    @Schema(description = "内外部标识;true内部,false外部")
-    private Boolean characteristic;
+    @Schema(description = "状态（true：启用；false：停用）")
+    private Boolean status;
 }

@@ -3,7 +3,7 @@ package cn.kun.base.core.mq.constant;
 /**
  * 交换机
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-19 14:49
  */
 public class ExchangeConstants {

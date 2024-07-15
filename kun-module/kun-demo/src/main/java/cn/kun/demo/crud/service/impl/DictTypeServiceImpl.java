@@ -10,8 +10,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.obj.ObjHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.obj.ObjUtils;
 import cn.kun.demo.crud.entity.dto.DictTypeAddDTO;
 import cn.kun.demo.crud.entity.dto.DictTypeEditDTO;
 import cn.kun.demo.crud.entity.dto.DictTypePageDTO;
@@ -29,7 +29,7 @@ import java.util.List;
  * 字典类型表 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:24
  */
 @Slf4j
@@ -65,14 +65,14 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
         }
         // 分页列表查询
         page = page(page, queryWrapper);
-        return (Page<DictTypePageVO>) page.convert(dictType -> BeanHelp.copyProperties(dictType, DictTypePageVO.class));
+        return (Page<DictTypePageVO>) page.convert(dictType -> BeanUtils.copyProperties(dictType, DictTypePageVO.class));
     }
 
     @Override
     public DictTypeDetailVO detail(Long id) {
 
         log.info("字典类型-详情：{}", id);
-        if (ObjHelp.isNull(id)) {
+        if (ObjUtils.isNull(id)) {
             log.warn("字典类型-详情：主键不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "字典类型-详情：主键不能为空");
         }
@@ -83,12 +83,12 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "字典类型-详情：数据不存在");
         }
         // 复制到返回值
-        return BeanHelp.copyProperties(dictType, DictTypeDetailVO.class);
+        return BeanUtils.copyProperties(dictType, DictTypeDetailVO.class);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long add(DictTypeAddDTO dto) {
+    public String add(DictTypeAddDTO dto) {
 
         log.info("字典类型-添加：{}", dto);
         // 重复校验
@@ -100,7 +100,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
             throw new BusinessException(ErrorCodeConstants.REPEAT, "字典类型-添加：编码重复");
         }
         // 传入值复制到数据库对象
-        DictType dictType = BeanHelp.copyProperties(dto, DictType.class);
+        DictType dictType = BeanUtils.copyProperties(dto, DictType.class);
         // 添加
         save(dictType);
         return dictType.getId();
@@ -118,7 +118,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "字典类型-修改：数据不存在");
         }
         // 传入值复制到数据库对象
-        BeanHelp.copyPropertiesIgnoreNull(dto, dictType);
+        BeanUtils.copyPropertiesIgnoreNull(dto, dictType);
         // 修改
         return updateById(dictType);
     }

@@ -3,7 +3,7 @@ package cn.kun.base.core.job.constants;
 /**
  * xxl-job登录-常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-01 15:58
  */
 public class XxlJobLoginConstants {

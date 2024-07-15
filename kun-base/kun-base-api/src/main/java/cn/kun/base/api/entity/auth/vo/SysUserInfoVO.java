@@ -15,8 +15,6 @@ public class SysUserInfoVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "用户id")
-    @JsonSerialize(using = LongJsonSerializer.class)
-    @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long userId;
 
     @Schema(description = "用户名称")

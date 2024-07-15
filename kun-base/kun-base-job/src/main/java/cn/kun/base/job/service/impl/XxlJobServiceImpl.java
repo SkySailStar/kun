@@ -1,8 +1,8 @@
 package cn.kun.base.job.service.impl;
 
 import cn.hutool.core.date.DatePattern;
-import cn.kun.base.core.global.util.coll.CollHelp;
-import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
+import cn.kun.base.core.global.util.coll.CollUtils;
+import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
 import cn.kun.base.core.job.constants.XxlJobLoginConstants;
 import cn.kun.base.core.job.constants.XxlJobTaskPathConstants;
 import cn.kun.base.api.entity.dispatch.dto.ExecutorPageDTO;
@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * xxl-job 服务层实现类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-01 16:29
  */
 @SuppressWarnings("all")
@@ -74,7 +74,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         ResponseEntity<ReturnT> entity = restTemplate.postForEntity(url, param, ReturnT.class);
         // 获取cookie
         List<String> cookies = entity.getHeaders().get("Set-Cookie");
-        if (CollHelp.isEmpty(cookies)) {
+        if (CollUtils.isEmpty(cookies)) {
             return;
         }
         // 设置cookie
@@ -423,8 +423,8 @@ public class XxlJobServiceImpl implements XxlJobService {
         body.add("logStatus", dto.getLogStatus());
         // 执行开始结束时间
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN);
-        String startTime = LocalDateTimeHelp.format(dto.getStartTime(), dateTimeFormatter);
-        String endTime = LocalDateTimeHelp.format(dto.getEndTime(), dateTimeFormatter);
+        String startTime = LocalDateTimeUtils.format(dto.getStartTime(), dateTimeFormatter);
+        String endTime = LocalDateTimeUtils.format(dto.getEndTime(), dateTimeFormatter);
         body.add("filterTime", startTime + " - " + endTime);
         // 请求参数
         return new HttpEntity<>(body, buildRequestHeaders());

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 运行日志 Mapper 接口
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-09 16:48
  */
 public interface RunLogMapper extends BaseMapper<RunLog> {

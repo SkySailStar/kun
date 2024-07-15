@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 /**
  * 登录-控制层
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Tag(name = "认证")
 @RestController

@@ -9,7 +9,7 @@ import java.io.Serial;
 /**
  * 机器人地图信息-简单-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-05-19 15:50
  */
 @Schema(description = "机器人地图信息-简单-返回值")

@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 错误信息
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Getter
 @AllArgsConstructor

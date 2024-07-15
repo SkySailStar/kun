@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.dict.DictHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.dict.DictUtils;
 import cn.kun.system.log.entity.dto.LoginLogAddDTO;
 import cn.kun.system.log.entity.dto.LoginLogPageDTO;
 import cn.kun.system.log.entity.po.LoginLog;
@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 登录日志 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-09 16:48
  */
 @Slf4j
@@ -80,13 +80,13 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
         page = page(page, queryWrapper);
         return (Page<LoginLogPageVO>) page.convert(loginLog -> {
             LoginLogPageVO vo = new LoginLogPageVO();
-            BeanHelp.copyProperties(loginLog, vo);
+            BeanUtils.copyProperties(loginLog, vo);
             // 登录方式名称
             vo.setLoginWaysName(dictDataService.getLabel(SystemDictTypeConstants.LOGIN_WAYS, loginLog.getLoginWays()));
             // 登录业务类型名称
             vo.setLoginBusinessName(dictDataService.getLabel(SystemDictTypeConstants.LOGIN_BUSINESS, loginLog.getLoginBusiness()));
             // 登录标识名称
-            vo.setLoginFlagName(DictHelp.castSuccessFlag(loginLog.getLoginFlag()));
+            vo.setLoginFlagName(DictUtils.castSuccessFlag(loginLog.getLoginFlag()));
             // 浏览器类型名称
             vo.setBrowserTypeName(dictDataService.getLabel(SystemDictTypeConstants.BROWSER_TYPE, loginLog.getBrowserType()));
             // 操作系统名称
@@ -107,13 +107,13 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
         }
         // 复制到返回值
         LoginLogDetailVO vo = new LoginLogDetailVO();
-        BeanHelp.copyProperties(loginLog, vo);
+        BeanUtils.copyProperties(loginLog, vo);
         // 登录方式名称
         vo.setLoginWaysName(dictDataService.getLabel(SystemDictTypeConstants.LOGIN_WAYS, loginLog.getLoginWays()));
         // 登录业务类型名称
         vo.setLoginBusinessName(dictDataService.getLabel(SystemDictTypeConstants.LOGIN_BUSINESS, loginLog.getLoginBusiness()));
         // 登录标识名称
-        vo.setLoginFlagName(DictHelp.castSuccessFlag(loginLog.getLoginFlag()));
+        vo.setLoginFlagName(DictUtils.castSuccessFlag(loginLog.getLoginFlag()));
         // 浏览器类型名称
         vo.setBrowserTypeName(dictDataService.getLabel(SystemDictTypeConstants.BROWSER_TYPE, loginLog.getBrowserType()));
         // 操作系统名称
@@ -128,7 +128,7 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
         log.info("登录日志-添加-开始：{}", dto);
         // 传入值复制到数据库对象
         LoginLog loginLog = new LoginLog();
-        BeanHelp.copyProperties(dto, loginLog);
+        BeanUtils.copyProperties(dto, loginLog);
         // 添加
         save(loginLog);
         return loginLog;

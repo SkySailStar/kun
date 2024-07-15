@@ -15,7 +15,7 @@ import cn.kun.system.dict.entity.vo.DictTypePageVO;
  * 字典类型表 服务类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:24
  */
 public interface DictTypeService extends IService<DictType> {

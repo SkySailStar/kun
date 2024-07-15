@@ -14,7 +14,7 @@ import java.io.Serial;
  * 内部职位菜单表
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-02-28 17:12
  */
 @Getter

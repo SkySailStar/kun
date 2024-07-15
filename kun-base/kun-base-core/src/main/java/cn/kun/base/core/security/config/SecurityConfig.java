@@ -20,7 +20,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 /**
  * 安全配置
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Configuration
 @EnableWebSecurity

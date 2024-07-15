@@ -14,7 +14,7 @@ import java.io.Serial;
  * 字典类型
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-28 17:41
  */
 @Getter

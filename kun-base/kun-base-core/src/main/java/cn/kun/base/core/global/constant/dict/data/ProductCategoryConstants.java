@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 产品分类-常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-16 11:16
  */
 public class ProductCategoryConstants {

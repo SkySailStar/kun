@@ -1,6 +1,6 @@
 package cn.kun.base.core.data.handler;
 
-import cn.kun.base.core.security.util.AuthHelp;
+import cn.kun.base.core.security.util.AuthUtils;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class MetaHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         
         // 当前登录用户id
-        Long userId = AuthHelp.getUserId();
+        String userId = AuthUtils.getUserId();
         // 当前时间
         LocalDateTime now = LocalDateTime.now();
         // 创建人
@@ -43,7 +43,7 @@ public class MetaHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         
         // 更新者
-        this.setFieldValByName("updatePerson", AuthHelp.getLoginName(), metaObject);
+        this.setFieldValByName("updatePerson", AuthUtils.getLoginName(), metaObject);
         // 更新时间
         this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
     }

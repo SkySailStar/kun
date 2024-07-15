@@ -3,7 +3,7 @@ package cn.kun.system.dict.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.kun.base.core.cache.util.RedisHelp;
+import cn.kun.base.core.cache.util.RedisUtils;
 import cn.kun.system.dict.entity.dto.DictDataAddDTO;
 import cn.kun.system.dict.entity.dto.DictDataEditDTO;
 import cn.kun.system.dict.entity.dto.DictDataPageDTO;
@@ -19,8 +19,8 @@ import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.cache.constant.SystemCacheConstants;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import cn.kun.system.dict.entity.po.DictData;
 import cn.kun.system.dict.entity.vo.DictDataDetailVO;
 import cn.kun.system.dict.entity.vo.DictDataPageVO;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * 字典数据表 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:32
  */
 @Slf4j
@@ -71,7 +71,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
                 .orderByDesc(DictData::getUpdateTime);
         // 分页列表查询
         page = page(page, queryWrapper);
-        return (Page<DictDataPageVO>) page.convert(dictData -> BeanHelp.copyProperties(dictData, DictDataPageVO.class));
+        return (Page<DictDataPageVO>) page.convert(dictData -> BeanUtils.copyProperties(dictData, DictDataPageVO.class));
     }
 
     @Override
@@ -85,7 +85,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "字典数据-详情数据不存在");
         }
         // 复制到返回值
-        return BeanHelp.copyProperties(dictData, DictDataDetailVO.class);
+        return BeanUtils.copyProperties(dictData, DictDataDetailVO.class);
     }
 
     @Override
@@ -100,9 +100,9 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
             throw new BusinessException(ErrorCodeConstants.REPEAT, "该字典值已存在");
         }
         // 传入值复制到数据库对象
-        DictData dictData = BeanHelp.copyProperties(dto, DictData.class);
+        DictData dictData = BeanUtils.copyProperties(dto, DictData.class);
         // 如果启用标识为空，则设默认值
-        if (StrHelp.isBlank(dictData.getEnableFlag())) {
+        if (StrUtils.isBlank(dictData.getEnableFlag())) {
             dictData.setEnableFlag(BaseConstants.YES);
         }
         // 添加
@@ -110,7 +110,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
         // 添加成功后添加缓存
         if (result) {
             log.info("字典数据-添加-成功");
-            RedisHelp.setHash(SystemCacheConstants.DICT_DATA_HASH, dictData.getTypeCode(), listNoCache(dictData.getTypeCode()));
+            RedisUtils.setHash(SystemCacheConstants.DICT_DATA_HASH, dictData.getTypeCode(), listNoCache(dictData.getTypeCode()));
             log.info("字典数据-添加缓存-成功");
         }
         return dictData;
@@ -128,14 +128,14 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "字典数据-修改数据不存在");
         }
         // 传入值复制到数据库对象
-        BeanHelp.copyPropertiesIgnoreNull(dto, dictData);
+        BeanUtils.copyPropertiesIgnoreNull(dto, dictData);
         // 修改
         boolean result = updateById(dictData);
         // 修改成功后更新缓存
         if (result) {
             log.info("字典数据-修改-成功");
             // 更新缓存
-            RedisHelp.setHash(SystemCacheConstants.DICT_DATA_HASH, dictData.getTypeCode(), listNoCache(dictData.getTypeCode()));
+            RedisUtils.setHash(SystemCacheConstants.DICT_DATA_HASH, dictData.getTypeCode(), listNoCache(dictData.getTypeCode()));
             log.info("字典数据-修改缓存-成功");
         }
         return dictData;
@@ -162,7 +162,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
         // 删除后删除缓存
         if (result) {
             log.info("字典数据-删除-成功");
-            RedisHelp.setHash(SystemCacheConstants.DICT_DATA_HASH, dictData.getTypeCode(), listNoCache(dictData.getTypeCode()));
+            RedisUtils.setHash(SystemCacheConstants.DICT_DATA_HASH, dictData.getTypeCode(), listNoCache(dictData.getTypeCode()));
             log.info("字典数据-删除缓存-成功");
         }
     }
@@ -171,7 +171,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
     public List<BaseSelectVO> list(String type) {
 
         // 先从缓存中查询
-        Object obj = RedisHelp.getHash(SystemCacheConstants.DICT_DATA_HASH, type);
+        Object obj = RedisUtils.getHash(SystemCacheConstants.DICT_DATA_HASH, type);
         if (ObjUtil.isNotNull(obj) && obj instanceof List list) {
             if (CollUtil.isNotEmpty(list)) {
                 return list;
@@ -180,7 +180,7 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
         // 缓存中没有再从数据库查询
         List<BaseSelectVO> voList = listNoCache(type);
         // 数据库查询的结果存入缓存
-        RedisHelp.setHash(SystemCacheConstants.DICT_DATA_HASH, type, voList);
+        RedisUtils.setHash(SystemCacheConstants.DICT_DATA_HASH, type, voList);
         return voList;
     }
 

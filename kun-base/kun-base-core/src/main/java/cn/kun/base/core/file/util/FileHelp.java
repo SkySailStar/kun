@@ -4,8 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import cn.kun.base.core.data.util.SeqHelp;
 import cn.kun.base.core.global.constant.file.type.FileTypeConstants;
 import cn.kun.base.core.global.config.GlobalConfig;
-import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 
@@ -25,14 +25,14 @@ public class FileHelp {
     public static String buildFileNameByFile(MultipartFile file) {
         
         // 当前时间
-        String time = LocalDateTimeHelp.format(LocalDateTime.now(), LocalDateTimeHelp.YYYYMMDDHHMMSS);
+        String time = LocalDateTimeUtils.format(LocalDateTime.now(), LocalDateTimeUtils.YYYYMMDDHHMMSS);
         // 文件名称
         String fileName = getPrefixByFileName(file.getOriginalFilename());
         // 序列号
         String seqId = GlobalConfig.getMachineCode() + SeqHelp.getSeqNo();
         // 文件类型
         String fileType = getSuffixByFile(file);
-        return StrHelp.format("{}_{}_{}.{}", time, fileName, seqId, fileType);
+        return StrUtils.format("{}_{}_{}.{}", time, fileName, seqId, fileType);
     }
     
     /**
@@ -44,7 +44,7 @@ public class FileHelp {
     public static String getSuffixByFile(MultipartFile file) {
         
         String fileName = getSuffixByFile(file.getOriginalFilename());
-        if (StrHelp.isEmpty(fileName)) {
+        if (StrUtils.isEmpty(fileName)) {
             return "";
         }
         return getSuffixByFileName(fileName);

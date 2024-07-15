@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 /**
  * 桶信息-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-13 10:06
  */
 @Schema(description = "桶信息-返回值")

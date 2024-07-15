@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * 行政区划 Mapper 接口
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-06 18:08
  */
 public interface AreaMapper extends BaseMapper<Area> {

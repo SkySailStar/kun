@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 远程认证服务-降级处理
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-27 16:13
  */
 @Slf4j

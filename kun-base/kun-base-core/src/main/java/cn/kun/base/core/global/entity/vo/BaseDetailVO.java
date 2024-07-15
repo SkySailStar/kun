@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 /**
  * 公用-详情-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-09 20:25
  */
 @Schema(description = "公用-详情-返回值")

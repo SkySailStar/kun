@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
 import cn.kun.system.log.entity.po.RunLog;
 import cn.kun.system.log.mapper.RunLogMapper;
 import cn.kun.system.log.service.RunLogService;
@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 运行日志 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-09 16:48
  */
 @Slf4j
@@ -74,7 +74,7 @@ public class RunLogServiceImpl extends ServiceImpl<RunLogMapper, RunLog> impleme
         page = page(page, queryWrapper);
         return (Page<RunLogPageVO>) page.convert(runLog -> {
             RunLogPageVO vo = new RunLogPageVO();
-            BeanHelp.copyProperties(runLog, vo);
+            BeanUtils.copyProperties(runLog, vo);
             // 日志级别名称
             vo.setLogLevelName(dictDataService.getLabel(SystemDictTypeConstants.LOG_LEVEL, runLog.getLogLevel()));
             // 数据来源名称
@@ -95,7 +95,7 @@ public class RunLogServiceImpl extends ServiceImpl<RunLogMapper, RunLog> impleme
         }
         // 复制到返回值
         RunLogDetailVO vo = new RunLogDetailVO();
-        BeanHelp.copyProperties(runLog, vo);
+        BeanUtils.copyProperties(runLog, vo);
         // 日志级别名称
         vo.setLogLevelName(dictDataService.getLabel(SystemDictTypeConstants.LOG_LEVEL, runLog.getLogLevel()));
         // 数据来源名称
@@ -110,7 +110,7 @@ public class RunLogServiceImpl extends ServiceImpl<RunLogMapper, RunLog> impleme
         log.info("运行日志-添加-开始：{}", dto);
         // 传入值复制到数据库对象
         RunLog runLog = new RunLog();
-        BeanHelp.copyProperties(dto, runLog);
+        BeanUtils.copyProperties(dto, runLog);
         // 添加
         save(runLog);
         return runLog;

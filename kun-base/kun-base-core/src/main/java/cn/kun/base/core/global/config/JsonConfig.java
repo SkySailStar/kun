@@ -27,7 +27,7 @@ import java.util.TimeZone;
 /**
  * Json格式化配置
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-02-15 13:55
  */
 @Configuration

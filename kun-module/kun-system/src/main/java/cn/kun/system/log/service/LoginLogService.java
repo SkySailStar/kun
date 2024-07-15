@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 登录日志 服务类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-09 16:48
  */
 public interface LoginLogService extends IService<LoginLog> {

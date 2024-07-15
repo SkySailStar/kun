@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 字典数据-添加-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-23 14:09
  */
 @Schema(description = "字典数据-添加-传入值")

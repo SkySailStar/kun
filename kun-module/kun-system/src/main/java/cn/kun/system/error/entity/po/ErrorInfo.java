@@ -12,7 +12,7 @@ import lombok.Setter;
  * 错误信息
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-11 17:22
  */
 @Getter

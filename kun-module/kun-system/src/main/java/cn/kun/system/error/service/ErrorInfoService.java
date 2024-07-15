@@ -13,7 +13,7 @@ import cn.kun.system.error.entity.vo.ErrorInfoPageVO;
  * 错误编码 服务类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-11 17:22
  */
 public interface ErrorInfoService extends IService<ErrorInfo> {

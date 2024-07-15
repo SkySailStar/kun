@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 挂载装置定义属性配置模板-查询-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-14 16:28
  */
 @Schema(description = "挂载装置定义属性配置模板-查询-传入值")

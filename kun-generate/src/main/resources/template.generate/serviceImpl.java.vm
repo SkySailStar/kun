@@ -18,7 +18,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import org.springframework.transaction.annotation.Transactional;
-import com.sevnce.common.core.exception.ServiceException;
+import cn.kun.common.core.exception.ServiceException;
 
 /**
  * $!{table.comment}-服务层实现类

@@ -27,7 +27,7 @@ import java.util.List;
  * 字典数据表 前端控制器
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:32
  */
 @Tag(name = "字典数据")

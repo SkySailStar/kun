@@ -8,7 +8,7 @@ import cn.kun.demo.crud.entity.po.DictType;
  * 字典类型表 Mapper 接口
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:24
  */
 public interface DictTypeMapper extends BaseMapper<DictType> {

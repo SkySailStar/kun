@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.type;
 /**
  * 巡检服务字典类型常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-28 15:10
  */
 public class PatrolDictTypeConstants {

@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.kun.base.api.service.system.BaseDictService;
 import cn.kun.base.api.service.system.RemoteDictService;
 import cn.kun.base.core.cache.constant.SystemCacheConstants;
-import cn.kun.base.core.cache.util.RedisHelp;
+import cn.kun.base.core.cache.util.RedisUtils;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 字典-服务层实现类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-23 17:39
  */
 @SuppressWarnings("all")
@@ -42,7 +42,7 @@ public class BaseDictServiceImpl implements BaseDictService {
             return voList;
         }
         // 根据类型获取列表
-        Object obj = RedisHelp.getHash(SystemCacheConstants.DICT_DATA_HASH, type);
+        Object obj = RedisUtils.getHash(SystemCacheConstants.DICT_DATA_HASH, type);
         if (ObjUtil.isNotNull(obj) && obj instanceof List list) {
             if (CollUtil.isNotEmpty(list)) {
                 return list;

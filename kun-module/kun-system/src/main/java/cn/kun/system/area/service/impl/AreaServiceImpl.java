@@ -15,7 +15,7 @@ import cn.kun.base.core.global.entity.BaseTreeBuild;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
 import cn.kun.system.area.entity.dto.AreaAddDTO;
 import cn.kun.system.area.entity.dto.AreaEditDTO;
 import cn.kun.system.area.entity.dto.AreaPageDTO;
@@ -36,7 +36,7 @@ import java.util.List;
  * 行政区划 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-06 18:08
  */
 @Slf4j
@@ -113,7 +113,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "区域-修改：数据不存在");
         }
         // 传入值复制到数据库对象（只复制不为空的属性）
-        BeanHelp.copyPropertiesIgnoreNull(dto, area);
+        BeanUtils.copyPropertiesIgnoreNull(dto, area);
         // 修改
         updateById(area);
         return area;

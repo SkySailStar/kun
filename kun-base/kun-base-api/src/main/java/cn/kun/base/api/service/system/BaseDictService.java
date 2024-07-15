@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 字典-服务层
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-23 17:37
  */
 public interface BaseDictService {

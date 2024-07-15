@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 认证信息-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-06 08:53
  */
 @Schema(description = "认证信息-传入值")

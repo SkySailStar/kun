@@ -3,7 +3,7 @@ package cn.kun.demo.mq.constants;
 /**
  * 路由标识
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-19 16:35
  */
 public class DemoRoutingConstants {

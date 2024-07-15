@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 文件 Mapper 接口
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-28 17:42
  */
 public interface FileMapper extends BaseMapper<File> {

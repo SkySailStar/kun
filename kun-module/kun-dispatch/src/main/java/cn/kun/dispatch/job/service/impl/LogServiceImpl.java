@@ -9,9 +9,9 @@ import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.constant.dict.type.DispatchDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.coll.CollHelp;
-import cn.kun.base.core.global.util.obj.ObjHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.coll.CollUtils;
+import cn.kun.base.core.global.util.obj.ObjUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import cn.kun.base.api.entity.dispatch.dto.ExecutorPageDTO;
 import cn.kun.base.api.entity.dispatch.dto.LogPageDTO;
 import cn.kun.base.api.entity.dispatch.vo.ExecutorDetailVO;
@@ -21,7 +21,7 @@ import cn.kun.base.job.service.XxlJobService;
 import cn.kun.dispatch.job.service.ExecutorService;
 import cn.kun.dispatch.job.service.LogService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -40,13 +40,13 @@ public class LogServiceImpl implements LogService {
     @Value("${xxl.job.executor.appname}")
     private String appname;
     
-    @Autowired
+    @Resource
     private XxlJobService xxlJobService;
     
-    @Autowired
+    @Resource
     private ExecutorService executorService;
     
-    @Autowired
+    @Resource
     private BaseDictService baseDictService;
     
     @Override
@@ -57,7 +57,7 @@ public class LogServiceImpl implements LogService {
         buildDefault(dto);
         Map<String, Object> resultMap = xxlJobService.pageLog(dto);
         // 失败情况
-        if (StrHelp.equals(Convert.toStr(resultMap.get("code")), HttpStatusConstants.ERROR)) {
+        if (StrUtils.equals(Convert.toStr(resultMap.get("code")), HttpStatusConstants.ERROR)) {
             log.warn("日志-分页-失败：{}", Convert.toStr(resultMap.get("msg")));
             throw new BusinessException(ErrorCodeConstants.QUERY_FAIL, "日志-分页-失败：" + Convert.toStr(resultMap.get("msg")));
         }
@@ -78,15 +78,15 @@ public class LogServiceImpl implements LogService {
     private void buildDefault(LogPageDTO dto) {
 
         // 执行器ID
-        if (ObjHelp.isNull(dto.getExecutorId())) {
+        if (ObjUtils.isNull(dto.getExecutorId())) {
             dto.setExecutorId(buildExecutorId());
         }
         // 任务ID
-        if (ObjHelp.isNull(dto.getTaskId())) {
+        if (ObjUtils.isNull(dto.getTaskId())) {
             dto.setTaskId(0);
         }
         // 日志状态
-        if (ObjHelp.isNull(dto.getLogStatus())) {
+        if (ObjUtils.isNull(dto.getLogStatus())) {
             dto.setLogStatus(-1);
         }
     }
@@ -103,11 +103,11 @@ public class LogServiceImpl implements LogService {
         // 执行器分页查询
         Page<ExecutorPageVO> page = executorService.page(executorPageDTO);
         // 获取执行器ID
-        if (ObjHelp.isNotNull(page)) {
+        if (ObjUtils.isNotNull(page)) {
             List<ExecutorPageVO> records = page.getRecords();
-            if (CollHelp.isNotEmpty(records)) {
+            if (CollUtils.isNotEmpty(records)) {
                 ExecutorPageVO executorPageVO = records.get(0);
-                if (ObjHelp.isNotNull(executorPageVO)) {
+                if (ObjUtils.isNotNull(executorPageVO)) {
                     return executorPageVO.getId();
                 }
             }
@@ -131,7 +131,7 @@ public class LogServiceImpl implements LogService {
         vo.setExecutorId(executorId);
         // 执行器名称
         ExecutorDetailVO executorDetailVO = executorService.detail(executorId);
-        if (ObjHelp.isNotNull(executorDetailVO)) {
+        if (ObjUtils.isNotNull(executorDetailVO)) {
             vo.setExecutorName(executorDetailVO.getAppName());
         }
         // 任务ID

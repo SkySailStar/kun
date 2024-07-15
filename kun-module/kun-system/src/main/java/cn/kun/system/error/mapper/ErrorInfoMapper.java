@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 错误编码 Mapper 接口
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-11 17:22
  */
 public interface ErrorInfoMapper extends BaseMapper<ErrorInfo> {

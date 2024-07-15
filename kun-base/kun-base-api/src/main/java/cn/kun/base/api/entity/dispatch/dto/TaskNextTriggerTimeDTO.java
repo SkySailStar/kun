@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 任务后续触发时间-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-02 13:49
  */
 @Schema(description = "任务后续触发时间-传入值")

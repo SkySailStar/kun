@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
 import cn.kun.system.dict.entity.po.DictType;
 import cn.kun.system.dict.entity.vo.DictTypeDetailVO;
 import cn.kun.system.dict.entity.vo.DictTypePageVO;
@@ -28,7 +28,7 @@ import java.util.List;
  * 字典类型表 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:24
  */
 @Slf4j
@@ -55,7 +55,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
                 .orderByDesc(DictType::getUpdateTime);
         // 分页列表查询
         page = page(page, queryWrapper);
-        return (Page<DictTypePageVO>) page.convert(dictType -> BeanHelp.copyProperties(dictType, DictTypePageVO.class));
+        return (Page<DictTypePageVO>) page.convert(dictType -> BeanUtils.copyProperties(dictType, DictTypePageVO.class));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "字典类型-详情数据不存在");
         }
         // 复制到返回值
-        return BeanHelp.copyProperties(dictType, DictTypeDetailVO.class);
+        return BeanUtils.copyProperties(dictType, DictTypeDetailVO.class);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
             throw new BusinessException(ErrorCodeConstants.REPEAT, "编码重复");
         }
         // 传入值复制到数据库对象
-        DictType dictType = BeanHelp.copyProperties(dto, DictType.class);
+        DictType dictType = BeanUtils.copyProperties(dto, DictType.class);
         // 添加
         save(dictType);
         return dictType;
@@ -104,7 +104,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "字典类型-修改数据不存在");
         }
         // 传入值复制到数据库对象
-        BeanHelp.copyPropertiesIgnoreNull(dto, dictType);
+        BeanUtils.copyPropertiesIgnoreNull(dto, dictType);
         // 修改
         updateById(dictType);
         return dictType;

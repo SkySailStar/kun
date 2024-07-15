@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 /**
  * 启动类
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @MapperScan("cn.kun.**.mapper")
 @EnableFeignClients(basePackages = "cn.kun")

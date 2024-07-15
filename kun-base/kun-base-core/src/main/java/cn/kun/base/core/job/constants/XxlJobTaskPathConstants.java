@@ -3,7 +3,7 @@ package cn.kun.base.core.job.constants;
 /**
  * xxl-job请求路径-常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-06-01 15:44
  */
 public class XxlJobTaskPathConstants {

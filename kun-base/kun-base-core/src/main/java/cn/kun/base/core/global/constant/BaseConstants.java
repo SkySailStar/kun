@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant;
 /**
  * 公共常量
  *
- * @author SkySailStar
+ * @author 天航星
  */
 public class BaseConstants {
 

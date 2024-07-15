@@ -9,7 +9,7 @@ import java.io.Serial;
 /**
  * 错误信息-分页-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-11 17:25
  */
 @Schema(description = "错误编码-分页-传入值")

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 字典数据-列表-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-04-04 16:42
  */
 @Schema(description = "字典数据-列表-返回值")

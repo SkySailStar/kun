@@ -18,7 +18,7 @@ import java.util.List;
  * 行政区划 服务类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-06 18:08
  */
 public interface AreaService extends IService<Area> {

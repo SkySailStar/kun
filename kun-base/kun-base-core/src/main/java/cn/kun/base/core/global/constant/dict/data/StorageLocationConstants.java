@@ -3,7 +3,7 @@ package cn.kun.base.core.global.constant.dict.data;
 /**
  * 文件存储位置-字典数据常量类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-28 18:44
  */
 public class StorageLocationConstants {

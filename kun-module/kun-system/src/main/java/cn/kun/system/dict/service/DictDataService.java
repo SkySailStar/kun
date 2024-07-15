@@ -19,7 +19,7 @@ import java.util.List;
  * 字典数据表 服务类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:32
  */
 public interface DictDataService extends IService<DictData> {

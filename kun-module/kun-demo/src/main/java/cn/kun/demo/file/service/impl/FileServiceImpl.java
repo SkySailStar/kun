@@ -2,7 +2,7 @@ package cn.kun.demo.file.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.kun.demo.file.entity.vo.ItemVO;
-import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
+import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
 import cn.kun.base.core.file.util.MinioHelp;
 import cn.kun.demo.file.service.FileService;
 import io.minio.messages.Item;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 文件-服务层实现类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-13 10:57
  */
 @Service
@@ -69,7 +69,7 @@ public class FileServiceImpl implements FileService {
         // 所属人
         vo.setOwner(item.owner().displayName());
         // 更新时间
-        vo.setUpdateDate(LocalDateTimeHelp.castChina(item.lastModified().toLocalDateTime()));
+        vo.setUpdateDate(LocalDateTimeUtils.castChina(item.lastModified().toLocalDateTime()));
         // 是否文件夹
         vo.setDir(item.isDir());
         return vo;

@@ -10,7 +10,7 @@ import java.io.Serial;
 /**
  * 挂载装置定义的巡检能力-查询-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-21 11:47
  */
 @Schema(description = "挂载装置定义的巡检能力-查询-返回值")

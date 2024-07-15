@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 认证-服务层
  *
- * @author SkySailStar
+ * @author 天航星
  */
 public interface LoginService {
 

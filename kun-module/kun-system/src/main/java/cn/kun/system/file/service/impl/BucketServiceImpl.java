@@ -3,7 +3,7 @@ package cn.kun.system.file.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.kun.system.file.entity.vo.BucketVO;
 import cn.kun.base.core.file.util.MinioHelp;
-import cn.kun.base.core.global.util.date.LocalDateTimeHelp;
+import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
 import cn.kun.system.file.service.BucketService;
 import io.minio.messages.Bucket;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 桶-服务层实现类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-13 10:04
  */
 @Service
@@ -57,7 +57,7 @@ public class BucketServiceImpl implements BucketService {
         // 名称
         vo.setName(bucket.name());
         // 创建时间
-        vo.setCreateDate(LocalDateTimeHelp.castChina(bucket.creationDate().toLocalDateTime()));
+        vo.setCreateDate(LocalDateTimeUtils.castChina(bucket.creationDate().toLocalDateTime()));
         return vo;
     }
 }

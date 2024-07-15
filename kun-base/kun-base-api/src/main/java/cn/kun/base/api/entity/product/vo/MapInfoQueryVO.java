@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 机器人地图信息-查询-返回值
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-27 14:44
  */
 @Schema(description = "机器人地图信息-查询-返回值")

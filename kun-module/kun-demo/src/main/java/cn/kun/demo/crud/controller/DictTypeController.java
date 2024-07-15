@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
  * 字典类型表 前端控制器
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-03-23 10:24
  */
 @Tag(name = "字典类型")
@@ -50,7 +50,7 @@ public class DictTypeController extends BaseController {
     @Operation(summary = "添加")
     @PostMapping
     @PreAuthorize("@custom.hasAuthority('demo')")
-    public BaseResult<Long> add(@RequestBody @Valid DictTypeAddDTO dto) {
+    public BaseResult<String> add(@RequestBody @Valid DictTypeAddDTO dto) {
         return success(dictTypeService.add(dto));
     }
 

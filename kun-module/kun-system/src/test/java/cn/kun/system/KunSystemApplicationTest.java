@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * 测试类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-03-10 17:29
  */
 @SpringBootTest

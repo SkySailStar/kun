@@ -2,8 +2,8 @@ package cn.kun.base.api.config;
 
 import cn.kun.base.api.service.auth.RemoteAuthService;
 import cn.kun.base.core.global.constant.BaseConstants;
-import cn.kun.base.core.global.util.obj.ObjHelp;
-import cn.kun.base.core.global.util.str.StrHelp;
+import cn.kun.base.core.global.util.obj.ObjUtils;
+import cn.kun.base.core.global.util.str.StrUtils;
 import cn.kun.base.core.security.constant.LoginConstants;
 import cn.kun.base.core.security.entity.dto.LoginDTO;
 import cn.kun.base.core.security.entity.vo.LoginVO;
@@ -20,7 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 远程服务调用配置类
  *
- * @author SkySailStar
+ * @author 天航星
  * @date 2023-01-07 17:45
  */
 @Slf4j
@@ -41,14 +41,14 @@ public class OpenFeignConfig {
             String token;
             // 请求方
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            if (ObjHelp.isEmpty(requestAttributes)) {
+            if (ObjUtils.isEmpty(requestAttributes)) {
                 return;
             } else {
                 // 获取请求方token
                 HttpServletRequest request = requestAttributes.getRequest();
                 token = request.getHeader(LoginConstants.AUTHENTICATION);
                 // 如果token为空、环境为开发环境，则说明是在单元测试OpenFeign接口，则生成超级管理员的token便于测试使用
-                if (StrHelp.isBlank(token) && StrHelp.equals(active, BaseConstants.DEV)) {
+                if (StrUtils.isBlank(token) && StrUtils.equals(active, BaseConstants.DEV)) {
                     token = buildTokenByAuth();
                 }
             }
@@ -67,7 +67,7 @@ public class OpenFeignConfig {
         loginDTO.setLoginName(BaseConstants.ADMIN_LOGIN_NAME);
         loginDTO.setPassword(BaseConstants.ADMIN_PASS_WORD);
         LoginVO loginVO = remoteAuthService.login(loginDTO).getData();
-        if (ObjHelp.isNotEmpty(loginVO)) {
+        if (ObjUtils.isNotEmpty(loginVO)) {
             return loginVO.getToken();
         }
         return null;

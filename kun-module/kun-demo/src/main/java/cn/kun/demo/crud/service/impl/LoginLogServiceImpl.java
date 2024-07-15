@@ -11,9 +11,9 @@ import cn.kun.base.api.service.system.BaseDictService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
-import cn.kun.base.core.global.util.bean.BeanHelp;
-import cn.kun.base.core.global.util.dict.DictHelp;
-import cn.kun.base.core.global.util.obj.ObjHelp;
+import cn.kun.base.core.global.util.bean.BeanUtils;
+import cn.kun.base.core.global.util.dict.DictUtils;
+import cn.kun.base.core.global.util.obj.ObjUtils;
 import cn.kun.demo.crud.entity.dto.LoginLogAddDTO;
 import cn.kun.demo.crud.entity.dto.LoginLogPageDTO;
 import cn.kun.demo.crud.entity.po.LoginLog;
@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 登录日志 服务实现类
  * </p>
  *
- * @author SkySailStar
+ * @author 天航星
  * @since 2023-04-09 16:48
  */
 @Slf4j
@@ -80,13 +80,13 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
         // 分页列表查询
         page = page(page, queryWrapper);
         return (Page<LoginLogPageVO>) page.convert(loginLog -> {
-            LoginLogPageVO vo = BeanHelp.copyProperties(loginLog, LoginLogPageVO.class);
+            LoginLogPageVO vo = BeanUtils.copyProperties(loginLog, LoginLogPageVO.class);
             // 登录方式名称
             vo.setLoginWaysName(baseDictService.getLabel(SystemDictTypeConstants.LOGIN_WAYS, loginLog.getLoginWays()));
             // 登录业务类型名称
             vo.setLoginBusinessName(baseDictService.getLabel(SystemDictTypeConstants.LOGIN_BUSINESS, loginLog.getLoginBusiness()));
             // 登录标识名称
-            vo.setLoginFlagName(DictHelp.castSuccessFlag(loginLog.getLoginFlag()));
+            vo.setLoginFlagName(DictUtils.castSuccessFlag(loginLog.getLoginFlag()));
             // 浏览器类型名称
             vo.setBrowserTypeName(baseDictService.getLabel(SystemDictTypeConstants.BROWSER_TYPE, loginLog.getBrowserType()));
             // 操作系统名称
@@ -99,7 +99,7 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
     public LoginLogDetailVO detail(Long id) {
 
         log.info("登录日志-详情：{}", id);
-        if (ObjHelp.isNull(id)) {
+        if (ObjUtils.isNull(id)) {
             log.warn("登录日志-详情：主键不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "登录日志-详情：主键不能为空");
         }
@@ -110,13 +110,13 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
             throw new BusinessException(ErrorCodeConstants.WITHOUT, "登录日志-详情：数据不存在");
         }
         // 复制到返回值
-        LoginLogDetailVO vo = BeanHelp.copyProperties(loginLog, LoginLogDetailVO.class);
+        LoginLogDetailVO vo = BeanUtils.copyProperties(loginLog, LoginLogDetailVO.class);
         // 登录方式名称
         vo.setLoginWaysName(baseDictService.getLabel(SystemDictTypeConstants.LOGIN_WAYS, loginLog.getLoginWays()));
         // 登录业务类型名称
         vo.setLoginBusinessName(baseDictService.getLabel(SystemDictTypeConstants.LOGIN_BUSINESS, loginLog.getLoginBusiness()));
         // 登录标识名称
-        vo.setLoginFlagName(DictHelp.castSuccessFlag(loginLog.getLoginFlag()));
+        vo.setLoginFlagName(DictUtils.castSuccessFlag(loginLog.getLoginFlag()));
         // 浏览器类型名称
         vo.setBrowserTypeName(baseDictService.getLabel(SystemDictTypeConstants.BROWSER_TYPE, loginLog.getBrowserType()));
         // 操作系统名称
@@ -130,7 +130,7 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
 
         log.info("登录日志-添加：{}", dto);
         // 传入值复制到数据库对象
-        LoginLog loginLog = BeanHelp.copyProperties(dto, LoginLog.class);
+        LoginLog loginLog = BeanUtils.copyProperties(dto, LoginLog.class);
         // 添加
         save(loginLog);
         return loginLog;

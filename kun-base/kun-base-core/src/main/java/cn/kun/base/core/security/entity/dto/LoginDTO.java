@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 登录-传入值
  *
- * @author SkySailStar
+ * @author 天航星
  */
 @Schema(description = "登录-传入值")
 @Data
