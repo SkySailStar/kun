@@ -9,7 +9,6 @@ import cn.kun.base.core.global.exception.BusinessException;
 import cn.kun.base.core.global.util.obj.ObjUtils;
 import cn.kun.base.core.security.entity.LoginUser;
 import cn.kun.base.core.security.entity.UserInfo;
-import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.Resource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Component;
  * 
  * @author 天航星
  */
-@Slf4j
 @Component
 public class AuthProvider implements AuthenticationProvider {
  

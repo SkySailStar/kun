@@ -15,7 +15,6 @@ import io.minio.Result;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
 import io.minio.messages.Item;
-import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FastByteArrayOutputStream;
@@ -31,8 +30,7 @@ import java.util.List;
  * @author 天航星
  */
 @Component
-@Slf4j
-public class MinioHelp {
+public class MinioUtils {
 
     private static MinioConfig minioConfig;
 
@@ -40,12 +38,12 @@ public class MinioHelp {
 
     @Resource
     public void setMinioConfig(MinioConfig minioConfig) {
-        MinioHelp.minioConfig = minioConfig;
+        MinioUtils.minioConfig = minioConfig;
     }
 
     @Resource
     public void setMinioClient(MinioClient minioClient) {
-        MinioHelp.minioClient = minioClient;
+        MinioUtils.minioClient = minioClient;
     }
 
     /**

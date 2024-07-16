@@ -83,7 +83,7 @@ public class JsonUtils {
             }
             // 普通字符串
             else {
-                result.add((T) str);
+                result.add(tClass.cast(str));
             }
         }
         return result;

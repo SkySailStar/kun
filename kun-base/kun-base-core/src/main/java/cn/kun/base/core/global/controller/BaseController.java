@@ -5,14 +5,12 @@ import cn.hutool.core.util.ObjUtil;
 import cn.kun.base.core.global.constant.BaseConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.entity.BaseResult;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * web层通用数据处理
  *
  * @author 天航星
  */
-@Slf4j
 public class BaseController {
 
     /**

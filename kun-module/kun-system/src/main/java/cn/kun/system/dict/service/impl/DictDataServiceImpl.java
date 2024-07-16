@@ -171,14 +171,12 @@ public class DictDataServiceImpl extends ServiceImpl<DictDataMapper, DictData> i
     public List<BaseSelectVO> list(String type) {
 
         // 先从缓存中查询
-        Object obj = RedisUtils.getHash(SystemCacheConstants.DICT_DATA_HASH, type);
-        if (ObjUtil.isNotNull(obj) && obj instanceof List list) {
-            if (CollUtil.isNotEmpty(list)) {
-                return list;
-            }
+        List<BaseSelectVO> voList = RedisUtils.getHashList(SystemCacheConstants.DICT_DATA_HASH, type, BaseSelectVO.class);
+        if (ObjUtil.isNotNull(voList)) {
+                return voList;
         }
         // 缓存中没有再从数据库查询
-        List<BaseSelectVO> voList = listNoCache(type);
+        voList = listNoCache(type);
         // 数据库查询的结果存入缓存
         RedisUtils.setHash(SystemCacheConstants.DICT_DATA_HASH, type, voList);
         return voList;

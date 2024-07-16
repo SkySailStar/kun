@@ -52,6 +52,12 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+        <!-- Spring数据处理 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+
         <!-- Swagger（优化界面） -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

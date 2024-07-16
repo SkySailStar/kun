@@ -35,7 +35,7 @@ public class DirectDeadLetterConfig {
                 // 如果10秒没处理，就自动删除
                 .ttl(10 * 1000)
                 // 最大长度设定为3
-                .maxLength(3)
+                .maxLength(3L)
                 .build();
         rabbitService.bindDirect(queue);
 

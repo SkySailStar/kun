@@ -31,6 +31,7 @@ import com.xxl.job.core.glue.GlueTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.util.CastUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +43,6 @@ import java.util.Map;
  * @author 廖航
  * @date 2023-06-01 17:36
  */
-@SuppressWarnings("all")
 @Slf4j
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -75,7 +75,7 @@ public class TaskServiceImpl implements TaskService {
         // 定义返回值
         Page<TaskPageVO> voPage = Page.of(dto.getPageNo(), dto.getPageSize());
         voPage.setTotal(Convert.toInt(resultMap.get("recordsTotal")));
-        if (resultMap.get("data") instanceof List list) {
+        if (resultMap.get("data") instanceof List<?> list) {
             voPage.setRecords(list.stream().map(this::cast).toList());
             return voPage;
         }
@@ -91,7 +91,7 @@ public class TaskServiceImpl implements TaskService {
         // 设置默认值
         buildDefault(dto);
         // 添加任务
-        ReturnT returnT = xxlJobService.addTask(dto);
+        ReturnT<?> returnT = xxlJobService.addTask(dto);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-添加-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.ADD_FAIL, "定时任务-添加-失败：" + returnT.getMsg());
@@ -109,7 +109,7 @@ public class TaskServiceImpl implements TaskService {
         // 设置默认值
         buildDefault(dto);
         // 修改任务
-        ReturnT returnT = xxlJobService.editTask(dto);
+        ReturnT<?> returnT = xxlJobService.editTask(dto);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-修改-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.EDIT_FAIL, "定时任务-修改-失败：" + returnT.getMsg());
@@ -122,7 +122,7 @@ public class TaskServiceImpl implements TaskService {
 
         log.info("定时任务-删除：{}", id);
         // 删除任务
-        ReturnT returnT = xxlJobService.removeTask(id);
+        ReturnT<?> returnT = xxlJobService.removeTask(id);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-删除-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.DEL_FAIL, "定时任务-删除-失败：" + returnT.getMsg());
@@ -135,7 +135,7 @@ public class TaskServiceImpl implements TaskService {
 
         log.info("定时任务-启动：{}", id);
         // 启动任务
-        ReturnT returnT = xxlJobService.startTask(id);
+        ReturnT<?> returnT = xxlJobService.startTask(id);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-启动-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.OPERATE_FAIL, "定时任务-启动-失败" + returnT.getMsg());
@@ -148,7 +148,7 @@ public class TaskServiceImpl implements TaskService {
 
         log.info("定时任务-停止：{}", id);
         // 停止任务
-        ReturnT returnT = xxlJobService.stopTask(id);
+        ReturnT<?> returnT = xxlJobService.stopTask(id);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-停止-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.OPERATE_FAIL, "定时任务-停止-失败：" + returnT.getMsg());
@@ -161,7 +161,7 @@ public class TaskServiceImpl implements TaskService {
 
         log.info("定时任务-触发：{}", dto);
         // 触发任务
-        ReturnT returnT = xxlJobService.triggerTask(dto);
+        ReturnT<?> returnT = xxlJobService.triggerTask(dto);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-触发-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.OPERATE_FAIL, "定时任务-触发-失败：" + returnT.getMsg());
@@ -174,13 +174,13 @@ public class TaskServiceImpl implements TaskService {
 
         log.info("定时任务-后续触发时间：{}", dto);
         // 后续触发时间
-        ReturnT returnT = xxlJobService.nextTriggerTimeTask(dto);
+        ReturnT<?> returnT = xxlJobService.nextTriggerTimeTask(dto);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("定时任务-后续触发时间-失败：{}", returnT.getMsg());
             throw new BusinessException(ErrorCodeConstants.QUERY_FAIL, "定时任务-后续触发时间-失败：" + returnT.getMsg());
         }
         if (returnT.getContent() instanceof List list) {
-            return list;
+            return CastUtils.cast(list);
         }
         return null;
     }

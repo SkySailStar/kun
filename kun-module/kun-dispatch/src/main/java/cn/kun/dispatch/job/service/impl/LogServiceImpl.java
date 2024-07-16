@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +63,7 @@ public class LogServiceImpl implements LogService {
         // 定义返回值
         Page<LogPageVO> voPage = Page.of(dto.getPageNo(), dto.getPageSize());
         voPage.setTotal(Convert.toInt(resultMap.get("recordsTotal")));
-        if (resultMap.get("data") instanceof List list) {
+        if (resultMap.get("data") instanceof List<?> list) {
             voPage.setRecords(list.stream().map(this::cast).toList());
             return voPage;
         }

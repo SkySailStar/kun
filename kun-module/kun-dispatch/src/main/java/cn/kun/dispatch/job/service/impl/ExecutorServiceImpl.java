@@ -30,7 +30,6 @@ import java.util.Map;
  * @author 廖航
  * @date 2023-06-06 10:27
  */
-@SuppressWarnings("all")
 @Slf4j
 @Service
 public class ExecutorServiceImpl implements ExecutorService {
@@ -55,7 +54,7 @@ public class ExecutorServiceImpl implements ExecutorService {
         // 定义返回值
         Page<ExecutorPageVO> voPage = Page.of(dto.getPageNo(), dto.getPageSize());
         voPage.setTotal(Convert.toInt(resultMap.get("recordsTotal")));
-        if (resultMap.get("data") instanceof List list) {
+        if (resultMap.get("data") instanceof List<?> list) {
             voPage.setRecords(list.stream().map(this::cast).toList());
             return voPage;
         }
@@ -70,7 +69,7 @@ public class ExecutorServiceImpl implements ExecutorService {
             log.warn("执行器-详情：主键不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "执行器-详情：主键不能为空");
         }
-        ReturnT returnT = xxlJobService.detailExecutor(id);
+        ReturnT<?> returnT = xxlJobService.detailExecutor(id);
         if (ObjUtil.isNull(returnT) || returnT.getCode() == ReturnT.FAIL_CODE) {
             log.warn("执行器-详情：失败");
             throw new BusinessException(ErrorCodeConstants.QUERY_FAIL, "执行器-详情：失败");

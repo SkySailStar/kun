@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -171,7 +172,7 @@ public class BeanHandler {
         BufferedReader bufferedReader = null;
         try {
             // connection
-            URL realUrl = new URL(url);
+            URL realUrl = new URI(url).toURL();
             connection = (HttpURLConnection) realUrl.openConnection();
 
             // connection setting

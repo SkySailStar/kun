@@ -1,10 +1,7 @@
 package cn.kun.base.api.entity.auth.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 

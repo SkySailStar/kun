@@ -3,10 +3,8 @@ package cn.kun.base.core.security.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 用户信息

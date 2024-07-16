@@ -16,6 +16,7 @@ import cn.kun.base.job.service.XxlJobService;
 import com.xxl.job.core.biz.model.ReturnT;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.util.CastUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,6 @@ import java.util.Map;
  * @author 天航星
  * @date 2023-06-01 16:29
  */
-@SuppressWarnings("all")
 @Component
 public class XxlJobServiceImpl implements XxlJobService {
 
@@ -71,7 +71,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         // 请求参数
         HttpEntity<MultiValueMap<String, Object>> param = new HttpEntity<>(body, null);
         // 发送请求
-        ResponseEntity<ReturnT> entity = restTemplate.postForEntity(url, param, ReturnT.class);
+        ResponseEntity<?> entity = restTemplate.postForEntity(url, param, ReturnT.class);
         // 获取cookie
         List<String> cookies = entity.getHeaders().get("Set-Cookie");
         if (CollUtils.isEmpty(cookies)) {
@@ -93,7 +93,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         // 请求参数
         HttpEntity<MultiValueMap<String, Object>> param = buildRequestParam(dto);
         // 发送请求
-        return restTemplate.postForObject(url, param, Map.class);
+        return CastUtils.cast(restTemplate.postForObject(url, param, Map.class));
     }
 
     @Override
@@ -104,11 +104,11 @@ public class XxlJobServiceImpl implements XxlJobService {
         // 请求参数
         HttpEntity<MultiValueMap<String, Object>> param = buildRequestParam(dto);
         // 发送请求
-        return restTemplate.postForObject(url, param, Map.class);
+        return CastUtils.cast(restTemplate.postForObject(url, param, Map.class));
     }
 
     @Override
-    public ReturnT detailExecutor(Integer id) {
+    public ReturnT<?> detailExecutor(Integer id) {
 
         // 请求网址
         String url = adminAddresses + XxlJobTaskPathConstants.EXECUTOR_DETAIL;
@@ -126,10 +126,10 @@ public class XxlJobServiceImpl implements XxlJobService {
         // 请求参数
         HttpEntity<MultiValueMap<String, Object>> param = buildRequestParam(dto);
         // 发送请求
-        return restTemplate.postForObject(url, param, Map.class);
+        return CastUtils.cast(restTemplate.postForObject(url, param, Map.class));
     }
 
-    public ReturnT addTask(TaskAddDTO dto) {
+    public ReturnT<?> addTask(TaskAddDTO dto) {
         
         // 请求网址
         String url = adminAddresses + XxlJobTaskPathConstants.TASK_ADD;
@@ -139,7 +139,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         return restTemplate.postForObject(url, param, ReturnT.class);
     }
     
-    public ReturnT editTask(TaskEditDTO dto) {
+    public ReturnT<?> editTask(TaskEditDTO dto) {
 
         // 请求网址
         String url = adminAddresses + XxlJobTaskPathConstants.TASK_EDIT;
@@ -148,7 +148,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         return restTemplate.postForObject(url, param, ReturnT.class);
     }
     
-    public ReturnT startTask(Integer id) {
+    public ReturnT<?> startTask(Integer id) {
 
         // 请求网址
         String url = adminAddresses + XxlJobTaskPathConstants.TASK_START;
@@ -157,7 +157,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         return restTemplate.postForObject(url, param, ReturnT.class);
     }
     
-    public ReturnT stopTask(Integer id) {
+    public ReturnT<?> stopTask(Integer id) {
         
         // 请求网址
         String url =  adminAddresses + XxlJobTaskPathConstants.TASK_STOP;
@@ -166,7 +166,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         return restTemplate.postForObject(url, param, ReturnT.class);
     }
     
-    public ReturnT removeTask(Integer id) {
+    public ReturnT<?> removeTask(Integer id) {
 
         // 请求网址
         String url =  adminAddresses + XxlJobTaskPathConstants.TASK_REMOVE;
@@ -175,7 +175,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         return restTemplate.postForObject(url, param, ReturnT.class);
     }
     
-    public ReturnT triggerTask(TaskTriggerDTO dto) {
+    public ReturnT<?> triggerTask(TaskTriggerDTO dto) {
 
         // 请求网址
         String url =  adminAddresses + XxlJobTaskPathConstants.TASK_TRIGGER;
@@ -184,7 +184,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         return restTemplate.postForObject(url, param, ReturnT.class);
     }
     
-    public ReturnT nextTriggerTimeTask(TaskNextTriggerTimeDTO dto) {
+    public ReturnT<?> nextTriggerTimeTask(TaskNextTriggerTimeDTO dto) {
 
         // 请求网址
         String url =  adminAddresses + XxlJobTaskPathConstants.TASK_NEXT_TRIGGER_TIME;

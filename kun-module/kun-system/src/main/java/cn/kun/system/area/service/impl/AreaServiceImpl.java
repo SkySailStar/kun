@@ -148,7 +148,8 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
         // 下拉选列表
         List<BaseSelectVO> voList = baseMapper.selectAllList();
         // 构建树形
-        return new BaseTreeBuild(voList).buildTree();
+        BaseTreeBuild<?> baseTreeBuild = new BaseTreeBuild<>(voList);
+        return baseTreeBuild.buildTree();
     }
 
     @Override

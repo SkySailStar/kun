@@ -2,12 +2,9 @@ package cn.kun.demo;
 
 import cn.kun.demo.crud.service.DictTypeService;
 import cn.kun.base.api.service.system.RemoteAreaService;
-import cn.kun.base.core.global.entity.dto.BaseIdListDTO;
 import org.junit.jupiter.api.Test;
 import jakarta.annotation.Resource;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Arrays;
 
 /**
  * 测试类

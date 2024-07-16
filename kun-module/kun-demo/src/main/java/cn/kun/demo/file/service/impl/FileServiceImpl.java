@@ -3,7 +3,7 @@ package cn.kun.demo.file.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.kun.demo.file.entity.vo.ItemVO;
 import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
-import cn.kun.base.core.file.util.MinioHelp;
+import cn.kun.base.core.file.util.MinioUtils;
 import cn.kun.demo.file.service.FileService;
 import io.minio.messages.Item;
 import org.springframework.stereotype.Service;
@@ -24,25 +24,25 @@ public class FileServiceImpl implements FileService {
     @Override
     public String upload(MultipartFile file) throws Exception {
         
-        return MinioHelp.upload(file);
+        return MinioUtils.upload(file);
     }
 
     @Override
     public String preview(String name) throws Exception {
         
-        return MinioHelp.preview(name);
+        return MinioUtils.preview(name);
     }
 
     @Override
     public void download(String name, HttpServletResponse res) throws Exception {
         
-        MinioHelp.download(name, res);
+        MinioUtils.download(name, res);
     }
 
     @Override
     public List<ItemVO> listObjects() throws Exception {
         
-        List<Item> items = MinioHelp.listObjects();
+        List<Item> items = MinioUtils.listObjects();
         if (CollUtil.isEmpty(items)) {
             return null;
         }
@@ -52,7 +52,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public void delFile(String name) throws Exception {
         
-        MinioHelp.delFile(name);
+        MinioUtils.delFile(name);
     }
 
     /**

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.kun.base.api.service.system.BaseDictService;
 import cn.kun.base.core.file.util.FileHelp;
-import cn.kun.base.core.file.util.MinioHelp;
+import cn.kun.base.core.file.util.MinioUtils;
 import cn.kun.base.core.global.constant.BaseConstants;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.data.FileTypeConstants;
@@ -59,7 +59,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
         // 文件大小校验
         checkSize(fileType, fileSize);
         // 上传文件，获取文件路径
-        String filePath = MinioHelp.upload(uploadFile);
+        String filePath = MinioUtils.upload(uploadFile);
         log.info("{}：上传成功", uploadFile.getOriginalFilename());
         // 文件名称
         String fileName = FileHelp.getFileNameByPath(filePath);
@@ -109,7 +109,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
             log.warn("文件名称不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "文件名称不能为空");
         }
-        return MinioHelp.preview(name);
+        return MinioUtils.preview(name);
     }
 
     @Override
@@ -125,12 +125,12 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
             log.warn("文件名称不能为空");
             throw new BusinessException(ErrorCodeConstants.NULL, "文件名称不能为空");
         }
-        MinioHelp.download(name, res);
+        MinioUtils.download(name, res);
     }
 
     @Override
     public List<FileVO> listObjects() throws Exception {
-        List<Item> items = MinioHelp.listObjects();
+        List<Item> items = MinioUtils.listObjects();
         if (CollUtil.isEmpty(items)) {
             return null;
         }
@@ -153,7 +153,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
             throw new BusinessException(ErrorCodeConstants.NULL, "文件名称不能为空");
         }
         // 删除文件
-        MinioHelp.delFile(name);
+        MinioUtils.delFile(name);
         // 删除文件表数据
         QueryWrapper<File> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(File::getName, name);

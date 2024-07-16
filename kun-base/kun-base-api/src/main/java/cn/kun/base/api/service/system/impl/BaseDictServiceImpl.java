@@ -8,10 +8,8 @@ import cn.kun.base.api.service.system.RemoteDictService;
 import cn.kun.base.core.cache.constant.SystemCacheConstants;
 import cn.kun.base.core.cache.util.RedisUtils;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +20,6 @@ import java.util.List;
  * @author 天航星
  * @date 2023-03-23 17:39
  */
-@SuppressWarnings("all")
-@Slf4j
 @Service
 public class BaseDictServiceImpl implements BaseDictService {
 
@@ -42,11 +38,9 @@ public class BaseDictServiceImpl implements BaseDictService {
             return voList;
         }
         // 根据类型获取列表
-        Object obj = RedisUtils.getHash(SystemCacheConstants.DICT_DATA_HASH, type);
-        if (ObjUtil.isNotNull(obj) && obj instanceof List list) {
-            if (CollUtil.isNotEmpty(list)) {
-                return list;
-            }
+        voList = RedisUtils.getHashList(SystemCacheConstants.DICT_DATA_HASH, type, BaseSelectVO.class);
+        if (ObjUtil.isNotEmpty(voList)) {
+            return voList;
         }
         // 缓存获取不到再调用远程服务获取
         return remoteDictService.list(type).getData();

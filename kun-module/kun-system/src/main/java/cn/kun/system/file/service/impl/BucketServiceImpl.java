@@ -2,7 +2,7 @@ package cn.kun.system.file.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.kun.system.file.entity.vo.BucketVO;
-import cn.kun.base.core.file.util.MinioHelp;
+import cn.kun.base.core.file.util.MinioUtils;
 import cn.kun.base.core.global.util.date.LocalDateTimeUtils;
 import cn.kun.system.file.service.BucketService;
 import io.minio.messages.Bucket;
@@ -21,25 +21,25 @@ public class BucketServiceImpl implements BucketService {
     @Override
     public boolean has(String name) throws Exception {
         
-        return MinioHelp.hasBucket(name);
+        return MinioUtils.hasBucket(name);
     }
 
     @Override
     public void create(String name) throws Exception {
         
-        MinioHelp.createBucket(name);
+        MinioUtils.createBucket(name);
     }
 
     @Override
     public void del(String name) throws Exception {
         
-        MinioHelp.delBucket(name);
+        MinioUtils.delBucket(name);
     }
 
     @Override
     public List<BucketVO> getAll() throws Exception {
         
-        List<Bucket> allBuckets = MinioHelp.getAllBuckets();
+        List<Bucket> allBuckets = MinioUtils.getAllBuckets();
         if (CollUtil.isEmpty(allBuckets)) {
             return null;
         }
