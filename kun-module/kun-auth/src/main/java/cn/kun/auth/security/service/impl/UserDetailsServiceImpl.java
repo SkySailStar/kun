@@ -2,6 +2,7 @@ package cn.kun.auth.security.service.impl;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.kun.auth.security.entity.po.SysUser;
+import cn.kun.auth.security.service.SysMenuService;
 import cn.kun.auth.security.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
@@ -14,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +28,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     
     @Resource
     private SysUserService sysUserService;
+
+    @Resource
+    private SysMenuService sysMenuService;
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -60,8 +63,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userInfo.setPassword(sysUser.getPassword());
         userInfo.setNickName(sysUser.getNickName());
         userInfo.setStatus(sysUser.getStatus());
-        // TODO 增加权限列表
-        List<String> permissionList = new ArrayList<>();
+        // 权限列表
+        List<String> permissionList = sysMenuService.selectPermissionList(sysUser.getId());
         return new LoginUser(userInfo, permissionList);
     }
 

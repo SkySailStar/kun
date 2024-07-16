@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kun.auth.security.mapper.SysMenuMapper">
+
+    <select id="selectPermissionList" resultType="java.lang.String">
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_job_menu_inner sjmi ON sjmi.menu_id = menu.id
+        AND sjmi.del_flag = '0'
+        LEFT JOIN sys_user_job_inner suji ON suji.job_inner_id = sjmi.job_inner_id
+        AND suji.del_flag = '0'
+        LEFT JOIN sys_job_inner sji ON sji.id = suji.job_inner_id
+        LEFT JOIN sys_user_inner sui ON sui.id = suji.user_inner_id
+        AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and sji.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+                LEFT JOIN sys_user_menu_inner sumi ON sumi.menu_id = menu.id
+                AND sumi.del_flag = '0'
+                LEFT JOIN sys_user_inner sui ON sui.id = sumi.user_inner_id
+                AND sui.del_flag = '0'
+        WHERE
+            menu.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND sui.id = #{userId}
+            </if>
+        UNION
+        SELECT
+            menu.permission
+        FROM
+            sys_menu menu
+        LEFT JOIN sys_role_menu_inner srmi ON srmi.menu_id = menu.id
+        AND srmi.del_flag = '0'
+        LEFT JOIN sys_user_role_inner suri ON suri.role_inner_id = srmi.role_inner_id
+        AND suri.del_flag = '0'
+        LEFT JOIN sys_role_inner sri on sri.id = suri.role_inner_id
+        and sri.del_flag = '0'
+        LEFT JOIN sys_user_inner sui on sui.id = suri.user_inner_id
+        WHERE
+            menu.del_flag = '0'
+            and sui.del_flag = '0'
+            and menu.permission is not null
+            and menu.permission &lt;&gt; ''
+            <if test="userId != null">
+                AND suri.user_inner_id = #{userId}
+            </if>
+    </select>
+</mapper>
