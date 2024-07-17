@@ -44,6 +44,9 @@ target/
 ### VS Code ###
 .vscode
 
+### Fleet ###
+.fleet
+
 ### Maven ###
 **/mvnw
 **/mvnw.cmd
