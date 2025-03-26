@@ -9,7 +9,7 @@ import cn.kun.system.error.service.ErrorInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.kun.base.api.service.system.BaseDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
 import cn.kun.base.core.global.exception.BusinessException;
@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ErrorInfoServiceImpl extends ServiceImpl<ErrorInfoMapper, ErrorInfo> implements ErrorInfoService {
 
     @Resource
-    private BaseDictService baseDictService;
+    private DictService baseDictService;
 
     @Override
     public Page<ErrorInfoPageVO> page(ErrorInfoPageDTO dto) {

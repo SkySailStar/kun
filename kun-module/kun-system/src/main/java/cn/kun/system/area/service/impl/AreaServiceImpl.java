@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.kun.base.api.service.system.BaseDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.dict.data.AreaTypeConstants;
 import cn.kun.base.core.global.constant.dict.type.SystemDictTypeConstants;
@@ -44,7 +44,7 @@ import java.util.List;
 public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements AreaService {
 
     @Resource
-    private BaseDictService baseDictService;
+    private DictService baseDictService;
 
     @Override
     public Page<AreaPageVO> page(AreaPageDTO dto) {

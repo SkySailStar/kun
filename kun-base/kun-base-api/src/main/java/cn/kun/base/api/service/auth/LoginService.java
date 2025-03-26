@@ -1,4 +1,4 @@
-package cn.kun.base.core.security.service;
+package cn.kun.base.api.service.auth;
 
 
 import cn.kun.base.core.security.entity.LoginUser;

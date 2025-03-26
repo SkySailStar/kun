@@ -1,9 +1,9 @@
-package cn.kun.base.core.security.service.impl;
-
+package cn.kun.auth.security.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjUtil;
+import cn.kun.base.api.service.auth.LoginService;
 import cn.kun.base.core.cache.constant.AuthCacheConstants;
 import cn.kun.base.core.cache.util.RedisUtils;
 import cn.kun.base.core.global.util.convert.ConvertUtils;
@@ -13,7 +13,6 @@ import cn.kun.base.core.security.entity.UserInfo;
 import cn.kun.base.core.security.entity.dto.CheckTokenDTO;
 import cn.kun.base.core.security.entity.dto.LoginDTO;
 import cn.kun.base.core.security.entity.vo.LoginVO;
-import cn.kun.base.core.security.service.LoginService;
 import cn.kun.base.core.security.util.AuthUtils;
 import cn.kun.base.core.security.util.JwtUtils;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
@@ -21,12 +20,12 @@ import cn.kun.base.core.global.exception.BusinessException;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.Resource;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +36,7 @@ import java.util.Objects;
  *
  * @author 天航星
  */
-@Service
+@DubboService
 @Slf4j
 public class LoginServiceImpl implements LoginService {
 

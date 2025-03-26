@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.kun.base.api.service.system.BaseDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.constant.dict.type.DispatchDictTypeConstants;
@@ -46,7 +46,7 @@ public class LogServiceImpl implements LogService {
     private ExecutorService executorService;
     
     @Resource
-    private BaseDictService baseDictService;
+    private DictService baseDictService;
     
     @Override
     public Page<LogPageVO> page(LogPageDTO dto) {

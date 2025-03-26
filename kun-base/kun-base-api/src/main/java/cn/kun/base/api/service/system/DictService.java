@@ -10,7 +10,7 @@ import java.util.List;
  * @author 天航星
  * @date 2023-03-23 17:37
  */
-public interface BaseDictService {
+public interface DictService {
 
     /**
      * 根据类型获取列表

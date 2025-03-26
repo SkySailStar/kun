@@ -4,7 +4,7 @@ import cn.kun.base.core.global.controller.BaseController;
 import cn.kun.base.core.global.entity.BaseResult;
 import cn.kun.base.core.security.entity.dto.LoginDTO;
 import cn.kun.base.core.security.entity.vo.LoginVO;
-import cn.kun.base.core.security.service.LoginService;
+import cn.kun.base.api.service.auth.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;

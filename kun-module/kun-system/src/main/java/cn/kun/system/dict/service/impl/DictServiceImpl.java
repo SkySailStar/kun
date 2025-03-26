@@ -1,15 +1,15 @@
-package cn.kun.base.api.service.system.impl;
+package cn.kun.system.dict.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.kun.base.api.service.system.BaseDictService;
-import cn.kun.base.api.service.system.RemoteDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.cache.constant.SystemCacheConstants;
 import cn.kun.base.core.cache.util.RedisUtils;
 import cn.kun.base.core.global.entity.vo.BaseSelectVO;
+import cn.kun.system.dict.service.DictDataService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ import java.util.List;
  * @author 天航星
  * @date 2023-03-23 17:39
  */
-@Service
-public class BaseDictServiceImpl implements BaseDictService {
+@DubboService
+public class DictServiceImpl implements DictService {
 
     @Value("${spring.redis.database}")
     private int database;
-    
+
     @Resource
-    private RemoteDictService remoteDictService;
+    private DictDataService dictDataService;
     
     @Override
     public List<BaseSelectVO> list(String type) {
@@ -43,7 +43,7 @@ public class BaseDictServiceImpl implements BaseDictService {
             return voList;
         }
         // 缓存获取不到再调用远程服务获取
-        return remoteDictService.list(type).getData();
+        return dictDataService.list(type);
     }
 
     @Override
@@ -66,6 +66,6 @@ public class BaseDictServiceImpl implements BaseDictService {
             }
         }
         // 缓存获取不到再调用远程服务获取
-        return remoteDictService.getLabel(type, value).getData();
+        return dictDataService.getLabel(type, value);
     }
 }

@@ -1,9 +1,10 @@
 package cn.kun.demo;
 
-import cn.kun.demo.crud.service.DictTypeService;
-import cn.kun.base.api.service.system.RemoteAreaService;
+import cn.kun.base.api.service.auth.LoginService;
+import cn.kun.base.core.security.entity.dto.LoginDTO;
+import cn.kun.base.api.service.system.DictService;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.junit.jupiter.api.Test;
-import jakarta.annotation.Resource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -15,18 +16,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class KunDemoTest {
     
-    @Resource
-    private DictTypeService dictTypeService;
-    
-    @Resource
-    private RemoteAreaService remoteAreaService;
+    @DubboReference
+    private LoginService loginService;
+
+    @DubboReference
+    private DictService dictService;
     
     /**
-     * 普通测试
+     * 登录测试
      */
     @Test
-    public void test1() {
-        System.out.println(dictTypeService.list());
+    public void login() throws Exception {
+
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setLoginName("");
+        loginDTO.setPassword("");
+        System.out.println(loginService.login(loginDTO));
     }
 
     /**
@@ -34,7 +39,7 @@ public class KunDemoTest {
      */
     @Test
     public void test2() {
-        System.out.println(remoteAreaService.getNameById(100000L).getData());
+        System.out.println(dictService.getLabel("", ""));
     }
     
 }

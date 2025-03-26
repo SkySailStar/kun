@@ -8,7 +8,7 @@ import cn.kun.system.file.entity.vo.UploadVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.kun.base.api.service.system.BaseDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.file.util.FileHelp;
 import cn.kun.base.core.file.util.MinioUtils;
 import cn.kun.base.core.global.constant.BaseConstants;
@@ -46,7 +46,7 @@ import java.util.List;
 public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements FileService {
 
     @Resource
-    private BaseDictService baseDictService;
+    private DictService baseDictService;
     
     @Override
     @Transactional(rollbackFor = Exception.class)

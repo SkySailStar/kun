@@ -1,10 +1,10 @@
 package cn.kun.demo;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
  * @author 天航星
  */
 @MapperScan("cn.kun.**.mapper")
-@EnableFeignClients(basePackages = "cn.kun")
+@EnableDubbo
 @EnableTransactionManagement
 @EnableDiscoveryClient
 @SpringBootApplication

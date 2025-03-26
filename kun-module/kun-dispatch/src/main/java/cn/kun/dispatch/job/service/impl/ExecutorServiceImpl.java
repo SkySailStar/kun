@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import cn.kun.base.api.service.system.BaseDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.constant.dict.type.DispatchDictTypeConstants;
@@ -38,7 +38,7 @@ public class ExecutorServiceImpl implements ExecutorService {
     private XxlJobService xxlJobService;
     
     @Resource
-    private BaseDictService baseDictService;
+    private DictService baseDictService;
     
     @Override
     public Page<ExecutorPageVO> page(ExecutorPageDTO dto) {

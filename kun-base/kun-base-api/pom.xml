@@ -21,16 +21,16 @@
             <artifactId>kun-base-core</artifactId>
         </dependency>
 
-        <!-- OpenFeign -->
+        <!-- Dubbo -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
         </dependency>
-
-        <!-- 负载均衡 -->
+        
+        <!-- Dubbo-Nacos -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-loadbalancer</artifactId>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-nacos-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

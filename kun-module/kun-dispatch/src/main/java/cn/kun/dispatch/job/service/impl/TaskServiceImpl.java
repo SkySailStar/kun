@@ -14,7 +14,7 @@ import cn.kun.base.api.entity.dispatch.dto.TaskTriggerDTO;
 import cn.kun.base.api.entity.dispatch.vo.ExecutorDetailVO;
 import cn.kun.base.api.entity.dispatch.vo.ExecutorPageVO;
 import cn.kun.base.api.entity.dispatch.vo.TaskPageVO;
-import cn.kun.base.api.service.system.BaseDictService;
+import cn.kun.base.api.service.system.DictService;
 import cn.kun.base.core.global.constant.ErrorCodeConstants;
 import cn.kun.base.core.global.constant.HttpStatusConstants;
 import cn.kun.base.core.global.constant.dict.type.DispatchDictTypeConstants;
@@ -57,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
     private ExecutorService executorService;
     
     @Resource
-    private BaseDictService baseDictService;
+    private DictService baseDictService;
 
     @Override
     public Page<TaskPageVO> page(TaskPageDTO dto) {
