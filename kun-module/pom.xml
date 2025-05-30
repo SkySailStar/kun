@@ -16,8 +16,10 @@
     <modules>
         <module>kun-auth</module>
         <module>kun-demo</module>
-        <module>kun-system</module>
         <module>kun-dispatch</module>
+        <module>kun-system</module>
+        <module>kun-generate</module>
+        <module>kun-system</module>
     </modules>
     
     <dependencies>
