@@ -29,7 +29,7 @@
         <!-- 公共模块-定时任务 -->
         <kun-base-job.version>1.0.0</kun-base-job.version>
         <!-- 主框架 -->
-        <spring-boot.version>3.4.4</spring-boot.version>
+        <spring-boot.version>3.5.0</spring-boot.version>
         <!-- 微服务框架 -->
         <spring-cloud.version>2023.0.2</spring-cloud.version>
         <!-- 阿里巴巴微服务框架 -->
