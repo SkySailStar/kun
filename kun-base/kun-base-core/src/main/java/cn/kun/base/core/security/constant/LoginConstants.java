@@ -20,7 +20,7 @@ public class LoginConstants {
     /**
      * 令牌秘钥
      */
-    public final static String SECRET = "kun";
+    public static final String SECRET = "kun";
 
     /**
      * 算法
